@@ -1,5 +1,4 @@
 # FED03Nhom03
-gdfdfg
 
 ## Getting started
 
