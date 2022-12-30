@@ -1,0 +1,143 @@
+.FilmContainer {
+  background: url("https://www.bhdstar.vn/wp-content/themes/bhd/assets/images/movie-details-bg.jpg");
+  width: 100%;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-sizing: border-box;
+  padding: 30px 10px 10px 10px;
+  background-attachment: fixed;
+}
+.titleContainer {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+  font-size: 20px;
+  color: white;
+  span:not(:last-child) {
+    margin-right: 30px;
+  }
+  span {
+    transition: 0.5s;
+    cursor: pointer;
+  }
+  span:hover {
+    color: #ff7f50;
+    border-bottom: 1px solid #ff7e4f;
+  }
+}
+.Active {
+  color: #ff7f50;
+  border-bottom: 1px solid #ff7e4f;
+}
+.lsFilmContainer {
+  width: 100%;
+  height: auto;
+  box-sizing: border-box;
+  padding: 10px 60px 10px 60px;
+  color: white;
+  display: flex;
+  flex-wrap: wrap;
+}
+.Film {
+  margin-top: 50px;
+  width: 20%;
+  height: auto;
+  box-sizing: border-box;
+  padding: 0px 30px 0px 30px;
+  animation-name: example;
+  animation-duration: 1.5s;
+  p {
+    font-size: 20px;
+    color: white;
+    font-weight: bolder;
+    margin-top: 20px;
+    text-align: center;
+    min-height: 70px;
+    overflow-y: hidden;
+  }
+  button {
+    margin-top: 10px;
+    border-radius: 5px;
+    color: white;
+    font-weight: bolder;
+    background: rgb(237, 61, 17);
+    width: 100%;
+    cursor: pointer;
+    border: none;
+    outline: none;
+    font-size: 14px;
+    padding: 7px 40px 7px 40px;
+    transition: 0.3s;
+  }
+  button:hover {
+    color: rgb(214, 56, 17);
+    background: white;
+    font-weight: bolder;
+  }
+  button:active {
+    transform: translateY(2px);
+  }
+}
+.imageContainer {
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+  overflow: hidden;
+  img {
+    transition: 0.3s;
+    cursor: pointer;
+  }
+  img:hover {
+    transform: scale(1.1);
+  }
+}
+.addmoreButton {
+  color: #ff7e4f;
+  cursor: pointer;
+  border-bottom: 1px solid salmon;
+}
+.addmoreButton:active {
+  transform: translateY(2px);
+}
+.buttonAddmore {
+  height: 50px;
+  width: 140px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: none;
+  border: 2px solid #ff9873;
+  color: #fa9571;
+  cursor: pointer;
+  text-decoration: none;
+  transition: 0.7s;
+  font-weight: bolder;
+}
+.buttonAddmore:hover {
+  height: 50px;
+  width: 140px;
+  color: rgb(214, 56, 17);
+  background: white;
+  font-weight: bolder;
+  border: none;
+}
+.buttonAddmore:active {
+  transform: translateY(10px);
+}
+.fa-arrow-right {
+  margin-left: 5px;
+}
+@keyframes example {
+  0% {
+    opacity: 0;
+    transform: scale(0);
+  }
+
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
