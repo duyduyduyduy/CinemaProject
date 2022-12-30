@@ -5,7 +5,25 @@ export default function Header() {
   return (
     <div className='Header'>
         <div className="mainSide">
-            <div className="menuLeft">
+
+            <div className="head">
+                <div className="mainHead">
+                    <img src={require('./HeaderIMG/CinemaLogo.png')} alt="" />
+                    <div className="searchContainer">
+                        <input type="search" placeholder='Tìm Kiếm'/>
+                    </div>
+                    <div className="log">
+                        <span><a href="#">Đăng Nhập</a></span>
+                        
+                        <span><a href="#">Đăng Ký</a></span>
+                    </div>
+                </div>
+            </div>
+
+
+
+
+            <div className="navbar">
                 <ul>
                     <li><a href='#'>MUA VÉ</a></li>
                     <li><a href='#'>PHIM</a></li>
@@ -21,11 +39,11 @@ export default function Header() {
 
 
 
-            <div className="logo">
+            {/* <div className="logo">
                 <p><img src={require('./HeaderIMG/6.png')} alt="" /></p>
-            </div>
+            </div> */}
 
-            <div className="menuRight">
+            {/* <div className="menuRight">
                 <div className="menuCon">
                     <div className="Social">
                         <img src={require('./HeaderIMG/icon_in.png')} alt="" />
@@ -35,10 +53,11 @@ export default function Header() {
                     </div>
                     <div className="Log">
                         <h3>Đăng Nhập</h3>
+                        /
                         <h3>Đăng Ký</h3>
                     </div>
                 </div>
-            </div>
+            </div> */}
         </div>
     </div>
   )
