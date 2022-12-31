@@ -15,7 +15,7 @@
         justify-content: flex-start;
         flex-direction: column;
         align-items: center;
-        color: white;
+        
 
         .head {
             width: 100%;
@@ -58,12 +58,16 @@
                     justify-content: center;
                     align-items: center;
                     span {
+                        i {
+                            color: rgb(255, 68, 68);
+                        }
                         a {
                             margin: 0px 5px;
                             font-size: 14px;
                             text-decoration: none;
                             // border-left: 3px solid tomato;
                             color: rgb(166, 148, 148);
+                            -webkit-transition: all 0.5s;
                         }
                         a:hover {
                             color: rgb(255, 68, 68);
@@ -99,69 +103,40 @@
                     border-left: 2px solid tomato;
                     
                     a {
+                        font-weight: bolder;
                         font-size: 14px;
+                        white-space: nowrap;
                         text-decoration: none;
                         color: white;
+                        -webkit-transition: all 0.5s;
                     }
                     a:hover {
                         color: tomato;
                     }
                 }
+                li:hover .subMenu {
+                    display: block !important;
+                }
+                .subMenu {
+                    display: none !important;
+                    z-index: 100;
+                    width: 190%;
+                    background-color: black;
+                    display: flex;
+                    flex-direction: column;
+                    text-align: start;
+                    padding: 10px 20px;
+                    li {
+                        border: none;
+                        a {
+                            white-space: nowrap;
+                        }
+                    }
+                }
                 
             }
+           
+            
         }
-        // .logo {
-        //     width: 10%;
-        //     height: 100%;
-        //     img {
-        //         width: 110px;
-        //         margin-left: 30px;
-        //         margin-top: 11px;
-        //         animation: app-logo-spin infinite 5s linear;
-
-        //         @keyframes app-logo-spin {
-        //             to {
-        //               transform: rotate(0deg)
-        //             }
-        //             from {
-        //               transform: rotate(360deg)
-        //             }
-        //           }
-        //     }
-        // }
-        // .menuRight {
-        //     width: 45%;
-        //     height: 100%;
-        //     display: flex;
-        //     justify-content: flex-end;
-        //     .menuCon {
-        //         width: 80%;
-        //         height: 100%;
-        //         display: flex;
-        //         justify-content: space-between;
-
-        //         .Social {
-        //             width: 50%;
-        //             height: 100%;
-        //             // background-color: brown;
-        //             display: flex;
-        //             justify-content: space-between;
-        //             align-items: center;
-        //             img {
-        //                 width: 50px;
-        //             }
-        //         }
-        //         .Log {
-        //             width: 50%;
-        //             // background-color: rgb(75, 168, 202);
-        //             display: flex;
-        //             justify-content: center;
-        //             align-items: center;
-        //             font-size: 12px;
-
-                    
-        //         }
-        //     }
-        // }
     }
 }

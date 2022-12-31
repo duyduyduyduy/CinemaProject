@@ -1,6 +1,6 @@
 import React from 'react'
 import './Header.scss'
-
+ 
 export default function Header() {
   return (
     <div className='Header'>
@@ -13,9 +13,8 @@ export default function Header() {
                         <input type="search" placeholder='Tìm Kiếm'/>
                     </div>
                     <div className="log">
-                        <span><a href="#">Đăng Nhập</a></span>
-                        
-                        <span><a href="#">Đăng Ký</a></span>
+                        <span><i className="fa-solid fa-user"></i><a href="#">Đăng Nhập</a></span>
+                        <span><i className="fa-regular fa-registered"></i><a href="#">Đăng Ký</a></span>
                     </div>
                 </div>
             </div>
@@ -26,38 +25,42 @@ export default function Header() {
             <div className="navbar">
                 <ul>
                     <li><a href='#'>MUA VÉ</a></li>
-                    <li><a href='#'>PHIM</a></li>
-                    <li><a href='#'>SỰ KIỆN</a></li>
-                    <li><a href='#'>RẠP/GIÁ VÉ</a></li>
-                    <li><a href='#'>HỖ TRỢ</a></li>
+                    <li><a href='#'>THỂ LOẠI</a>
+                        <ul className='subMenu'>
+                            <li><a href='#'>HÀNH ĐỘNG</a></li>
+                            <li><a href='#'>TÌNH CẢM</a></li>
+                            <li><a href='#'>KINH DỊ</a></li>
+                            <li><a href='#'>HÀI HƯỚC</a></li>
+                        </ul>
+                    </li>
+                    <li><a href='#'>SỰ KIỆN</a>
+                        <ul className='subMenu'>
+                            <li><a href='#'>ƯU ĐÃI</a></li>
+                            <li><a href='#'>FAN MEETING</a></li>
+                            <li><a href='#'>PHIM HAY THÁNG</a></li>
+                        </ul>
+                    </li>
+                    <li style={{paddingLeft:'20px'}}><a href='#'>GÓC ĐIỆN ẢNH</a>
+                        <ul style={{marginLeft:'-20px'}} className='subMenu'>
+                            <li><a href='#'>DIỄN VIÊN</a></li>
+                            <li><a href='#'>ĐẠO DIỄN</a></li>
+                            <li><a href='#'>BÌNH LUẬN PHIM</a></li>
+                            <li><a href='#'>BLOG ĐIỆN ẢNH</a></li>
+                        </ul>
+                    </li>
+                    <li><a href='#'>HỖ TRỢ</a>
+                        <ul className='subMenu'>
+                            <li><a href='#'>GÓP Ý</a></li>
+                            <li><a href='#'>SALE & SERVICES</a></li>
+                            <li><a href='#'>ĐÁNH GIÁ</a></li>
+                        </ul>
+                    </li>
                     <li><a href='#'>THÀNH VIÊN</a></li>
                 </ul>
             </div>
 
 
 
-
-
-
-            {/* <div className="logo">
-                <p><img src={require('./HeaderIMG/6.png')} alt="" /></p>
-            </div> */}
-
-            {/* <div className="menuRight">
-                <div className="menuCon">
-                    <div className="Social">
-                        <img src={require('./HeaderIMG/icon_in.png')} alt="" />
-                        <img src={require('./HeaderIMG/icon_tiktok.png')} alt="" />
-                        <img src={require('./HeaderIMG/icon_YT.png')} alt="" />
-                        <img src={require('./HeaderIMG/icon_fb.png')} alt="" />
-                    </div>
-                    <div className="Log">
-                        <h3>Đăng Nhập</h3>
-                        /
-                        <h3>Đăng Ký</h3>
-                    </div>
-                </div>
-            </div> */}
         </div>
     </div>
   )
