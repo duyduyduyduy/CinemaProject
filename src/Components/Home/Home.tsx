@@ -50,7 +50,7 @@ export default function Home() {
             if (index < (tmp > a ? tmp * 5 + b : tmp * 5)) {
               return (
                 <div className="Film">
-                  <div className="imageContainer">
+                  <div className="imageContainer shine">
                     <img alt="Bùi Thanh Duy" src={item.imagePortrait} />
                   </div>
                   <p>
