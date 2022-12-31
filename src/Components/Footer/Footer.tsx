@@ -5,7 +5,7 @@ export default function Footer() {
   return (
     <div className='Footer'>
         <div className="logo">
-            <p><img className='imgHo' src={require('./FooterIMG/logo2.webp')} alt="" /></p>
+            <p><img className='imgHo' src={require('./FooterIMG/VDlogo.png')} alt="" /></p>
         </div>
         <div className="content">
             <div className="card">
@@ -50,7 +50,14 @@ export default function Footer() {
             <div className="card marHr">
                 <h2>KẾT NỐI GALAXY CINEMA</h2>
                 <div className="iconItem">
-                    {/* <img src={require('./FooterIMG/logoFace.jpg')} alt="" /> */}
+                    <i className="fa-brands fa-2x fa-facebook"></i>
+                    <i className="fa-brands fa-2x fa-youtube"></i>
+                    <i className="fa-brands fa-2x fa-instagram"></i>
+                </div>
+                <h2>DOWNLOAD APP</h2>
+                <div className="iconItem2">
+                    <i className="fa-brands fa-2x fa-apple"></i>
+                    <i className="fa-brands fa-2x fa-google-play"></i>
                 </div>
             </div>
         </div>
