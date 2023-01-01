@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import { readJsonConfigFile } from "typescript";
 import ePromotion from "../../Model/ePromotion";
 import "./Promotion.scss";
 export default function Promotion() {
@@ -14,15 +13,20 @@ export default function Promotion() {
   let a = 0,
     b = 0;
   useEffect(() => {
-    fetch("https://teachingserver.onrender.com/cinema/moreInfo")
+    fetch("https://mocki.io/v1/e0b2b770-bca5-4f0c-b213-b7f8aeba509b")
       .then((res) => res.json())
       .then((data) => setLsPro(data));
   }, []);
   return (
     <div>
       {assignVar()}
-      <div className="promotionContainer">
-        <p style={{ position: "fixed" }}>TIN TỨC - KHUYẾN MÃI</p>
+      <div className="promotionContainer" id="sectionPromotion">
+        <img
+          className="BothSideImage"
+          src="https://ocwckgy6c1obj.vcdn.cloud/media/wysiwyg/CGV_T12_120x600.jpg"
+          alt="Bùi Thanh Duy"
+        />
+        <p>TIN TỨC - KHUYẾN MÃI</p>
         <div className="promotionMainsize">
           {/* LOOP */}
           {lsPro?.map((item, index) => {
@@ -33,10 +37,7 @@ export default function Promotion() {
                   onMouseEnter={() => setStyle(index)}
                   onMouseLeave={() => setStyle(-1)}
                 >
-                  <img
-                    alt="Bùi Thanh Duy"
-                    src={"https://cdn.galaxycine.vn/media/3/0/300_25.jpg"}
-                  />
+                  <img alt="Bùi Thanh Duy" src={item.imagePortrait} />
                   <div style={{ transition: "0.3s" }}>
                     <div
                       className="contentBG"
@@ -70,9 +71,13 @@ export default function Promotion() {
             </button>
           )}
           {tmp > a && (
-            <button className="promotionButton_1" onClick={() => setTmp(1)}>
+            <a
+              className="promotionButton_1"
+              onClick={() => setTmp(1)}
+              href="/#sectionPromotion"
+            >
               <i className="fa-solid fa-arrow-up"></i>THU GỌN
-            </button>
+            </a>
           )}
         </div>
       </div>

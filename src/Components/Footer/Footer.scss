@@ -4,7 +4,8 @@
   min-height: 400px;
   background-image: url("./FooterIMG/bg-grid.jpg");
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-
+  z-index: 1;
+  position: relative;
   .logo {
     width: 100%;
 
