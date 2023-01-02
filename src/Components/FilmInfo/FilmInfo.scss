@@ -1,0 +1,265 @@
+.bannerContainer {
+  background: url("https://cdn.galaxycine.vn/media/2022/12/7/913wx391h_1670397257137.jpg");
+  width: 100%;
+  height: 500px;
+  background-size: cover;
+  margin-bottom: 50px;
+  background-position: center;
+  .bannerMainsize {
+    width: 1479px;
+  }
+  .overlapbanner {
+    background: rgba(0, 0, 0, 0.7);
+    width: 100%;
+    height: 100%;
+    display: flex;
+    box-sizing: border-box;
+    padding: 20px;
+    justify-content: center;
+    div:first-child {
+      width: 284px;
+      height: 351px;
+      display: flex;
+      position: relative;
+      flex-direction: column;
+      img {
+        height: auto;
+      }
+    }
+    div:nth-child(2) {
+      padding: 10px;
+      box-sizing: border-box;
+      width: 750px;
+      height: auto;
+      color: white;
+      font-weight: bolder;
+      h1 {
+        font-weight: bolder;
+        font-size: 40px;
+      }
+      div {
+        display: flex;
+        p {
+          margin-right: 50px;
+        }
+      }
+    }
+  }
+}
+
+.scheduleMainsize {
+  width: 1200px;
+  display: flex;
+  justify-content: center;
+  margin: 0 auto;
+}
+.FilmRecommend {
+  flex-grow: 1;
+  box-sizing: border-box;
+  height: auto;
+  padding-left: 10px;
+}
+.titleandlocation {
+  width: 800px;
+  height: auto;
+  box-sizing: border-box;
+  padding-right: 10px;
+  .Duy {
+    display: flex;
+    justify-content: space-between;
+  }
+  .titleFilm {
+    font-size: 20px;
+    padding-top: 5px;
+    p {
+      font-weight: bolder;
+    }
+  }
+  div:nth-child(2) {
+    display: flex;
+  }
+}
+.locationCity {
+  border: 1px solid rgb(219, 61, 33);
+  padding: 5px 13px;
+  border-radius: 10px;
+  margin-right: 20px;
+  color: rgb(219, 61, 33);
+  font-weight: bolder;
+}
+.cinemalocation {
+  border: 1px solid rgb(219, 61, 33);
+  padding: 5px 13px;
+  border-radius: 10px;
+  color: rgb(219, 61, 33);
+  font-weight: bolder;
+}
+.fa-caret-down {
+  margin-left: 20px;
+}
+.trailerButton {
+  margin-top: 20px;
+  border-radius: 5px;
+  color: white;
+  font-weight: bolder;
+  background: rgb(237, 61, 17);
+  cursor: pointer;
+  border: none;
+  outline: none;
+  font-size: 14px;
+  padding: 7px 40px 7px 40px;
+  transition: 0.3s;
+}
+.trailerButton:hover {
+  background: white;
+  color: rgb(237, 61, 17);
+}
+.trailerButton:active {
+  transform: translateY(5px);
+}
+.scheduleInfo {
+  border: 1px solid lightgray;
+  margin-top: 10px;
+  max-height: 500px;
+  overflow-y: scroll;
+  border-radius: 5px;
+  box-sizing: border-box;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+}
+.scheduleDetail {
+  margin-top: 10px;
+  width: 100%;
+  height: auto;
+  flex-direction: column;
+  .duycontainer {
+    display: flex;
+    width: 100%;
+    border-bottom: 1px solid lightgray;
+    border-radius: 5px;
+    margin-top: 10px;
+  }
+  .lefthand {
+    width: 25%;
+    padding: 10px;
+    height: 115px;
+    background: rgb(76, 49, 49);
+    border-left: 10px solid rgb(164, 52, 32);
+    h3 {
+      color: white;
+    }
+    p {
+      margin-top: 10px;
+      font-size: 12px;
+      line-height: 20px;
+      color: lightgray;
+      font-weight: bolder;
+    }
+  }
+  .righthand {
+    width: 75%;
+    padding: 10px;
+    box-sizing: border-box;
+    flex-direction: column;
+  }
+}
+.dateInfo {
+  width: 100%;
+  height: auto;
+  border-bottom: 1px solid lightgray;
+  padding-bottom: 15px;
+  display: flex;
+  justify-content: space-around;
+}
+.Date {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 10px 20px;
+  border-radius: 5px;
+  transition: 0.3s;
+  font-weight: bolder;
+  cursor: pointer;
+}
+.Date:hover {
+  background-color: #f97407;
+  color: white;
+}
+.active {
+  color: white;
+  font-weight: bolder;
+  background-color: #f97407;
+}
+.version2D {
+  background: #f4760f;
+  padding: 9px 6px;
+  color: white;
+  font-weight: bolder;
+  height: 22px;
+  margin-top: 10px;
+  margin-right: 10px;
+}
+.version3D {
+  background: #f4760f;
+  padding: 9px 6px;
+  color: white;
+  font-weight: bolder;
+  height: 22px;
+  margin-top: 10px;
+  margin-right: 10px;
+}
+.time {
+  border: 2px solid #0284c7;
+  padding: 6px 15px;
+  height: 21px;
+  margin-top: 10px;
+  cursor: pointer;
+  margin-right: 10px;
+  transition: 0.3s;
+}
+.time:hover {
+  background-color: #0284c7;
+  color: white;
+  font-weight: bolder;
+}
+.D2 {
+  display: flex;
+  flex-wrap: wrap;
+}
+.D3 {
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: 20px;
+}
+.FilmRecommend {
+  max-height: 550px;
+  overflow-y: scroll;
+  div:not(:last-child) {
+    border-bottom: 1px solid lightgray;
+  }
+}
+.FilmContainerRe {
+  display: flex;
+  padding-bottom: 20px;
+  margin-top: 10px;
+  img {
+    width: 100px;
+    border-radius: 5px;
+  }
+  div {
+    height: auto;
+    box-sizing: border-box;
+    padding: 12px 10px;
+  }
+  span {
+    background: #ddbc3f;
+    color: white;
+    font-size: 12px;
+    padding: 3px 10px;
+    font-weight: bolder;
+  }
+  p {
+    line-height: 27px;
+  }
+}

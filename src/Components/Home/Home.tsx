@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Carousel from "../Carousel/Carousel";
 import "./Home.scss";
+import { useNavigate } from "react-router-dom";
 import eFilm from "../Model/eFilm";
 import Promotion from "./Promotion/Promotion";
 export default function Home() {
@@ -25,6 +26,10 @@ export default function Home() {
     a = Math.floor(lsfilm.length / 5);
     b = lsfilm.length - 5 * Math.floor(lsfilm.length / 5);
     return false;
+  };
+  const nav = useNavigate();
+  const handleOnclickMuaVe = (id: string) => {
+    nav("/Film/" + id);
   };
   return (
     <div>
@@ -55,7 +60,7 @@ export default function Home() {
                   </div>
                   <p>
                     {item.name.length > 30
-                      ? item.name.slice(0, 35) + " ..."
+                      ? item.name.slice(0, 30) + " ..."
                       : item.name}
                   </p>
                   <div
@@ -65,7 +70,9 @@ export default function Home() {
                       justifyContent: "center",
                     }}
                   >
-                    <button>MUA VÉ</button>
+                    <button onClick={() => handleOnclickMuaVe(item.id)}>
+                      MUA VÉ
+                    </button>
                   </div>
                 </div>
               );
@@ -92,7 +99,7 @@ export default function Home() {
             <a
               className="buttonAddmore"
               onClick={() => setTmp(1)}
-              href="/#section1Home"
+              href="/HomePage#section1Home"
             >
               THU GỌN <i className="fa-solid fa-arrow-right"></i>
             </a>

@@ -22,7 +22,12 @@ export default function Promotion() {
       {assignVar()}
       <div className="promotionContainer" id="sectionPromotion">
         <img
-          className="BothSideImage"
+          className="LeftSideImage"
+          src="https://ocwckgy6c1obj.vcdn.cloud/media/wysiwyg/CGV_T12_120x600.jpg"
+          alt="Bùi Thanh Duy"
+        />
+        <img
+          className="RightSideImage"
           src="https://ocwckgy6c1obj.vcdn.cloud/media/wysiwyg/CGV_T12_120x600.jpg"
           alt="Bùi Thanh Duy"
         />
@@ -74,7 +79,7 @@ export default function Promotion() {
             <a
               className="promotionButton_1"
               onClick={() => setTmp(1)}
-              href="/#sectionPromotion"
+              href="/HomePage#sectionPromotion"
             >
               <i className="fa-solid fa-arrow-up"></i>THU GỌN
             </a>
