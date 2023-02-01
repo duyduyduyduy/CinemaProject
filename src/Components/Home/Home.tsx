@@ -4,24 +4,21 @@ import "./Home.scss";
 import { useNavigate } from "react-router-dom";
 import eFilm from "../Model/eFilm";
 import Promotion from "./Promotion/Promotion";
-export default function Home() {
+import { connect } from "react-redux";
+function Home(props: any) {
   const [isClick, setIsClick] = useState<number>(1);
   const [lsfilm, setLsFilm] = useState<Array<eFilm>>([]);
   const [tmp, setTmp] = useState<number>(1);
   let a = 0,
     b = 0;
   useEffect(() => {
-    fetch("https://teachingserver.onrender.com/cinema/nowAndSoon")
-      .then((res) => res.json())
-      .then((data) => {
-        setLsFilm(isClick === 1 ? data.movieShowing : data.movieCommingSoon);
-      });
+    if (isClick === 1) {
+      setLsFilm(props.CurrentFilmState.lsCurFilm);
+    } else {
+      setLsFilm(props.NextFilmState.lsNextFilm);
+    }
     setTmp(1);
-  }, [isClick]);
-  const consoleLog = (data: number) => {
-    console.log("Data:", data);
-    return false;
-  };
+  }, [isClick, props]);
   const assignVar = () => {
     a = Math.floor(lsfilm.length / 5);
     b = lsfilm.length - 5 * Math.floor(lsfilm.length / 5);
@@ -99,7 +96,7 @@ export default function Home() {
             <a
               className="buttonAddmore"
               onClick={() => setTmp(1)}
-              href="/HomePage#section1Home"
+              href="/#section1Home"
             >
               THU GỌN <i className="fa-solid fa-arrow-right"></i>
             </a>
@@ -110,3 +107,19 @@ export default function Home() {
     </div>
   );
 }
+const mapStateToProps = (state: any, ownProps: any) => {
+  return {
+    CurrentFilmState: state.CurrentFilmState,
+    NextFilmState: state.NextFilmState,
+  };
+};
+const mapDispatchToProps = (dispatch: any, ownProps: any) => {
+  return {
+    fetchdatafromfirstapi: () => {
+      dispatch({
+        type: "FECTH_DATA_FROM_FIRST_API",
+      });
+    },
+  };
+};
+export default connect(mapStateToProps, mapDispatchToProps)(Home);

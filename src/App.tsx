@@ -1,10 +1,14 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Home from "./Components/Home/Home";
 import Header from "./Components/Header/Header";
 import Footer from "./Components/Footer/Footer";
 import FilmInfo from "./Components/FilmInfo/FilmInfo";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-export default function App() {
+import { connect } from "react-redux";
+function App(props: any) {
+  useEffect(() => {
+    props.fetchdatafromfirstapi();
+  }, []);
   return (
     <div>
       <BrowserRouter>
@@ -13,7 +17,7 @@ export default function App() {
         </div>
         <Routes>
           <Route
-            path="/HomePage"
+            path="/"
             element={
               <div className="Home">
                 <Home />
@@ -27,3 +31,14 @@ export default function App() {
     </div>
   );
 }
+const mapStateToProps = (state: any, ownProps: any) => {};
+const mapDispatchToProps = (dispatch: any, ownProps: any) => {
+  return {
+    fetchdatafromfirstapi: () => {
+      dispatch({
+        type: "FECTH_DATA_FROM_FIRST_API",
+      });
+    },
+  };
+};
+export default connect(mapStateToProps, mapDispatchToProps)(App);

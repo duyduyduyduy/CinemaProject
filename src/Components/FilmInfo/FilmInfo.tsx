@@ -3,14 +3,10 @@ import "./FilmInfo.scss";
 import { useParams } from "react-router-dom";
 export default function FilmInfo() {
   const { id } = useParams();
-  const consoleLog = () => {
-    console.log("ID:", id);
-    return false;
-  };
+
   return (
     <>
       <div className="bannerContainer">
-        {consoleLog()}
         <div className="overlapbanner">
           <div>
             <img
