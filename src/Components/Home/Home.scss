@@ -60,7 +60,7 @@
     min-height: 70px;
     overflow-y: hidden;
   }
-  button {
+  a {
     margin-top: 10px;
     border-radius: 5px;
     color: white;
@@ -73,13 +73,15 @@
     font-size: 14px;
     padding: 7px 40px 7px 40px;
     transition: 0.3s;
+    text-align: center;
+    text-decoration: none;
   }
-  button:hover {
+  a:hover {
     color: rgb(214, 56, 17);
     background: white;
     font-weight: bolder;
   }
-  button:active {
+  a:active {
     transform: translateY(2px);
   }
 }

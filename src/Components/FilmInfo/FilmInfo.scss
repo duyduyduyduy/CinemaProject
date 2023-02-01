@@ -1,57 +1,18 @@
 .bannerContainer {
-  background: url("https://cdn.galaxycine.vn/media/2022/12/7/913wx391h_1670397257137.jpg");
-  width: 100%;
+  background-color: red;
   height: 500px;
-  background-size: cover;
-  margin-bottom: 50px;
-  background-position: center;
-  .bannerMainsize {
-    width: 1479px;
-  }
-  .overlapbanner {
-    background: rgba(0, 0, 0, 0.7);
-    width: 100%;
-    height: 100%;
-    display: flex;
-    box-sizing: border-box;
-    padding: 20px;
-    justify-content: center;
-    div:first-child {
-      width: 284px;
-      height: 351px;
-      display: flex;
-      position: relative;
-      flex-direction: column;
-      img {
-        height: auto;
-      }
-    }
-    div:nth-child(2) {
-      padding: 10px;
-      box-sizing: border-box;
-      width: 750px;
-      height: auto;
-      color: white;
-      font-weight: bolder;
-      h1 {
-        font-weight: bolder;
-        font-size: 40px;
-      }
-      div {
-        display: flex;
-        p {
-          margin-right: 50px;
-        }
-      }
-    }
-  }
 }
-
+.scheduleContainer {
+  margin-top: 10px;
+  width: 100%;
+  height: auto;
+  display: flex;
+  justify-content: center;
+}
 .scheduleMainsize {
   width: 1200px;
   display: flex;
   justify-content: center;
-  margin: 0 auto;
 }
 .FilmRecommend {
   flex-grow: 1;
@@ -234,7 +195,6 @@
 }
 .FilmRecommend {
   max-height: 550px;
-  overflow-y: scroll;
   div:not(:last-child) {
     border-bottom: 1px solid lightgray;
   }

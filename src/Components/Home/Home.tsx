@@ -67,9 +67,12 @@ function Home(props: any) {
                       justifyContent: "center",
                     }}
                   >
-                    <button onClick={() => handleOnclickMuaVe(item.id)}>
+                    <a
+                      href={`/Film/${item.id}#FilmBanner`}
+                      onClick={() => handleOnclickMuaVe(item.id)}
+                    >
                       MUA VÉ
-                    </button>
+                    </a>
                   </div>
                 </div>
               );
