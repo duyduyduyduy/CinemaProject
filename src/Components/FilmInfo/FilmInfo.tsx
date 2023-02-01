@@ -1,347 +1,576 @@
 import React, { useEffect, useState } from "react";
 import "./FilmInfo.scss";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
+import eFilm from "../Model/eFilm";
 import eSchedule from "../Model/eSchedule";
 import { connect } from "react-redux";
+import eCity from "../Model/eCity";
 function FilmInfo(props: any) {
   const { id } = useParams();
+  const [trailer, setTrailer] = useState(false);
+  const [FilmInfo, setFilmInfo] = useState<Array<eFilm>>([]);
+  const [FilmRe, setFilmRe] = useState<Array<eFilm>>([]);
   const [detaiSchedule, setSchedule] = useState<Array<eSchedule>>([]);
+  const [IndexDate, setIndexDate] = useState<number>(0);
+  const [city, setCity] = useState<Array<eCity>>([]);
+  const [cinema, setCinema] = useState<Array<any>>([]);
+  const [valueInut, setValueinput] = useState<string>("");
+  const [popupCity, setPopUpCity] = useState<boolean>(false);
+  const [popupCinema, setPopupCinema] = useState<boolean>(false);
+  const [num, setNum] = useState<number>(0);
+  const [numTime, setNumTime] = useState<number>(0);
+  const [lengthActor, setLengthActor] = useState<number>(0);
+  const [lengthTime, setLengthTime] = useState<number>(0);
+  const [lsActor, setLsActor] = useState<any>([]);
+  const [CityObject, setCityObject] = useState<any>({
+    cityID: "",
+    name: "Cả Nước",
+  });
+  const [CinemaObject, setCinemaObject] = useState<any>({
+    slug: "",
+    name: "Tất cả các rạp",
+  });
   useEffect(() => {
+    fetch("https://teachingserver.onrender.com/cinema/city")
+      .then((res) => res.json())
+      .then((data) => setCity(data));
+    fetch("https://teachingserver.onrender.com/cinema/cinemas")
+      .then((res) => res.json())
+      .then((data) => setCinema(data));
+    fetch("https://mocki.io/v1/2603f90d-c4e7-4866-be66-3144003ca032")
+      .then((res) => res.json())
+      .then((data) => {
+        setLengthActor(data.length);
+        setLsActor(data);
+      });
+  }, []);
+  useEffect(() => {
+    setCinemaObject({
+      slug: "",
+      name: "Tất cả các rạp",
+    });
+  }, [CityObject]);
+  useEffect(() => {
+    setFilmRe(props.CurrentFilmState.lsCurFilm);
     fetch("https://teachingserver.onrender.com/cinema/movie/" + id)
       .then((res) => res.json())
       .then((data) => {
         setSchedule(data);
-        console.log(data);
+        setLengthTime(data[0]?.dates.length);
+        setNum(0);
+        setNumTime(0);
       });
   }, [id, props]);
+
+  const ageClassName = (age: number) => {
+    let result = "";
+    if (age === 0) {
+      result = "age_1";
+    } else if (age === 13) {
+      result = "age";
+    } else if (age === 16) {
+      result = "age_3";
+    } else {
+      result = "age_2";
+    }
+    return result;
+  };
+
+  const nav = useNavigate();
+
+  const handleOnclickMuaVe = (id: string) => {
+    nav("/Film/" + id);
+  };
+  const handleOnClickDatve = () => {
+    setTrailer(false);
+    nav("/Film/" + id);
+  };
+  const SetCloseCity = () => {
+    setPopUpCity(false);
+    setValueinput("");
+  };
+  const handleOnClickActor = (a: number) => {
+    let number =
+      lengthActor % 6 === 0
+        ? Math.floor(lengthActor / 6 - 1)
+        : Math.floor(lengthActor / 6);
+    if (num + a > number) {
+      setNum(0);
+    } else if (num + a < 0) {
+      setNum(number);
+    } else {
+      setNum(num + a);
+    }
+  };
+  const handleOnClickCity = (ObjectCity: any) => {
+    setCityObject(ObjectCity);
+    setPopUpCity(false);
+  };
+  const HandleOnClickCinema = (ObjectCinema: any) => {
+    setCinemaObject(ObjectCinema);
+    setPopupCinema(false);
+  };
+  const handleOnClickTime = (a: number) => {
+    let number =
+      lengthTime % 3 === 0
+        ? Math.floor(lengthTime / 3 - 1)
+        : Math.floor(lengthTime / 3);
+    if (numTime + a > number) {
+      setNumTime(0);
+    } else if (numTime + a < 0) {
+      setNumTime(number);
+    } else {
+      setNumTime(numTime + a);
+    }
+  };
   return (
-    <>
-      {/* Phần banner của anh Vũ */}
-      <div className="bannerContainer" id="FilmBanner"></div>
-      {/* ------------------------------ */}
-      <div className="scheduleContainer">
-        <div className="scheduleMainsize">
-          <div className="titleandlocation">
-            <div className="Duy">
-              <div className="titleFilm">
-                <p>Lịch chiếu Quyết Tâm Cua Em</p>
-              </div>
-              <div>
-                <div className="locationCity">
-                  <p>
-                    <i className="fa-solid fa-location-dot"></i> TPHCM
-                    <i className="fa-solid fa-caret-down"></i>
-                  </p>
-                </div>
-                <div className="cinemalocation">
-                  <p>
-                    Tất cả các rạp<i className="fa-solid fa-caret-down"></i>
-                  </p>
-                </div>
-              </div>
+    <div style={{ marginBottom: "100px" }}>
+      {/* Subhead */}
+      <div className="subheadContainer">
+        <div className="subheadMainSize">
+          <i className="fa-solid fa-house" onClick={() => nav("/")}></i>
+          <i className="fa-solid fa-angle-right"></i>
+          <a
+            href="/#section1Home"
+            onClick={() => nav("/#section1Home")}
+            className="phimchieusubhead"
+          >
+            <b>Phim chiếu</b>
+          </a>
+          <i className="fa-solid fa-angle-right"></i>
+          <span style={{ color: "#737373", fontSize: "15px" }}>
+            {FilmInfo[0]?.name}
+          </span>
+        </div>
+      </div>
+      {/* Pop Up Cinema */}
+      {popupCinema && (
+        <div className="PopUpCinemaBg">
+          <div className="PopUpCinemaBorder">
+            <div className="buttonClose" onClick={() => setPopupCinema(false)}>
+              <i className="fa-solid fa-x"></i>
             </div>
-            <div className="scheduleInfo">
-              <div className="dateInfo">
-                <div className="Date active">
-                  <span>Thứ 2</span>
-                  <span>02-01</span>
-                </div>
-                <div className="Date">
-                  <span>Thứ 2</span>
-                  <span>02-01</span>
-                </div>
-                <div className="Date">
-                  <span>Thứ 2</span>
-                  <span>02-01</span>
-                </div>
-                <div className="Date">
-                  <span>Thứ 2</span>
-                  <span>02-01</span>
-                </div>
-                <div className="Date">
-                  <span>Thứ 2</span>
-                  <span>02-01</span>
-                </div>
-                <div className="Date">
-                  <span>Thứ 2</span>
-                  <span>02-01</span>
-                </div>
+            <div className="popupcinemaMainsize">
+              <div className="headerPopup">
+                <h3>Chọn Rạp</h3>
               </div>
-              <div className="scheduleDetail">
-                <div className="duycontainer">
-                  <div className="lefthand">
-                    <h3>BHD Star 3.2</h3>
-                    <p>
-                      Lầu 5, Siêu Thị Vincom 3/2, 3C Đường 3/2, Quận 10, TPHCM
-                    </p>
-                  </div>
-                  <div className="righthand">
-                    <div className="D2">
-                      <span className="version2D">2D</span>
-                      <span className="time">13:00</span>
-                      <span className="time">13:00</span>
-                      <span className="time">13:00</span>
-                      <span className="time">13:00</span>
-                      <span className="time">13:00</span>
-                      <span className="time">13:00</span>
-                      <span className="time">13:00</span>
-                      <span className="time">13:00</span>
-                      <span className="time">13:00</span>
-                      <span className="time">13:00</span>
-                      <span className="time">13:00</span>
-                      <span className="time">13:00</span>
-                      <span className="time">13:00</span>
-                      <span className="time">13:00</span>
-                    </div>
-                    <div className="D3">
-                      <span className="version3D">3D</span>
-                      <span className="time">13:00</span>
-                      <span className="time">13:00</span>
-                      <span className="time">13:00</span>
-                      <span className="time">13:00</span>
-                      <span className="time">13:00</span>
-                      <span className="time">13:00</span>
-                      <span className="time">13:00</span>
-                      <span className="time">13:00</span>
-                      <span className="time">13:00</span>
-                      <span className="time">13:00</span>
-                      <span className="time">13:00</span>
-                      <span className="time">13:00</span>
-                      <span className="time">13:00</span>
-                      <span className="time">13:00</span>
-                    </div>
-                  </div>
+              <div className="contentofCinema">
+                <div className="Cinema">
+                  <span>{CinemaObject.name}</span>
                 </div>
-                <div className="duycontainer">
-                  <div className="lefthand">
-                    <h3>BHD Star 3.2</h3>
-                    <p>
-                      Lầu 5, Siêu Thị Vincom 3/2, 3C Đường 3/2, Quận 10, TPHCM
-                    </p>
-                  </div>
-                  <div className="righthand">
-                    <div className="D2">
-                      <span className="version2D">2D</span>
-                      <span className="time">13:00</span>
-                      <span className="time">13:00</span>
-                      <span className="time">13:00</span>
-                      <span className="time">13:00</span>
-                      <span className="time">13:00</span>
-                      <span className="time">13:00</span>
-                      <span className="time">13:00</span>
-                      <span className="time">13:00</span>
-                      <span className="time">13:00</span>
-                      <span className="time">13:00</span>
-                      <span className="time">13:00</span>
-                      <span className="time">13:00</span>
-                      <span className="time">13:00</span>
-                      <span className="time">13:00</span>
-                    </div>
-                    <div className="D3">
-                      <span className="version3D">3D</span>
-                      <span className="time">13:00</span>
-                      <span className="time">13:00</span>
-                      <span className="time">13:00</span>
-                      <span className="time">13:00</span>
-                      <span className="time">13:00</span>
-                      <span className="time">13:00</span>
-                      <span className="time">13:00</span>
-                      <span className="time">13:00</span>
-                      <span className="time">13:00</span>
-                      <span className="time">13:00</span>
-                      <span className="time">13:00</span>
-                      <span className="time">13:00</span>
-                      <span className="time">13:00</span>
-                      <span className="time">13:00</span>
-                    </div>
-                  </div>
-                </div>
-                <div className="duycontainer">
-                  <div className="lefthand">
-                    <h3>BHD Star 3.2</h3>
-                    <p>
-                      Lầu 5, Siêu Thị Vincom 3/2, 3C Đường 3/2, Quận 10, TPHCM
-                    </p>
-                  </div>
-                  <div className="righthand">
-                    <div className="D2">
-                      <span className="version2D">2D</span>
-                      <span className="time">13:00</span>
-                      <span className="time">13:00</span>
-                      <span className="time">13:00</span>
-                      <span className="time">13:00</span>
-                      <span className="time">13:00</span>
-                      <span className="time">13:00</span>
-                      <span className="time">13:00</span>
-                      <span className="time">13:00</span>
-                      <span className="time">13:00</span>
-                      <span className="time">13:00</span>
-                      <span className="time">13:00</span>
-                      <span className="time">13:00</span>
-                      <span className="time">13:00</span>
-                      <span className="time">13:00</span>
-                    </div>
-                    <div className="D3">
-                      <span className="version3D">3D</span>
-                      <span className="time">13:00</span>
-                      <span className="time">13:00</span>
-                      <span className="time">13:00</span>
-                      <span className="time">13:00</span>
-                      <span className="time">13:00</span>
-                      <span className="time">13:00</span>
-                      <span className="time">13:00</span>
-                      <span className="time">13:00</span>
-                      <span className="time">13:00</span>
-                      <span className="time">13:00</span>
-                      <span className="time">13:00</span>
-                      <span className="time">13:00</span>
-                      <span className="time">13:00</span>
-                      <span className="time">13:00</span>
-                    </div>
-                  </div>
-                </div>
-                <div className="duycontainer">
-                  <div className="lefthand">
-                    <h3>BHD Star 3.2</h3>
-                    <p>
-                      Lầu 5, Siêu Thị Vincom 3/2, 3C Đường 3/2, Quận 10, TPHCM
-                    </p>
-                  </div>
-                  <div className="righthand">
-                    <div className="D2">
-                      <span className="version2D">2D</span>
-                      <span className="time">13:00</span>
-                      <span className="time">13:00</span>
-                      <span className="time">13:00</span>
-                      <span className="time">13:00</span>
-                      <span className="time">13:00</span>
-                      <span className="time">13:00</span>
-                      <span className="time">13:00</span>
-                      <span className="time">13:00</span>
-                      <span className="time">13:00</span>
-                      <span className="time">13:00</span>
-                      <span className="time">13:00</span>
-                      <span className="time">13:00</span>
-                      <span className="time">13:00</span>
-                      <span className="time">13:00</span>
-                    </div>
-                    <div className="D3">
-                      <span className="version3D">3D</span>
-                      <span className="time">13:00</span>
-                      <span className="time">13:00</span>
-                      <span className="time">13:00</span>
-                      <span className="time">13:00</span>
-                      <span className="time">13:00</span>
-                      <span className="time">13:00</span>
-                      <span className="time">13:00</span>
-                      <span className="time">13:00</span>
-                      <span className="time">13:00</span>
-                      <span className="time">13:00</span>
-                      <span className="time">13:00</span>
-                      <span className="time">13:00</span>
-                      <span className="time">13:00</span>
-                      <span className="time">13:00</span>
-                    </div>
-                  </div>
-                </div>
-                <div className="duycontainer">
-                  <div className="lefthand">
-                    <h3>BHD Star 3.2</h3>
-                    <p>
-                      Lầu 5, Siêu Thị Vincom 3/2, 3C Đường 3/2, Quận 10, TPHCM
-                    </p>
-                  </div>
-                  <div className="righthand">
-                    <div className="D2">
-                      <span className="version2D">2D</span>
-                      <span className="time">13:00</span>
-                      <span className="time">13:00</span>
-                      <span className="time">13:00</span>
-                      <span className="time">13:00</span>
-                      <span className="time">13:00</span>
-                      <span className="time">13:00</span>
-                      <span className="time">13:00</span>
-                      <span className="time">13:00</span>
-                      <span className="time">13:00</span>
-                      <span className="time">13:00</span>
-                      <span className="time">13:00</span>
-                      <span className="time">13:00</span>
-                      <span className="time">13:00</span>
-                      <span className="time">13:00</span>
-                    </div>
-                    <div className="D3">
-                      <span className="version3D">3D</span>
-                      <span className="time">13:00</span>
-                      <span className="time">13:00</span>
-                      <span className="time">13:00</span>
-                      <span className="time">13:00</span>
-                      <span className="time">13:00</span>
-                      <span className="time">13:00</span>
-                      <span className="time">13:00</span>
-                      <span className="time">13:00</span>
-                      <span className="time">13:00</span>
-                      <span className="time">13:00</span>
-                      <span className="time">13:00</span>
-                      <span className="time">13:00</span>
-                      <span className="time">13:00</span>
-                      <span className="time">13:00</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div className="FilmRecommend">
-            <h3 style={{ marginBottom: "20px" }}>Phim đang chiếu</h3>
-            <div className="FilmContainerRe">
-              <img src="https://static.mservice.io/cinema/s256x384/momo-cdn-api-220615131831-637908959110796170.jpg"></img>
-              <div>
-                <span className="age">13+</span>
-                <p style={{ fontWeight: "bolder" }}>
-                  Mèo Đi Hia: Điều Ước Cuối Cùng
-                </p>
-                <p
-                  style={{ color: "rgb(134, 134, 134)", fontWeight: "bolder" }}
-                >
-                  Puss in Boots: The Last Wish
-                </p>
-                <p>8.5/10</p>
-              </div>
-            </div>
-            <div className="FilmContainerRe">
-              <img src="https://static.mservice.io/cinema/s256x384/momo-cdn-api-220615131831-637908959110796170.jpg"></img>
-              <div>
-                <span className="age">13+</span>
-                <p style={{ fontWeight: "bolder" }}>
-                  Mèo Đi Hia: Điều Ước Cuối Cùng
-                </p>
-                <p
-                  style={{ color: "rgb(134, 134, 134)", fontWeight: "bolder" }}
-                >
-                  Puss in Boots: The Last Wish
-                </p>
-                <p>8.5/10</p>
-              </div>
-            </div>
-            <div className="FilmContainerRe">
-              <img src="https://static.mservice.io/cinema/s256x384/momo-cdn-api-220615131831-637908959110796170.jpg"></img>
-              <div>
-                <span className="age">13+</span>
-                <p style={{ fontWeight: "bolder" }}>
-                  Mèo Đi Hia: Điều Ước Cuối Cùng
-                </p>
-                <p
-                  style={{ color: "rgb(134, 134, 134)", fontWeight: "bolder" }}
-                >
-                  Puss in Boots: The Last Wish
-                </p>
-                <p>8.5/10</p>
+                {cinema &&
+                  cinema
+                    .filter((n) => n.cityId.includes(CityObject.cityID))
+                    .map((item) => {
+                      return (
+                        <div
+                          className="Cinema"
+                          onClick={() =>
+                            HandleOnClickCinema({
+                              slug: item.slug,
+                              name: item.name,
+                            })
+                          }
+                        >
+                          <span>{item.name}</span>
+                        </div>
+                      );
+                    })}
               </div>
             </div>
           </div>
         </div>
+      )}
+      {/* --------------------- */}
+
+      {/* Pop Up City */}
+      {popupCity && (
+        <div className="popUpCityBg">
+          <div className="PopupCityBorder">
+            <div className="buttonClose">
+              <i className="fa-solid fa-x" onClick={() => SetCloseCity()}></i>
+            </div>
+            <div className="popupcityMainsize">
+              {" "}
+              <div className="headerPopup">
+                <h3>Chọn địa điểm</h3>
+                <div className="InputContainerCity">
+                  <i className="fa-solid fa-magnifying-glass"></i>
+                  <input
+                    placeholder="Tìm địa điểm"
+                    onChange={(event) => setValueinput(event?.target.value)}
+                  ></input>
+                </div>
+              </div>
+              <div className="contentofCity">
+                <div
+                  className="City"
+                  onClick={() =>
+                    handleOnClickCity({ cityID: "", name: "Cả Nước" })
+                  }
+                >
+                  <span>Cả Nước</span>
+                </div>
+                {city &&
+                  city
+                    .filter((n) =>
+                      n.name.toLowerCase().includes(valueInut.toLowerCase())
+                    )
+                    .map((item) => {
+                      return (
+                        <div
+                          className="City"
+                          onClick={() =>
+                            handleOnClickCity({
+                              cityID: item.id,
+                              name: item.name,
+                            })
+                          }
+                        >
+                          <span>{item.name}</span>
+                        </div>
+                      );
+                    })}
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+      {/* ---------------------------- */}
+      {/* Phần banner của anh Vũ */}
+      <div className="bannerContainer" id="FilmBanner"></div>
+      {/* ------------------------------ */}
+      <div className="scheduleMainsize">
+        <div className="titleandlocation" id="titleandschedule">
+          <div className="Duy">
+            <div className="titleFilm">
+              <p>
+                Lịch chiếu{" "}
+                {FilmInfo[0]?.name.length > 35
+                  ? FilmInfo[0]?.name.slice(0, 35) + " ... "
+                  : FilmInfo[0]?.name}
+              </p>
+            </div>
+            <div>
+              <div className="locationCity">
+                <p onClick={() => setPopUpCity(true)}>
+                  <i className="fa-solid fa-location-dot"></i> {CityObject.name}
+                  <i className="fa-solid fa-caret-down"></i>
+                </p>
+              </div>
+              <div
+                className="cinemalocation"
+                onClick={() => setPopupCinema(true)}
+              >
+                <p>
+                  {CinemaObject.name}
+                  <i className="fa-solid fa-caret-down"></i>
+                </p>
+              </div>
+            </div>
+          </div>
+          <div className="dateInfoContainer">
+            <a className="prevbuttonTime" onClick={() => handleOnClickTime(-1)}>
+              ❮
+            </a>
+            <a className="nextbuttonTime" onClick={() => handleOnClickTime(1)}>
+              ❯
+            </a>
+            <div
+              className="dateInfo"
+              style={{ marginLeft: `${numTime * 3 * 250 * -1}px` }}
+            >
+              {detaiSchedule[0]?.dates?.map((item, index) => {
+                return (
+                  <div
+                    className={index === IndexDate ? "Date active" : "Date"}
+                    onClick={() => setIndexDate(index)}
+                  >
+                    <span>{item?.dayOfWeekLabel}</span>
+                    <span>{item?.showDate}</span>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+          <div className="scheduleInfo">
+            <div className="scheduleDetail">
+              {detaiSchedule
+                ?.filter((n) => n.slug.includes(CinemaObject.slug))
+                .filter((n) => n.cityId.includes(CityObject.cityID))
+                .map((item) => {
+                  return (
+                    <div className="duycontainer">
+                      <div className="lefthand">
+                        <h3>{item?.name}</h3>
+                        <p>{item?.address}</p>
+                      </div>
+                      <div className="righthand">
+                        {item?.dates[IndexDate]?.bundles[0]?.version && (
+                          <div className="D2">
+                            <span className="version2D">
+                              {item?.dates[
+                                IndexDate
+                              ]?.bundles[0]?.version.toUpperCase()}
+                            </span>
+                            {item?.dates[IndexDate]?.bundles[0]?.sessions.map(
+                              (d) => {
+                                return (
+                                  <span className="time">{d.showTime}</span>
+                                );
+                              }
+                            )}
+                          </div>
+                        )}
+                        {item?.dates[IndexDate]?.bundles[1] && (
+                          <div className="D3">
+                            <span className="version3D">
+                              {item?.dates[
+                                IndexDate
+                              ]?.bundles[1]?.version.toUpperCase()}
+                            </span>
+                            {item?.dates[IndexDate]?.bundles[1]?.sessions.map(
+                              (d) => {
+                                return (
+                                  <span className="time">{d.showTime}</span>
+                                );
+                              }
+                            )}
+                          </div>
+                        )}
+                      </div>
+                    </div>
+                  );
+                })}
+            </div>
+          </div>
+          <h3
+            style={{ marginTop: "30px", fontSize: "20px" }}
+            className="ActorFilmTitle"
+          >
+            Diễn viên
+          </h3>
+          <div className="ActorFilmContainer">
+            <a
+              className="prevbuttonActor"
+              onClick={() => handleOnClickActor(-1)}
+            >
+              ❮
+            </a>
+            <a
+              className="nextbuttonActor"
+              onClick={() => handleOnClickActor(1)}
+            >
+              ❯
+            </a>
+            <div
+              className={`slideActor`}
+              style={{ marginLeft: `${num * 6 * 130 * -1}px` }}
+            >
+              {lsActor?.map((item: any, index: any) => {
+                return (
+                  <div>
+                    <img src={item.imgsrc}></img>
+                    <p style={{ fontSize: "14px" }}>{item.name}</p>
+                    <p
+                      style={{
+                        fontSize: "13px",
+                        color: "rgb(66, 66, 66)",
+                        textAlign: "center",
+                      }}
+                    >
+                      Cady
+                    </p>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+          <h3
+            style={{ marginTop: "30px", fontSize: "20px" }}
+            className="BlogFilmTitle"
+          >
+            Blog phim
+          </h3>
+          <div className="BlogFilmContainer">
+            <div className="Blog">
+              <img
+                alt="Bùi Thanh Duy"
+                src="https://static.mservice.io/blogscontents/s770x370/momo-upload-api-220131203141-637792579015243080.jpg"
+              />
+              <p className="titleBlog">
+                One Piece: RED - Siêu phẩm anime không thể bỏ lỡ năm 2022
+              </p>
+              <p className="blogView">9.2k lượt xem</p>
+            </div>
+            <div className="Blog">
+              <img
+                alt="Bùi Thanh Duy"
+                src="https://static.mservice.io/blogscontents/s770x370/momo-upload-api-220131203141-637792579015243080.jpg"
+              />
+              <p className="titleBlog">
+                One Piece: RED - Siêu phẩm anime không thể bỏ lỡ năm 2022
+              </p>
+              <p className="blogView">9.2k lượt xem</p>
+            </div>
+            <div className="Blog">
+              <img
+                alt="Bùi Thanh Duy"
+                src="https://static.mservice.io/blogscontents/s770x370/momo-upload-api-220131203141-637792579015243080.jpg"
+              />
+              <p className="titleBlog">
+                One Piece: RED - Siêu phẩm anime không thể bỏ lỡ năm 2022
+              </p>
+              <p className="blogView">9.2k lượt xem</p>
+            </div>
+            <div className="Blog">
+              <img
+                alt="Bùi Thanh Duy"
+                src="https://static.mservice.io/blogscontents/s770x370/momo-upload-api-220131203141-637792579015243080.jpg"
+              />
+              <p className="titleBlog">
+                One Piece: RED - Siêu phẩm anime không thể bỏ lỡ năm 2022
+              </p>
+              <p className="blogView">9.2k lượt xem</p>
+            </div>
+          </div>
+        </div>
+        <div className="FilmRecommend">
+          <h3 className="titleFilmNow" style={{ marginBottom: "20px" }}>
+            Phim đang chiếu
+          </h3>
+          {FilmRe?.map((item, index) => {
+            return (
+              index <= 4 && (
+                <div
+                  className="FilmContainerRe"
+                  onClick={() => handleOnclickMuaVe(item.id)}
+                >
+                  <a href={`/Film/${item.id}#FilmBanner`}>
+                    <img src={item.imagePortrait} alt="fjdlkjfkl"></img>
+                  </a>
+                  <div>
+                    <span className={ageClassName(parseInt(item.age))}>
+                      {item.age === "0" ? "P" : item.age + " +"}
+                    </span>
+                    <p style={{ fontWeight: "bolder" }}>
+                      {item.name?.length > 25
+                        ? item.name.slice(0, 25) + " ..."
+                        : item.name}
+                    </p>
+                    <p
+                      style={{
+                        color: "rgb(134, 134, 134)",
+                        fontWeight: "bolder",
+                      }}
+                    >
+                      {item.subName?.length > 25
+                        ? item.subName.slice(0, 25) + " ..."
+                        : item.subName}
+                    </p>
+                    <p style={{ display: "flex", alignItems: "center" }}>
+                      <img
+                        className="star"
+                        style={{ width: "20px", marginRight: "4px" }}
+                        alt="fhjkdshfjkshjk"
+                        src="https://www.galaxycine.vn/website/images/ic_star_yellow.png"
+                      />
+                      {parseFloat(item.point.toString()).toFixed(1)}/10
+                    </p>
+                  </div>
+                </div>
+              )
+            );
+          })}
+          <div
+            style={{
+              width: "100%",
+              display: "flex",
+              justifyContent: "flex-end",
+            }}
+          >
+            <a
+              href="/#section1Home"
+              onClick={() => nav("/")}
+              className="moreButtoninRe"
+              style={{
+                padding: "5px 15px",
+                borderRadius: "5px",
+                cursor: "pointer",
+              }}
+            >
+              Xem thêm<i className="fa-solid fa-arrow-right"></i>
+            </a>
+          </div>
+        </div>
       </div>
-    </>
+      {trailer && (
+        <div className="trailerContainer">
+          <div className="trailerPopup">
+            <i
+              className="fa-regular fa-circle-xmark"
+              onClick={() => setTrailer(false)}
+            ></i>
+            <iframe
+              width="560"
+              height="315"
+              src={`https://www.youtube.com/embed/${FilmInfo[0]?.trailer.replace(
+                "https://www.youtube.com/watch?v=",
+                ""
+              )}`}
+              frameBorder={0}
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              allowFullScreen
+            ></iframe>
+            <div className="FilmTrailerInfo">
+              <img alt="Bùi Thanh Duy" src={FilmInfo[0]?.imagePortrait} />
+              <div className="trailerInfo">
+                <h3>{FilmInfo[0]?.name}</h3>
+                <p>
+                  Lấy bối cảnh sau hơn một thập kỷ kể từ phần phim đầu tiên,
+                  Avatar: Dòng Chảy Của Nước kể về câu chuyện của gia đình Sully
+                  (Jake, Neytiri, và con của họ),
+                </p>
+                <div className="buttontrailerContainer">
+                  <a
+                    type="button"
+                    style={{
+                      backgroundColor: "#d24d0b",
+                      borderRadius: "6px",
+                      padding: "6px 20px",
+                      fontSize: "14px",
+                      fontWeight: "bolder",
+                      marginRight: "10px",
+                      cursor: "pointer",
+                      textDecoration: "none",
+                      color: "white",
+                    }}
+                    onClick={() => handleOnClickDatve()}
+                    href={`/Film/${id}#titleandschedule`}
+                  >
+                    Đặt vé
+                  </a>
+                  <a
+                    type="button"
+                    style={{
+                      cursor: "pointer",
+                      backgroundColor: "#737373",
+                      borderRadius: "6px",
+                      padding: "6px 20px",
+                      fontSize: "14px",
+                      fontWeight: "bolder",
+                    }}
+                    onClick={() => setTrailer(false)}
+                  >
+                    Đóng
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+    </div>
   );
 }
 const mapStateToProps = (state: any, ownProps: any) => {

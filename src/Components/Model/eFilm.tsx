@@ -6,4 +6,9 @@ export default interface eFilm {
   trailer: string;
   startdate: string;
   imagePortrait: string;
+  imageLandscapeMobile: string;
+  duration: string;
+  point: number;
+  age: string;
+  imageLandscape: string;
 }
