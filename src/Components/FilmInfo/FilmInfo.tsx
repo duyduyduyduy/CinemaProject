@@ -59,9 +59,12 @@ function FilmInfo(props: any) {
     fetch(
       "https://vietcpq.name.vn/U2FsdGVkX1+ibKkbj+HGKjeepxUwFVviPP1AkhuyHto=/cinema/movie/" +
         id
+    );
+    setFilmRe(props.CurrentFilmState.lsCurFilm);
+    fetch(
+      "https://vietcpq.name.vn/U2FsdGVkX1+ibKkbj+HGKjeepxUwFVviPP1AkhuyHto=/cinema/movie/" +
+        id
     )
-    setFilmRe(props.CurrentFilmState.lsCurFilm) 
-    fetch("https://teachingserver.onrender.com/cinema/movie/" + id)
       .then((res) => res.json())
       .then((data) => {
         setSchedule(data);
