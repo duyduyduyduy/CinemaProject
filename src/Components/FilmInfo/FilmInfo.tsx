@@ -59,11 +59,6 @@ function FilmInfo(props: any) {
     fetch(
       "https://vietcpq.name.vn/U2FsdGVkX1+ibKkbj+HGKjeepxUwFVviPP1AkhuyHto=/cinema/movie/" +
         id
-    );
-    setFilmRe(props.CurrentFilmState.lsCurFilm);
-    fetch(
-      "https://vietcpq.name.vn/U2FsdGVkX1+ibKkbj+HGKjeepxUwFVviPP1AkhuyHto=/cinema/movie/" +
-        id
     )
       .then((res) => res.json())
       .then((data) => {
@@ -89,20 +84,23 @@ function FilmInfo(props: any) {
     }
     return result;
   };
+
   useEffect(() => {
-    console.log(props.CurrentFilmState);
-    let ObjectFilmInfo = props.CurrentFilmState.lsCurFilm.filter(
-      (n: eFilm) => n.id === id
-    );
-    if (!ObjectFilmInfo[0]) {
-      ObjectFilmInfo = props.NextFilmState.lsNextFilm.filter(
+    console.log("Current data: ", props.CurrentFilmState);
+    if (props.CurrentFilmState && props.NextFilmState) {
+      let ObjectFilmInfo = props.CurrentFilmState.lsCurFilm?.filter(
         (n: eFilm) => n.id === id
       );
+      if (!ObjectFilmInfo[0]) {
+        ObjectFilmInfo = props.NextFilmState.lsNextFilm?.filter(
+          (n: eFilm) => n.id === id
+        );
+      }
+      if (ObjectFilmInfo) {
+        setFilmInfo(ObjectFilmInfo);
+      }
     }
-    if (ObjectFilmInfo[0]) {
-      setFilmInfo(ObjectFilmInfo);
-    }
-  }, [props]);
+  }, [id, props]);
   const nav = useNavigate();
 
   const handleOnclickMuaVe = (id: string) => {
@@ -521,11 +519,11 @@ function FilmInfo(props: any) {
           {FilmRe?.map((item, index) => {
             return (
               index <= 4 && (
-                <div
-                  className="FilmContainerRe"
-                  onClick={() => handleOnclickMuaVe(item.id)}
-                >
-                  <a href={`/Film/${item.id}#FilmBanner`}>
+                <div className="FilmContainerRe">
+                  <a
+                    href={`/Film/${item.id}#FilmBanner`}
+                    onClick={() => handleOnclickMuaVe(item.id)}
+                  >
                     <img src={item.imagePortrait} alt="fjdlkjfkl"></img>
                   </a>
                   <div>
