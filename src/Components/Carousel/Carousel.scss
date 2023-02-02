@@ -3,7 +3,6 @@
   position: relative;
   width: 100%;
   height: auto;
-  overflow-x: auto;
   img {
     width: 100%;
     transition: 2s;
@@ -15,11 +14,13 @@
     cursor: pointer;
     transition: 0.3s;
     color: white;
+    padding: 10px;
   }
   a:hover {
     background: rgb(66, 66, 66);
     color: white;
     box-sizing: border-box;
+    padding: 10px;
   }
   .dot {
     border-radius: 50%;
@@ -59,13 +60,12 @@
   transition: 0.4s;
   background: #ee4126 !important;
 }
-.prev {
+.prevBanner {
   top: 50%;
-  padding: 10px;
+  left: 0px;
 }
 
-.next {
+.nextBanner {
   top: 50%;
   right: 0px;
-  padding: 10px;
 }

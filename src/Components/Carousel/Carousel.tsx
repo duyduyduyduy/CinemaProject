@@ -29,10 +29,10 @@ export default function Carousel() {
           />
         );
       })}
-      <a className="prev" onClick={() => plus(-1)} type="button">
+      <a className="prevBanner" onClick={() => plus(-1)} type="button">
         ❮
       </a>
-      <a className="next" onClick={() => plus(1)} type="button">
+      <a className="nextBanner" onClick={() => plus(1)} type="button">
         ❯
       </a>
       <div>

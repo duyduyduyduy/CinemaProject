@@ -31,10 +31,14 @@ function FilmInfo(props: any) {
     name: "Tất cả các rạp",
   });
   useEffect(() => {
-    fetch("https://teachingserver.onrender.com/cinema/city")
+    fetch(
+      "https://vietcpq.name.vn/U2FsdGVkX1+ibKkbj+HGKjeepxUwFVviPP1AkhuyHto=/cinema/city"
+    )
       .then((res) => res.json())
       .then((data) => setCity(data));
-    fetch("https://teachingserver.onrender.com/cinema/cinemas")
+    fetch(
+      "https://vietcpq.name.vn/U2FsdGVkX1+ibKkbj+HGKjeepxUwFVviPP1AkhuyHto=/cinema/cinemas"
+    )
       .then((res) => res.json())
       .then((data) => setCinema(data));
     fetch("https://mocki.io/v1/2603f90d-c4e7-4866-be66-3144003ca032")
@@ -52,13 +56,18 @@ function FilmInfo(props: any) {
   }, [CityObject]);
   useEffect(() => {
     setFilmRe(props.CurrentFilmState.lsCurFilm);
-    fetch("https://teachingserver.onrender.com/cinema/movie/" + id)
+    fetch(
+      "https://vietcpq.name.vn/U2FsdGVkX1+ibKkbj+HGKjeepxUwFVviPP1AkhuyHto=/cinema/movie/" +
+        id
+    )
       .then((res) => res.json())
       .then((data) => {
         setSchedule(data);
         setLengthTime(data[0]?.dates.length);
         setNum(0);
         setNumTime(0);
+        setCityObject({ cityID: "", name: "Cả Nước" });
+        setCinemaObject({ slug: "", name: "Tất cả các rạp" });
       });
   }, [id, props]);
 

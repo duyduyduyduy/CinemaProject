@@ -1,7 +1,7 @@
 import { takeEvery, put, call } from "redux-saga/effects";
 const FetchDataFromFirstAPI = async () => {
   let res = await fetch(
-    "https://teachingserver.onrender.com/cinema/nowAndSoon"
+    "https://vietcpq.name.vn/U2FsdGVkX1+ibKkbj+HGKjeepxUwFVviPP1AkhuyHto=/cinema/nowAndSoon"
   );
   let data = await res.json();
   return data;
