@@ -5,9 +5,9 @@ import eFilm from "../Model/eFilm";
 import eSchedule from "../Model/eSchedule";
 import { connect } from "react-redux";
 import eCity from "../Model/eCity";
+import { url } from "inspector";
 function FilmInfo(props: any) {
   const { id } = useParams();
-  const [trailer, setTrailer] = useState(false);
   const [FilmInfo, setFilmInfo] = useState<Array<eFilm>>([]);
   const [FilmRe, setFilmRe] = useState<Array<eFilm>>([]);
   const [detaiSchedule, setSchedule] = useState<Array<eSchedule>>([]);
@@ -60,6 +60,8 @@ function FilmInfo(props: any) {
       "https://vietcpq.name.vn/U2FsdGVkX1+ibKkbj+HGKjeepxUwFVviPP1AkhuyHto=/cinema/movie/" +
         id
     )
+    setFilmRe(props.CurrentFilmState.lsCurFilm) 
+    fetch("https://teachingserver.onrender.com/cinema/movie/" + id)
       .then((res) => res.json())
       .then((data) => {
         setSchedule(data);
@@ -84,14 +86,23 @@ function FilmInfo(props: any) {
     }
     return result;
   };
-
+  useEffect(() => {
+    console.log(props.CurrentFilmState);
+    let ObjectFilmInfo = props.CurrentFilmState.lsCurFilm.filter(
+      (n: eFilm) => n.id === id
+    );
+    if (!ObjectFilmInfo[0]) {
+      ObjectFilmInfo = props.NextFilmState.lsNextFilm.filter(
+        (n: eFilm) => n.id === id
+      );
+    }
+    if (ObjectFilmInfo[0]) {
+      setFilmInfo(ObjectFilmInfo);
+    }
+  }, [props]);
   const nav = useNavigate();
 
   const handleOnclickMuaVe = (id: string) => {
-    nav("/Film/" + id);
-  };
-  const handleOnClickDatve = () => {
-    setTrailer(false);
     nav("/Film/" + id);
   };
   const SetCloseCity = () => {
@@ -132,6 +143,7 @@ function FilmInfo(props: any) {
       setNumTime(numTime + a);
     }
   };
+
   return (
     <div style={{ marginBottom: "100px" }}>
       {/* Subhead */}
@@ -152,6 +164,64 @@ function FilmInfo(props: any) {
           </span>
         </div>
       </div>
+
+      {/* ---------------------------- */}
+      {/* Phần banner của anh Vũ */}
+      <div
+        className="bannerContainer"
+        id="FilmBanner"
+        style={{
+          backgroundImage: `url(${FilmInfo[0]?.imageLandscapeMobile})`,
+          backgroundSize: "cover",
+        }}
+      >
+        <div className="overlapbanner">
+          <div>
+            <img src={FilmInfo[0]?.imagePortrait} alt="" />
+          </div>
+
+          <div>
+            <span className="age_3">16+</span>
+            <h1 className="title">{FilmInfo[0]?.name}</h1>
+            <h3>
+              {FilmInfo[0]?.name} · 2002 · {FilmInfo[0]?.duration} phút
+            </h3>
+
+            <h2 className="nd-h2">Nội dung</h2>
+
+            <p>
+              Lấy bối cảnh sau hơn một thập kỷ kể từ phần phim đầu tiên, Avatar:
+              Dòng Chảy Của Nước kể về câu chuyện của gia đình Sully (Jake,
+              Neytiri, và con của họ), những vấn đề xung quanh họ, những nỗ lực
+              để bảo vệ sự an toàn của gia đình, những cuộc chiến sinh tồn, và
+              những hiểm họa mà họ phải đối mặt.
+            </p>
+
+            <div className="infoFilm">
+              <p>
+                <span className="nd-h2">Ngày chiếu</span>
+                <span>
+                  {FilmInfo[0]?.startdate.replace("T00:00:00.000Z", "")}
+                </span>
+              </p>
+
+              <p>
+                <span className="nd-h2">Thể loại</span>
+                <span>Khoa Học Viễn Tưởng, Phiêu Lưu, Hành Động</span>
+              </p>
+
+              <p>
+                <span className="nd-h2">Quốc gia</span>
+                <span>Mỹ</span>
+              </p>
+            </div>
+
+            <button className="btn-trailer">Xem trailer</button>
+          </div>
+        </div>
+      </div>
+
+      {/* ------------------------------ */}
       {/* Pop Up Cinema */}
       {popupCinema && (
         <div className="PopUpCinemaBg">
@@ -245,10 +315,7 @@ function FilmInfo(props: any) {
           </div>
         </div>
       )}
-      {/* ---------------------------- */}
-      {/* Phần banner của anh Vũ */}
-      <div className="bannerContainer" id="FilmBanner"></div>
-      {/* ------------------------------ */}
+
       <div className="scheduleMainsize">
         <div className="titleandlocation" id="titleandschedule">
           <div className="Duy">
@@ -500,7 +567,7 @@ function FilmInfo(props: any) {
           >
             <a
               href="/#section1Home"
-              onClick={() => nav("/")}
+              onClick={() => nav("/#section1Home")}
               className="moreButtoninRe"
               style={{
                 padding: "5px 15px",
@@ -513,72 +580,6 @@ function FilmInfo(props: any) {
           </div>
         </div>
       </div>
-      {trailer && (
-        <div className="trailerContainer">
-          <div className="trailerPopup">
-            <i
-              className="fa-regular fa-circle-xmark"
-              onClick={() => setTrailer(false)}
-            ></i>
-            <iframe
-              width="560"
-              height="315"
-              src={`https://www.youtube.com/embed/${FilmInfo[0]?.trailer.replace(
-                "https://www.youtube.com/watch?v=",
-                ""
-              )}`}
-              frameBorder={0}
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-              allowFullScreen
-            ></iframe>
-            <div className="FilmTrailerInfo">
-              <img alt="Bùi Thanh Duy" src={FilmInfo[0]?.imagePortrait} />
-              <div className="trailerInfo">
-                <h3>{FilmInfo[0]?.name}</h3>
-                <p>
-                  Lấy bối cảnh sau hơn một thập kỷ kể từ phần phim đầu tiên,
-                  Avatar: Dòng Chảy Của Nước kể về câu chuyện của gia đình Sully
-                  (Jake, Neytiri, và con của họ),
-                </p>
-                <div className="buttontrailerContainer">
-                  <a
-                    type="button"
-                    style={{
-                      backgroundColor: "#d24d0b",
-                      borderRadius: "6px",
-                      padding: "6px 20px",
-                      fontSize: "14px",
-                      fontWeight: "bolder",
-                      marginRight: "10px",
-                      cursor: "pointer",
-                      textDecoration: "none",
-                      color: "white",
-                    }}
-                    onClick={() => handleOnClickDatve()}
-                    href={`/Film/${id}#titleandschedule`}
-                  >
-                    Đặt vé
-                  </a>
-                  <a
-                    type="button"
-                    style={{
-                      cursor: "pointer",
-                      backgroundColor: "#737373",
-                      borderRadius: "6px",
-                      padding: "6px 20px",
-                      fontSize: "14px",
-                      fontWeight: "bolder",
-                    }}
-                    onClick={() => setTrailer(false)}
-                  >
-                    Đóng
-                  </a>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      )}
     </div>
   );
 }
