@@ -11,4 +11,5 @@ export default interface eFilm {
   point: number;
   age: string;
   imageLandscape: string;
+  shortDescription: string
 }

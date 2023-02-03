@@ -7,6 +7,9 @@ import { connect } from "react-redux";
 import eCity from "../Model/eCity";
 import LoaderFilmInfo from "./LoaderFilmInfo/LoaderFilmInfo";
 function FilmInfo(props: any) {
+
+  const [trailer, setTrailer] = useState<Boolean>(false)
+
   const { id } = useParams();
   const [FilmInfo, setFilmInfo] = useState<Array<eFilm>>([]);
   const [FilmRe, setFilmRe] = useState<Array<eFilm>>([]);
@@ -114,6 +117,12 @@ function FilmInfo(props: any) {
   const handleOnclickMuaVe = (id: string) => {
     nav("/Film/" + id);
   };
+  
+  const handleOnclickDatve = () => {
+    setTrailer(false);
+    nav("/Film/" + id)
+  }
+
   const SetCloseCity = () => {
     setPopUpCity(false);
     setValueinput("");
@@ -205,6 +214,7 @@ function FilmInfo(props: any) {
               để bảo vệ sự an toàn của gia đình, những cuộc chiến sinh tồn, và
               những hiểm họa mà họ phải đối mặt.
             </p>
+            {/* <p dangerouslySetInnerHTML={{__html: FilmInfo[0]?.description}}></p> */}
 
             <div className="infoFilm">
               <p>
@@ -225,10 +235,54 @@ function FilmInfo(props: any) {
               </p>
             </div>
 
-            <button className="btn-trailer">Xem trailer</button>
+            <button className="btn-trailer" onClick={() => setTrailer(true)}>Xem trailer</button>
           </div>
         </div>
       </div>
+      {/* Trailer */}
+      {trailer && (
+        <div className="trailerContainer1" onClick={() => setTrailer(false)}>
+          <div className="trailerPopup1" onClick={(Event) => Event.stopPropagation()}>
+            {/* <i className="fa-regular fa-circle-xmark"></i> Lỗi icon */}
+            <iframe
+              width="560px"
+              height="310"
+              src={`https://www.youtube.com/embed/${FilmInfo[0]?.trailer.replace("https://www.youtube.com/watch?v=","")}`}
+              frameBorder={0}
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              allowFullScreen
+              name="Something"
+            ></iframe>
+
+            <div className="FilmTrailerInfo1">
+              <img src={FilmInfo[0]?.imagePortrait} alt="Anh Vũ" />
+              <div className="trailerInfo1">
+                <h3>{FilmInfo[0]?.name}</h3>
+                <p>Lấy bối cảnh sau hơn một thập kỷ kể từ phần phim đầu tiên,
+                    Avatar: Dòng Chảy Của Nước kể về câu chuyện của gia đình Sully
+                    (Jake, Neytiri, và con của họ),
+                </p>
+                {/* <p dangerouslySetInnerHTML={{__html: FilmInfo[0]?.description}}></p> */}
+
+                <div className="buttontrailerContainer1">
+                  <a className="a-ve" type="button" href={`/Film/${id}#titleandschedule`} onClick={() => handleOnclickDatve()}>Đặt vé</a>
+                  <a className="a-clo" type="button" href="#" onClick={() => setTrailer(false)}>Đóng</a>
+                </div>
+                
+              </div>
+
+            </div>
+
+          </div>
+
+        </div>
+      )}
+
+
+
+
+
+
 
       {/* ------------------------------ */}
       {/* Pop Up Cinema */}

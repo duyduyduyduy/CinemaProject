@@ -1,3 +1,4 @@
+// Banner
 .bannerContainer {
   background-color: red;
   height: 500px;
@@ -89,6 +90,92 @@
     }
   }
 }
+// Trailer
+.trailerContainer1 {
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 10;
+  background-color: rgb(79, 79, 79, 0.6);
+  top: 0;
+  .trailerPopup1 {
+    width: 560px;
+    height: auto;
+    padding: 20px;
+    border-radius: 15px;
+    background-color: #2B2727;
+    animation-name: animatetop;
+    animation-duration: 0.4s;
+    z-index: 100;
+    iframe {
+      border-radius: 15px;
+    }
+  }
+  .FilmTrailerInfo1 {
+    width: 560px;
+    height: auto;
+    border-radius: 10px;
+    margin-top: 10px;
+    display: flex;
+    img {
+      border-radius: 10px;
+      width: 100px;
+    }
+    .trailerInfo1 {
+      padding: 10px;
+      color: white;
+      p {
+        margin-top: 10px;
+        color: rgb(168, 168, 168);
+      }
+      .buttontrailerContainer1 {
+        margin-top: 15px;
+        .a-ve {
+          background-color: #d24d0b;
+          border-radius: 6px;
+          padding: 6px 20px;
+          font-size: 14px;
+          font-weight: bolder;
+          margin-right: 10px;
+          cursor: pointer;
+          text-decoration: none;
+          color: white
+        }
+        .a-clo {
+          cursor: pointer;
+          background-color: #737373;
+          border-radius: 6px;
+          padding: 6px 20px;
+          font-size: 14px;
+          font-weight: bolder;
+          cursor: pointer;
+          text-decoration: none;
+          color: white
+        }
+        a {
+          transition: 0.3s;
+        }
+        .a-ve:hover {
+          background: white !important;
+          color: #d24d0b;
+        }
+        .a-clo:hover {
+          background: white !important;
+          color: #737373;
+        }
+      }
+    }
+  }
+}
+
+
+
+
+
+
 
 .scheduleMainsize {
   width: 1200px;
