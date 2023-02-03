@@ -186,8 +186,8 @@
   transform: translateY(5px);
 }
 .scheduleInfo {
-  max-height: 500px;
-  min-height: 200px;
+  height: 500px;
+  // min-height: 200px;
   overflow-y: scroll;
   overflow-x: hidden;
   box-sizing: border-box;

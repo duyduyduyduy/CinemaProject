@@ -46,11 +46,98 @@
         li:hover {
           color: rgb(255, 68, 68);
         }
+        .film-li {
+            position: relative;
+            .FilmDropdown {
+                position: absolute;
+                left: -117px;
+                box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.3);
+                width: 800px;
+                height: auto;
+                background-color: white;
+                animation: growDown 300ms ease-in-out forwards;
+                .currentFilm {
+                    width: 100%;
+                    height: 50%;
+                    box-sizing: border-box;
+                    padding: 10px;
+                    span {
+                        border-bottom: 2px solid orangered;
+                        color: black;
+                    }
+                    .currentFilmcontainer {
+                        width: 100%;
+                        height: auto;
+                        display: flex;
+                        margin-top: 20px;
+                        box-sizing: border-box;
+                        // justify-content: space-between;
+                        div {
+                            box-sizing: border-box;
+                            margin-right: 10px;
+                            width: 25%;
+                            height: 100%;
+                            div {
+                                width: 100%;
+                                height: auto;
+                                overflow: hidden;
+                                img {
+                                  cursor: pointer;
+                                    width: 100%;
+                                    height: auto;
+                                    object-fit: cover;
+                                    transition: 0.3s;
+                                }
+                                img:hover {
+                                    transform: scale(1.1);
+                                }
+                            }
+                            p {
+                                color: black;
+                            }
+                        }
+                    }
+                }
+                .upcomingFilm {
+                    
+                }
+            }
+        }
+        .event-li {
+          // background-color: aqua;
+          position: relative;
+          .event {
+            animation: growDown 300ms ease-in-out forwards;
+            position: absolute;
+            width: 140px;
+            height: auto;
+            padding: 20px;
+            box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.3);
+            background-color: white;
+            text-align: center;
+            color: black;
+            p:hover {
+              cursor: pointer;
+              color: rgb(255, 68, 68);
+            }
+          }
+        }
       }
     }
     .sign {
       flex-grow: 1;
-      background-color: black;
+    //   background-color: black;
     }
+  }
+}
+@keyframes growDown {
+  0% {
+    transform: scaleY(0);
+  }
+  80% {
+    transform: scaleY(1.1);
+  }
+  100% {
+    transform: scaleY(1);
   }
 }
