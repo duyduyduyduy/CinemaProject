@@ -109,6 +109,7 @@
   box-sizing: border-box;
   padding-right: 10px;
   display: flex;
+  position: relative;
   flex-direction: column;
   .Duy {
     display: flex;
@@ -189,7 +190,6 @@
   min-height: 200px;
   overflow-y: scroll;
   overflow-x: hidden;
-  position: relative;
   box-sizing: border-box;
   width: 800px;
   padding: 10px;

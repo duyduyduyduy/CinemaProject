@@ -382,6 +382,7 @@ function FilmInfo(props: any) {
             {props.CurrentFilmState.isReadyCurFilm === true && (
               <LoaderFilmInfo />
             )}
+
             <div className="scheduleDetail">
               {detaiSchedule
                 ?.filter((n) => n.slug.includes(CinemaObject.slug))
