@@ -23,7 +23,7 @@ function Header1(props: any) {
   return (
     <div className="Header">
       <div className="mainSide">
-        <img src={require("./Header1IMG/logo4.png")} alt="" />
+        <img src={require("./Header1IMG/logo4.png")} alt="Anh Vũ" onClick={() => nav("/")}/>
         <div className="menu">
           <ul>
             <li>
