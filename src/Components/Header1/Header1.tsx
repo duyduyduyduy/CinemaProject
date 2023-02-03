@@ -23,7 +23,7 @@ function Header1(props: any) {
   return (
     <div className="Header">
       <div className="mainSide">
-        <img src={require("./Header1IMG/CinemaLogo.png")} alt="" />
+        <img src={require("./Header1IMG/logo4.png")} alt="" />
         <div className="menu">
           <ul>
             <li>
