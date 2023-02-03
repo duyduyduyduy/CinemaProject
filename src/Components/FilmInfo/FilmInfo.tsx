@@ -207,14 +207,14 @@ function FilmInfo(props: any) {
 
             <h2 className="nd-h2">Nội dung</h2>
 
-            <p>
+            {/* <p>
               Lấy bối cảnh sau hơn một thập kỷ kể từ phần phim đầu tiên, Avatar:
               Dòng Chảy Của Nước kể về câu chuyện của gia đình Sully (Jake,
               Neytiri, và con của họ), những vấn đề xung quanh họ, những nỗ lực
               để bảo vệ sự an toàn của gia đình, những cuộc chiến sinh tồn, và
               những hiểm họa mà họ phải đối mặt.
-            </p>
-            {/* <p dangerouslySetInnerHTML={{__html: FilmInfo[0]?.description}}></p> */}
+            </p> */}
+            <p dangerouslySetInnerHTML={{__html: FilmInfo[0]?.description.length > 1000 ? FilmInfo[0]?.description.slice(0,600) + "..." : FilmInfo[0]?.description  }}></p>
 
             <div className="infoFilm">
               <p>
@@ -258,11 +258,11 @@ function FilmInfo(props: any) {
               <img src={FilmInfo[0]?.imagePortrait} alt="Anh Vũ" />
               <div className="trailerInfo1">
                 <h3>{FilmInfo[0]?.name}</h3>
-                <p>Lấy bối cảnh sau hơn một thập kỷ kể từ phần phim đầu tiên,
+                {/* <p>Lấy bối cảnh sau hơn một thập kỷ kể từ phần phim đầu tiên,
                     Avatar: Dòng Chảy Của Nước kể về câu chuyện của gia đình Sully
                     (Jake, Neytiri, và con của họ),
-                </p>
-                {/* <p dangerouslySetInnerHTML={{__html: FilmInfo[0]?.description}}></p> */}
+                </p> */}
+                <p dangerouslySetInnerHTML={{__html: FilmInfo[0]?.description.length > 1000 ? FilmInfo[0]?.description.slice(0,230) + "..." : FilmInfo[0]?.description}}></p>
 
                 <div className="buttontrailerContainer1">
                   <a className="a-ve" type="button" href={`/Film/${id}#titleandschedule`} onClick={() => handleOnclickDatve()}>Đặt vé</a>
