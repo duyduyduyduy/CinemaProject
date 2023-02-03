@@ -244,7 +244,16 @@ function FilmInfo(props: any) {
               </div>
               <div className="contentofCinema">
                 <div className="Cinema">
-                  <span>{CinemaObject.name}</span>
+                  <span
+                    onClick={() =>
+                      HandleOnClickCinema({
+                        slug: "",
+                        name: "Tất cả các rạp",
+                      })
+                    }
+                  >
+                    Tất cả các rạp
+                  </span>
                 </div>
                 {cinema &&
                   cinema
