@@ -5,6 +5,7 @@ import Footer from "./Components/Footer/Footer";
 import FilmInfo from "./Components/FilmInfo/FilmInfo";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { connect } from "react-redux";
+import Header1 from "./Components/Header1/Header1";
 function App(props: any) {
   useEffect(() => {
     props.fetchdatafromfirstapi();
@@ -13,7 +14,8 @@ function App(props: any) {
     <div>
       <BrowserRouter>
         <div className="Header">
-          <Header />
+          {/* <Header /> */}
+          <Header1 />
         </div>
         <Routes>
           <Route
