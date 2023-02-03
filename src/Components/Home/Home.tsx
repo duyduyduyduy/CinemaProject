@@ -106,7 +106,7 @@ function Home(props: any) {
           )}
         </div>
       </div>
-      {/* <Promotion /> */}
+      <Promotion />
     </div>
   );
 }

@@ -5,7 +5,7 @@ import eFilm from "../Model/eFilm";
 import eSchedule from "../Model/eSchedule";
 import { connect } from "react-redux";
 import eCity from "../Model/eCity";
-import { url } from "inspector";
+import LoaderFilmInfo from "./LoaderFilmInfo/LoaderFilmInfo";
 function FilmInfo(props: any) {
   const { id } = useParams();
   const [FilmInfo, setFilmInfo] = useState<Array<eFilm>>([]);
@@ -54,23 +54,31 @@ function FilmInfo(props: any) {
       name: "Tất cả các rạp",
     });
   }, [CityObject]);
-  useEffect(() => {
-    setFilmRe(props.CurrentFilmState.lsCurFilm);
-    fetch(
-      "https://vietcpq.name.vn/U2FsdGVkX1+ibKkbj+HGKjeepxUwFVviPP1AkhuyHto=/cinema/movie/" +
-        id
-    )
-      .then((res) => res.json())
-      .then((data) => {
-        setSchedule(data);
-        setLengthTime(data[0]?.dates.length);
-        setNum(0);
-        setNumTime(0);
-        setCityObject({ cityID: "", name: "Cả Nước" });
-        setCinemaObject({ slug: "", name: "Tất cả các rạp" });
-      });
-  }, [id, props]);
 
+  useEffect(() => {
+    props.readyCurFilm();
+    const fetchScheduleAPI = async () => {
+      setTimeout(() => {}, 2000);
+      let res = await fetch(
+        "https://vietcpq.name.vn/U2FsdGVkX1+ibKkbj+HGKjeepxUwFVviPP1AkhuyHto=/cinema/movie/" +
+          id
+      );
+      let data = await res.json();
+      if (res.status === 200) {
+        props.successCurFilm();
+      } else if (res.status === 500 || res.status === 400) {
+        props.failCurFilm();
+      }
+      console.log("INFO:", res);
+      setSchedule(data);
+      setLengthTime(data[0]?.dates.length);
+      setNum(0);
+      setNumTime(0);
+    };
+    setTimeout(() => {
+      fetchScheduleAPI();
+    }, 1000);
+  }, [id]);
   const ageClassName = (age: number) => {
     let result = "";
     if (age === 0) {
@@ -86,7 +94,7 @@ function FilmInfo(props: any) {
   };
 
   useEffect(() => {
-    console.log("Current data: ", props.CurrentFilmState);
+    setFilmRe(props.CurrentFilmState.lsCurFilm);
     if (props.CurrentFilmState && props.NextFilmState) {
       let ObjectFilmInfo = props.CurrentFilmState.lsCurFilm?.filter(
         (n: eFilm) => n.id === id
@@ -371,6 +379,9 @@ function FilmInfo(props: any) {
             </div>
           </div>
           <div className="scheduleInfo">
+            {props.CurrentFilmState.isReadyCurFilm === true && (
+              <LoaderFilmInfo />
+            )}
             <div className="scheduleDetail">
               {detaiSchedule
                 ?.filter((n) => n.slug.includes(CinemaObject.slug))
@@ -591,6 +602,22 @@ const mapStateToProps = (state: any, ownProps: any) => {
   };
 };
 const mapDispatchToProps = (dispatch: any, ownProps: any) => {
-  return {};
+  return {
+    readyCurFilm: () => {
+      dispatch({
+        type: "IS_READY_CUR_FILM",
+      });
+    },
+    successCurFilm: () => {
+      dispatch({
+        type: "IS_SUCCESS_CUR_FILM",
+      });
+    },
+    failCurFilm: () => {
+      dispatch({
+        type: "IS_FAILED_CUR_FILM",
+      });
+    },
+  };
 };
 export default connect(mapStateToProps, mapDispatchToProps)(FilmInfo);

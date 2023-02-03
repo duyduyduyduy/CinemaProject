@@ -1,6 +1,5 @@
 import React, { useEffect } from "react";
 import Home from "./Components/Home/Home";
-import Header from "./Components/Header/Header";
 import Footer from "./Components/Footer/Footer";
 import FilmInfo from "./Components/FilmInfo/FilmInfo";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
@@ -14,7 +13,6 @@ function App(props: any) {
     <div>
       <BrowserRouter>
         <div className="Header">
-          {/* <Header /> */}
           <Header1 />
         </div>
         <Routes>
