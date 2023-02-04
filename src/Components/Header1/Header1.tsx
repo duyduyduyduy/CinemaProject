@@ -95,7 +95,7 @@ function Header1(props: any) {
 
             </li>
             <li>
-              <a href="#">BLOG ĐIỆN ẢNH</a>
+              <a href="#" onClick={() => nav("/BlogFilm")}>BLOG ĐIỆN ẢNH</a>
             </li>
             <li className="event-li"
               onMouseEnter={() => setEventModal(true)}
