@@ -272,10 +272,6 @@ function FilmInfo(props: any) {
               <img src={FilmInfo[0]?.imagePortrait} alt="Anh Vũ" />
               <div className="trailerInfo1">
                 <h3>{FilmInfo[0]?.name}</h3>
-                {/* <p>Lấy bối cảnh sau hơn một thập kỷ kể từ phần phim đầu tiên,
-                    Avatar: Dòng Chảy Của Nước kể về câu chuyện của gia đình Sully
-                    (Jake, Neytiri, và con của họ),
-                </p> */}
                 <p
                   dangerouslySetInnerHTML={{
                     __html:
