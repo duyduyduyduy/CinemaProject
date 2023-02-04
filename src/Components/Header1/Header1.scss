@@ -16,7 +16,7 @@
       // width: 275px;
     }
     .menu {
-      width: 45%;
+      width: 50%;
       height: 100%;
       display: flex;
       justify-content: center;
@@ -25,9 +25,10 @@
       font-weight: bolder;
 
       ul {
+        display: flex;
         li {
-          margin-right: 50px;
           display: inline-block;
+          margin-right: 40px;
           a {
             text-decoration: none;
             color: black;
@@ -49,61 +50,60 @@
           color: rgb(255, 68, 68);
         }
         .film-li {
-            position: relative;
-            .FilmDropdown {
-                position: absolute;
-                left: -117px;
-                box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.3);
-                width: 800px;
+          position: relative;
+          .FilmDropdown {
+            position: absolute;
+            left: -117px;
+            box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.3);
+            width: 800px;
+            height: auto;
+            background-color: white;
+            animation: growDown 300ms ease-in-out forwards;
+            .currentFilm {
+              width: 100%;
+              height: 50%;
+              box-sizing: border-box;
+              padding: 10px;
+              span {
+                border-bottom: 2px solid orangered;
+                color: black;
+              }
+              .currentFilmcontainer {
+                width: 100%;
                 height: auto;
-                background-color: white;
-                animation: growDown 300ms ease-in-out forwards;
-                .currentFilm {
+                display: flex;
+                margin-top: 20px;
+                box-sizing: border-box;
+                // justify-content: space-between;
+                div {
+                  box-sizing: border-box;
+                  margin-right: 10px;
+                  width: 25%;
+                  height: 100%;
+                  div {
                     width: 100%;
-                    height: 50%;
-                    box-sizing: border-box;
-                    padding: 10px;
-                    span {
-                        border-bottom: 2px solid orangered;
-                        color: black;
+                    height: auto;
+                    overflow: hidden;
+                    img {
+                      cursor: pointer;
+                      width: 100%;
+                      height: auto;
+                      object-fit: cover;
+                      transition: 0.3s;
                     }
-                    .currentFilmcontainer {
-                        width: 100%;
-                        height: auto;
-                        display: flex;
-                        margin-top: 20px;
-                        box-sizing: border-box;
-                        // justify-content: space-between;
-                        div {
-                            box-sizing: border-box;
-                            margin-right: 10px;
-                            width: 25%;
-                            height: 100%;
-                            div {
-                                width: 100%;
-                                height: auto;
-                                overflow: hidden;
-                                img {
-                                  cursor: pointer;
-                                    width: 100%;
-                                    height: auto;
-                                    object-fit: cover;
-                                    transition: 0.3s;
-                                }
-                                img:hover {
-                                    transform: scale(1.1);
-                                }
-                            }
-                            p {
-                                color: black;
-                            }
-                        }
+                    img:hover {
+                      transform: scale(1.1);
                     }
+                  }
+                  p {
+                    color: black;
+                  }
                 }
-                .upcomingFilm {
-                    
-                }
+              }
             }
+            .upcomingFilm {
+            }
+          }
         }
         .event-li {
           // background-color: aqua;
@@ -185,6 +185,25 @@
         }
       }
     }
+  }
+}
+.loginsignup {
+  width: 30%;
+  display: flex;
+  position: relative;
+  justify-content: flex-end;
+  align-items: center;
+  span {
+    transition: 0.3s;
+    padding-left: 6px;
+    padding-right: 6px;
+    cursor: pointer;
+    font-weight: bolder;
+  }
+  span:hover {
+    color: crimson;
+    font-weight: bolder;
+    border-radius: 15px;
   }
 }
 @keyframes growDown {
