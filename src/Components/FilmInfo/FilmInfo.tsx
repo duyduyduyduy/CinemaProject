@@ -276,7 +276,7 @@ function FilmInfo(props: any) {
                   dangerouslySetInnerHTML={{
                     __html:
                       FilmInfo[0]?.description.length > 1000
-                        ? FilmInfo[0]?.description.slice(0, 230) + "..."
+                        ? FilmInfo[0]?.description.slice(0, 235) + "..."
                         : FilmInfo[0]?.description,
                   }}
                 ></p>
