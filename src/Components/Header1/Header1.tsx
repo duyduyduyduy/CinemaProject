@@ -7,6 +7,8 @@ import eFilm from "../Model/eFilm";
 function Header1(props: any) {
   const [filmModal, setFilmModal] = useState<Boolean>(false);
   const [eventModal, setEventModal] = useState<Boolean>(false)
+  const [signModal, setSignModal] = useState<Boolean>(false)
+
   const [lsCurrentFilm, setLsCurrentFilm] = useState<Array<eFilm>>([]);
   const [lsSoonFilm, setLsSoonFilm] = useState<Array<eFilm>>([]);
 
@@ -111,7 +113,26 @@ function Header1(props: any) {
           </ul>
         </div>
 
-        <div className="sign"></div>
+        <div className="sign"
+          // onMouseEnter={() => setSignModal(true)}
+          onMouseLeave={() => setSignModal(false)}
+        >
+          <div>
+            <i className="fa-solid fa-user" style={{fontSize: "20px", color: "red"}}></i>
+            <p  onMouseEnter={() => setSignModal(true)}>Hoàng Anh Vũ</p>
+            <i className="fa-solid fa-angle-down" style={{fontSize: '15px', color: 'rgb(97, 96, 96)'}}></i>
+          </div>
+          {signModal && (
+            <div className="popup-user">
+              <div>
+                <h3>Hoàng Anh Vũ</h3>
+                <p>UserCinema@Prd04.com</p>
+              </div>
+              <h2>Edit Profile</h2>
+              <h2 className="clear-h2">Sign Out</h2>
+            </div>
+          )}
+        </div>
       </div>
     </div>
   )

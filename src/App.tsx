@@ -5,6 +5,7 @@ import FilmInfo from "./Components/FilmInfo/FilmInfo";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { connect } from "react-redux";
 import Header1 from "./Components/Header1/Header1";
+import BlogFilm from "./Components/BlogFilm/BlogFilm";
 function App(props: any) {
   useEffect(() => {
     props.fetchdatafromfirstapi();
@@ -25,6 +26,7 @@ function App(props: any) {
             }
           ></Route>
           <Route path="/Film/:id" element={<FilmInfo />}></Route>
+          <Route path="/BlogFilm" element={<BlogFilm />}></Route>
         </Routes>
         <Footer />
       </BrowserRouter>

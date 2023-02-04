@@ -1,0 +1,29 @@
+.BlogFilm {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    .mainSize {
+        margin-top: 10px;
+        width: 1200px;
+        height: 100%;
+        // background-color: aqua;
+        .titleContainer {
+            color: rgb(57, 57, 57);
+            display: block;
+            width: 100%;
+            height: 200px;
+            // background-color: violet;
+            h1 {
+                font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+                width: 100%;
+                font-size: 60px;
+                color: Black;
+                font-weight: bolder;
+            }
+            p {
+                font-weight: bolder;
+            }
+        }
+    }
+}

@@ -262,7 +262,7 @@ function FilmInfo(props: any) {
                     Avatar: Dòng Chảy Của Nước kể về câu chuyện của gia đình Sully
                     (Jake, Neytiri, và con của họ),
                 </p> */}
-                <p dangerouslySetInnerHTML={{__html: FilmInfo[0]?.description.length > 1000 ? FilmInfo[0]?.description.slice(0,230) + "..." : FilmInfo[0]?.description}}></p>
+                <p dangerouslySetInnerHTML={{__html: FilmInfo[0]?.description.length > 1000 ? FilmInfo[0]?.description.slice(0,280) + "..." : FilmInfo[0]?.description}}></p>
 
                 <div className="buttontrailerContainer1">
                   <a className="a-ve" type="button" href={`/Film/${id}#titleandschedule`} onClick={() => handleOnclickDatve()}>Đặt vé</a>
