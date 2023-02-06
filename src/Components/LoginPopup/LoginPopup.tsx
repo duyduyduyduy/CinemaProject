@@ -6,11 +6,37 @@ function LoginPopup(props: any) {
   const [signinModal, setSignInModal] = useState<boolean>(true);
   const [username, setUserName] = useState<string>("");
   const [password, setPassword] = useState<string>("");
+  const [name, setName] = useState<string>("");
   const handleOnChangeEmail = (event: any) => {
     setUserName(event.target.value);
   };
   const handleOnChangePassword = (event: any) => {
     setPassword(event.target.value);
+  };
+  const handleOnchangeName = (event: any) => {
+    setName(event.target.value);
+  };
+  const handleOnClickSingup = () => {
+    const requestOptions = {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        Email: username,
+        Name: name,
+        Password: password,
+        Role: "0",
+      }),
+    };
+    fetch(
+      "https://vietcpq.name.vn/U2FsdGVkX1+ibKkbj+HGKjeepxUwFVviPP1AkhuyHto=/user/user",
+      requestOptions
+    ).then((response) => {
+      Cookies.set("Email", username);
+      Cookies.set("Password", password);
+      Cookies.set("Name", name);
+      response.status === 200 && props.successlogin();
+      response.status === 200 && props.closeSignIn();
+    });
   };
   const handleOnClickLogin = () => {
     Cookies.set("Email", username);
@@ -68,7 +94,11 @@ function LoginPopup(props: any) {
               thêm nhiều ưu đãi từ chương trình thành viên Galaxy Cinema.
             </p>
             <input placeholder="Email" onChange={handleOnChangeEmail} />
-            <input placeholder="Mật khẩu" onChange={handleOnChangePassword} />
+            <input
+              type={"password"}
+              placeholder="Mật khẩu"
+              onChange={handleOnChangePassword}
+            />
             <p className="ForgetPass">Quên mật khẩu ?</p>
             <button
               type="button"
@@ -86,11 +116,19 @@ function LoginPopup(props: any) {
               Vui lòng đăng nhập trước khi mua vé để tích luỹ điểm, cơ hội nhận
               thêm nhiều ưu đãi từ chương trình thành viên Galaxy Cinema.
             </p>
-            <input placeholder="Họ và tên" />
-            <input placeholder="Email" />
+            <input placeholder="Họ và tên" onChange={handleOnchangeName} />
+            <input placeholder="Email" onChange={handleOnChangeEmail} />
             <div className="passContainer">
-              <input placeholder="Mật khẩu" />
-              <input placeholder="Xác nhận mật khẩu" />
+              <input
+                placeholder="Mật khẩu"
+                type={"password"}
+                onChange={handleOnChangePassword}
+              />
+              <input
+                placeholder="Xác nhận mật khẩu"
+                type={"password"}
+                onChange={handleOnChangePassword}
+              />
             </div>
             <p style={{ marginBottom: "20px" }}>
               Tôi đã đọc và đồng ý với{" "}
@@ -104,7 +142,11 @@ function LoginPopup(props: any) {
               </span>{" "}
               của chương trình.
             </p>
-            <button type="button" className="signinButton">
+            <button
+              type="button"
+              className="signinButton"
+              onClick={handleOnClickSingup}
+            >
               ĐĂNG KÝ
             </button>
           </div>

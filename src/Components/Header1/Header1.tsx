@@ -111,7 +111,9 @@ function Header1(props: any) {
               )}
             </li>
             <li>
-              <a href="#" onClick={() => nav("/BlogFilm")}>BLOG ĐIỆN ẢNH</a>
+              <a href="#" onClick={() => nav("/BlogFilm")}>
+                BLOG ĐIỆN ẢNH
+              </a>
             </li>
             <li
               className="event-li"
@@ -134,18 +136,14 @@ function Header1(props: any) {
             className="sign"
             // onMouseEnter={() => setSignModal(true)}
             onMouseLeave={() => setSignModal(false)}
+            onMouseEnter={() => setSignModal(true)}
           >
             <div>
               <i
                 className="fa-solid fa-user"
                 style={{ fontSize: "20px", color: "red" }}
               ></i>
-              <p
-                onMouseEnter={() => setSignModal(true)}
-                style={{ cursor: "pointer" }}
-              >
-                {Cookies.get("Name")}
-              </p>
+              <p style={{ cursor: "pointer" }}>{Cookies.get("Name")}</p>
               <i
                 className="fa-solid fa-angle-down"
                 style={{ fontSize: "15px", color: "rgb(97, 96, 96)" }}
@@ -157,7 +155,10 @@ function Header1(props: any) {
                   <h3> {Cookies.get("Name")}</h3>
                   <p>{Cookies.get("Email")}</p>
                 </div>
-                <h2 style={{ cursor: "pointer" }}>
+                <h2
+                  style={{ cursor: "pointer" }}
+                  onClick={() => nav("/edit-user")}
+                >
                   {" "}
                   <i className="fa-solid fa-pen-to-square"></i> Edit Profile
                 </h2>

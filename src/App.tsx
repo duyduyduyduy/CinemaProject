@@ -8,6 +8,7 @@ import Header1 from "./Components/Header1/Header1";
 import BlogFilm from "./Components/BlogFilm/BlogFilm";
 import LoginPopup from "./Components/LoginPopup/LoginPopup";
 import Cookies from "js-cookie";
+import UserEdit from "./Components/UserEdit/UserEdit";
 function App(props: any) {
   useEffect(() => {
     props.fetchdatafromfirstapi();
@@ -45,6 +46,7 @@ function App(props: any) {
           ></Route>
           <Route path="/Film/:id" element={<FilmInfo />}></Route>
           <Route path="/BlogFilm" element={<BlogFilm />}></Route>
+          <Route path="/edit-user" element={<UserEdit />}></Route>
         </Routes>
         <Footer />
       </BrowserRouter>
