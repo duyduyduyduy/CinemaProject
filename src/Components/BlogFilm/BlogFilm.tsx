@@ -1,22 +1,24 @@
 import React, { useEffect, useState } from 'react'
+import { useParams } from 'react-router-dom'
 import eBlog from '../Model/eBlog'
+import eFilm from '../Model/eFilm'
 import eListBlogs from '../Model/eListBlogs'
+import eListBlogTopView from '../Model/eListBlogTopView'
 import './BlogFilm.scss'
 
-export default function BlogFilm() {
+export default function BlogFilm(props: any) {
     const [blogData, setBlogData] = useState<Array<eBlog>>([])
     const [listBlogs, setListBlogs] = useState<Array<eListBlogs>>([])
-
+    const [listBlogTopView, setListBlogTopView] = useState<Array<eListBlogTopView>>([])
+    
     useEffect(() => {
         fetch('https://mocki.io/v1/9f78daae-b0b3-4e80-90e0-ff3472bbb055?fbclid=IwAR0P010WN0LeqCPU8cHHTXH3GadDuW3vt6cj_wH8XNT_ICc3TVWsZ_WcaDI')
             .then(res => res.json())
-            .then((data) => 
-                setBlogData(data.pageProps.dataBlog.Data.ListBlogFeatured.Items)
-            );
-        fetch('https://mocki.io/v1/9f78daae-b0b3-4e80-90e0-ff3472bbb055?fbclid=IwAR0P010WN0LeqCPU8cHHTXH3GadDuW3vt6cj_wH8XNT_ICc3TVWsZ_WcaDI')
-            .then(res => res.json())
-            .then((data) => 
-                setListBlogs(data.pageProps.dataBlog.Data.ListBlogs.Items)
+            .then((data) => {
+                setBlogData(data.pageProps.dataBlog.Data.ListBlogFeatured.Items);
+                setListBlogs(data.pageProps.dataBlog.Data.ListBlogs.Items);
+                setListBlogTopView(data.pageProps.dataBlog.Data.ListBlogTopView.Items);
+                }
             );
     }, [])
         
@@ -98,8 +100,21 @@ export default function BlogFilm() {
                     })}
                 </div>
 
-                <div className='FilmReContainer'>
-
+                <div className='ListBlogTopView'>
+                    <h3>Xem nhiều nhất</h3>
+                    <div className="TopViewContainer">
+                        {listBlogTopView?.map((n, i) => {
+                            return (
+                                <div key={i} className="TopViewItem">
+                                    <img src={n.Avatar} alt="Anh Vũ" />
+                                    <div className='ItemInfo'>
+                                        <h4>{n.CategoryChildName}</h4>
+                                        <p>{n.Title}</p>
+                                    </div>
+                                </div>
+                            )
+                        })}
+                    </div>
                 </div>
             </div>
 
