@@ -3,7 +3,7 @@
     height: auto;
     display: flex;
     justify-content: center;
-    background-color: rgb(235, 232, 232);
+    // background-color: rgb(235, 232, 232);
     .mainSize {
         margin-top: 10px;
         width: 1200px;
@@ -27,8 +27,11 @@
             }
         }
         .ListBlogFeatured {
-            width: 100%;
+            width: 120%;
             height: 600px;
+            // margin-top: -50px;
+            // margin-left: -10%;
+            margin: -50px 0px 30px -10%;
             .top {
                 width: 100%;
                 height: 350px;
@@ -129,6 +132,74 @@
                     }
                 }
             }
+        }
+    }
+    .BodyContent {
+        width: 100%;
+        // height: 100vh;
+        height: auto;
+        margin-top: 50px;
+        border-top: 1px solid lightgray;
+        // background-color: aqua;
+        padding: 20px 0px 20px 0px;
+        box-sizing: border-box;
+        display: flex;
+        .ListBlogs {
+            width: 60%;
+            height: 100%;
+            // background-color: pink;
+            .BlogItem {
+                width: 100%;
+                // height: 170px;
+                height: auto;
+                margin-bottom: 20px;
+                border-bottom: 1px solid lightgray;
+                display: flex;
+                div {
+                    width: 30%;
+                    height: 100%;
+                    background-color: azure;
+                    img {
+                        height: 75%;
+                        width: 100%;
+                        object-fit: cover;
+                        border-radius: 10px;
+                    }
+                }
+                .ItemInfo {
+                    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+                    flex-grow: 1;
+                    // background-color: rgb(71, 255, 80);
+                    padding: 0px 20px 20px 20px;
+                    box-sizing: border-box;
+                    h3 {
+                        font-size: 16px;
+                        font-weight: bolder;
+                        color: blue;
+                    }
+                    h4 {
+                        font-size: 18px;
+                        font-weight: 1000;
+                    }
+                    .viewCont {
+                        color: rgb(127, 127, 127);
+                        font-size: 14px;
+                        i {
+                            margin-right: 5px;
+                        }
+                    }
+                    p {
+                        color: rgb(66, 66, 66);
+                    }
+                }
+            }
+        }
+
+
+
+        .FilmReContainer {
+            flex-grow: 1;
+            background-color: rgb(255, 106, 0);
         }
     }
 }

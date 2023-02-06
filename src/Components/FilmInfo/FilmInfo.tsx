@@ -608,6 +608,9 @@ function FilmInfo(props: any) {
             </div>
           </div>
         </div>
+
+        
+        {/* Phim Recomment */}
         <div className="FilmRecommend">
           <h3 className="titleFilmNow" style={{ marginBottom: "20px" }}>
             Phim đang chiếu
@@ -676,6 +679,10 @@ function FilmInfo(props: any) {
             </a>
           </div>
         </div>
+
+
+
+
       </div>
     </div>
   );
