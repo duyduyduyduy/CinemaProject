@@ -38,7 +38,9 @@ function Header1(props: any) {
         <div className="menu">
           <ul>
             <li>
-              <a href="#">MUA VÉ</a>
+              <a href="#" onClick={() => nav("/list-cinema")}>
+                CHỌN RẠP
+              </a>
             </li>
             <li
               className="film-li"
