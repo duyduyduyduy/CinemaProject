@@ -143,7 +143,12 @@ function Header1(props: any) {
                 className="fa-solid fa-user"
                 style={{ fontSize: "20px", color: "red" }}
               ></i>
-              <p style={{ cursor: "pointer" }}>{Cookies.get("Name")}</p>
+              <p style={{ cursor: "pointer" }}>
+                {Cookies.get("Name") &&
+                String(Cookies.get("Name"))?.length <= 10
+                  ? Cookies.get("Name")
+                  : Cookies.get("Name")?.slice(0, 10) + "..."}
+              </p>
               <i
                 className="fa-solid fa-angle-down"
                 style={{ fontSize: "15px", color: "rgb(97, 96, 96)" }}
@@ -152,7 +157,13 @@ function Header1(props: any) {
             {signModal && (
               <div className="popup-user">
                 <div>
-                  <h3> {Cookies.get("Name")}</h3>
+                  <h3>
+                    {" "}
+                    {Cookies.get("Name") &&
+                    String(Cookies.get("Name"))?.length <= 10
+                      ? Cookies.get("Name")
+                      : Cookies.get("Name")?.slice(0, 10) + "..."}
+                  </h3>
                   <p>{Cookies.get("Email")}</p>
                 </div>
                 <h2
