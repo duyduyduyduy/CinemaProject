@@ -71,7 +71,6 @@ function FilmInfo(props: any) {
       } else if (res.status === 500 || res.status === 400) {
         props.failCurFilm();
       }
-      console.log("INFO:", res);
       setSchedule(data);
       setLengthTime(data[0]?.dates.length);
       setNum(0);
@@ -609,7 +608,6 @@ function FilmInfo(props: any) {
           </div>
         </div>
 
-        
         {/* Phim Recomment */}
         <div className="FilmRecommend">
           <h3 className="titleFilmNow" style={{ marginBottom: "20px" }}>
@@ -679,10 +677,6 @@ function FilmInfo(props: any) {
             </a>
           </div>
         </div>
-
-
-
-
       </div>
     </div>
   );
