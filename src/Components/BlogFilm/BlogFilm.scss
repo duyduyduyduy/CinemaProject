@@ -29,8 +29,6 @@
         .ListBlogFeatured {
             width: 120%;
             height: 600px;
-            // margin-top: -50px;
-            // margin-left: -10%;
             margin: -50px 0px 30px -10%;
             .top {
                 width: 100%;
@@ -40,6 +38,10 @@
                 div {
                     width: 49.9%;
                     height: 350px;
+                    display: flex;
+                    flex-direction: column;
+                    align-items: flex-end;
+                    justify-content: space-between;
                     .viewPoint {
                         width: 100%;
                         height: 50%;
@@ -60,16 +62,18 @@
                     .content {
                         color: rgb(255, 255, 255);
                         width: 100%;
-                        height: 50%;
+                        height: 35%;
                         padding: 10px;
                         font-weight: bolder;
                         box-sizing: border-box;
                         background-color: rgba(0, 0, 0, 0.5);
                         display: flex;
                         flex-direction: column;
-                        justify-content: space-between;
+                        justify-content: start;
+                        // justify-content: space-between;
                         h1 {
                             font-size: 25px;
+                            width: 100%;
                             margin-bottom: 10px;
                         }
                         p {
@@ -92,6 +96,10 @@
                 div {
                     width: 33%;
                     height: 100%;
+                    display: flex;
+                    flex-direction: column;
+                    align-items: flex-end;
+                    justify-content: space-between;
                     // background-color: royalblue;
                     .viewPointBot {
                         width: 100%;
@@ -113,7 +121,7 @@
                     .content {
                         color: rgb(255, 255, 255);
                         width: 100%;
-                        height: 60%;
+                        height: 40%;
                         margin-top: -6%;
                         padding: 10px;
                         font-weight: bolder;
@@ -123,6 +131,7 @@
                         flex-direction: column;
                         justify-content: space-between;
                         h1 {
+                            width: 100%;
                             font-size: 17px;
                             margin-bottom: 10px;
                         }
@@ -133,6 +142,91 @@
                 }
             }
         }
+        .FilmReContainer {
+            width: 120%;
+            margin-left: -10%;
+            height: auto;
+            padding: 50px;
+            box-sizing: border-box;
+            margin-top: 50px;
+
+            border-radius: 20px;
+            background: #ebebeb;
+            box-shadow:  18px 18px 34px #cccccc,
+             -18px -18px 34px #ffffff;
+            .FilmReTitle {
+                width: 100%;
+                height: 100px;
+                // background-color: aqua;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+            h1 {
+                // border: 1px solid red;
+                border-radius: 20px;
+                border: none !important;
+                color: white;
+                background: #da7575;
+                box-shadow:  18px 18px 34px #cccccc,
+                 -18px -18px 34px #ffffff;
+                text-align: center;
+                width: 100px;
+                position: relative;
+                animation: myAnimation 5s ease-out infinite;
+            }
+            h1 {
+                width: 230px;
+                padding: 5px 0px;
+                box-sizing: border-box;
+                text-align: center;
+                border: 1px solid red;
+                margin-bottom: 20px;
+            }
+            .Film1Container {
+                width: 100%;
+                height: 350px;
+                display: flex;
+                justify-content: space-between;
+                position: relative;
+                h1 {
+                    text-align: center;
+                }
+                .FilmReItem {
+                    width: 19%;
+                    height: 100%;
+                    background-position: center;
+                    background-size: cover;
+                    display: flex;
+                    align-items: end;
+                    div {
+                        width: 100%;
+                        height: 50px;
+                        background-color: rgba(0, 0, 0, 0.6);
+                        text-align: center;
+                        line-height: 50px;
+                        position: relative;
+                        h2 {
+                            color: rgb(83, 216, 253);
+                        }   
+                        a {
+                            text-decoration: none;
+                            color: rgb(83, 216, 253);
+                            position: absolute;
+                            display: block;
+                            width: 100%;
+                            height: 100%;
+                        }
+                    }
+                    div:hover {
+                        opacity: 0.8;
+                    }
+                }
+            }
+
+
+        }
+
     }
     .BodyContent {
         width: 100%;
@@ -158,7 +252,6 @@
                 div {
                     width: 30%;
                     height: 100%;
-                    background-color: azure;
                     img {
                         height: 75%;
                         width: 100%;
@@ -193,6 +286,64 @@
                     }
                 }
             }
+            .MoreContainer {
+                width: 100%;
+                height: 50px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                a {
+                    cursor: pointer;
+                    font-size: 20px;
+                    font-weight: bolder;
+                    color: brown;
+                    box-sizing: border-box;
+                    padding: 10px 20px;
+                    border: 1px solid brown;
+                }
+                a:hover {
+                    background-color: brown;
+                    color: white;
+                }
+                .btn-donate {
+                    --clr-font-main: hsla(0 0% 20% / 100);
+                    --btn-bg-1: rgb(220, 51, 9);
+                    --btn-bg-2: rgb(245, 174, 169);
+                    --btn-bg-color: hsla(360 100% 100% / 1);
+                    --radii: 0.5em;
+                    cursor: pointer;
+                    padding: 0.9em 1.4em;
+                    min-width: 120px;
+                    min-height: 44px;
+                    font-size: var(--size, 1rem);
+                    font-family: "Segoe UI", system-ui, sans-serif;
+                    font-weight: 500;
+                    transition: 0.8s;
+                    background-size: 280% auto;
+                    background-image: linear-gradient(325deg, var(--btn-bg-2) 0%, var(--btn-bg-1) 55%, var(--btn-bg-2) 90%);
+                    border: none;
+                    // border-radius: var(--radii);
+                    // border-radius: 50px;
+                    color: var(--btn-bg-color);
+                    box-shadow: 0px 0px 20px rgba(71, 184, 255, 0.5), 0px 5px 5px -1px rgba(58, 125, 233, 0.25), inset 4px 4px 8px rgba(175, 230, 255, 0.5), inset -4px -4px 8px rgba(19, 95, 216, 0.35);
+                  }
+                  
+                  .btn-donate:hover {
+                    background-position: right top;
+                  }
+                  
+                  .btn-donate:is(:focus, :focus-within,:active) {
+                    outline: none;
+                    box-shadow: 0 0 0 3px var(--btn-bg-color), 0 0 0 6px var(--btn-bg-2);
+                  }
+                  
+                  @media (prefers-reduced-motion: reduce) {
+                    .btn-donate {
+                      transition: linear;
+                    }
+                  }
+                  
+            }
         }
 
 
@@ -200,6 +351,8 @@
         .ListBlogTopView {
             margin-left: 20px;
             flex-grow: 1;
+            position: sticky;
+            top: 40px;
             h1 {
                 font-size: 20px;
             }
@@ -232,5 +385,8 @@
                 }
             }
         }
+    }
+    .PopupContainer {
+        // width: ;
     }
 }
