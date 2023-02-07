@@ -40,6 +40,10 @@
         div {
           width: 49.9%;
           height: 350px;
+          display: flex;
+          justify-content: space-between;
+          flex-direction: column;
+          align-items: end;
           .viewPoint {
             width: 100%;
             height: 50%;
@@ -60,7 +64,7 @@
           .content {
             color: rgb(255, 255, 255);
             width: 100%;
-            height: 50%;
+            height: 34%;
             padding: 10px;
             font-weight: bolder;
             box-sizing: border-box;
@@ -69,6 +73,7 @@
             flex-direction: column;
             justify-content: space-between;
             h1 {
+              width: 100%;
               font-size: 25px;
               margin-bottom: 10px;
             }
@@ -77,330 +82,54 @@
             }
           }
         }
-        .ListBlogFeatured {
-            width: 120%;
-            height: 600px;
-            margin: -50px 0px 30px -10%;
-            .top {
-                width: 100%;
-                height: 350px;
-                display: flex;
-                justify-content: space-between;
-                div {
-                    width: 49.9%;
-                    height: 350px;
-                    display: flex;
-                    flex-direction: column;
-                    align-items: flex-end;
-                    justify-content: space-between;
-                    .viewPoint {
-                        width: 100%;
-                        height: 50%;
-                        padding: 20px;
-                        box-sizing: border-box;
-                        text-align: end;
-                        .viewCont {
-                            box-shadow: 0px 0px 10px 3px rgb(251, 130, 130);
-                            background-color: rgb(206, 204, 204);
-                            padding: 4px 10px;
-                            border-radius: 20px;
-                            span {
-                                margin-left: 5px;
-                                font-weight: bolder;
-                            }
-                        }
-                    }
-                    .content {
-                        color: rgb(255, 255, 255);
-                        width: 100%;
-                        height: 35%;
-                        padding: 10px;
-                        font-weight: bolder;
-                        box-sizing: border-box;
-                        background-color: rgba(0, 0, 0, 0.5);
-                        display: flex;
-                        flex-direction: column;
-                        justify-content: start;
-                        // justify-content: space-between;
-                        h1 {
-                            font-size: 25px;
-                            width: 100%;
-                            margin-bottom: 10px;
-                        }
-                        p {
-                            font-size: 15px;
-                        }
-                    }
-                }
-            }
+      }
 
-
-
-
-            .bottom {
-                width: 100%;
-                margin-top: 4px;
-                height: 246px;
-                // background-color: rgb(0, 0, 0);
-                display: flex;
-                justify-content: space-between;
-                div {
-                    width: 33%;
-                    height: 100%;
-                    display: flex;
-                    flex-direction: column;
-                    align-items: flex-end;
-                    justify-content: space-between;
-                    // background-color: royalblue;
-                    .viewPointBot {
-                        width: 100%;
-                        height: 50%;
-                        padding: 20px;
-                        box-sizing: border-box;
-                        text-align: end;
-                        .viewCont {
-                            box-shadow: 0px 0px 10px 3px rgb(251, 130, 130);
-                            background-color: rgb(206, 204, 204);
-                            padding: 4px 10px;
-                            border-radius: 20px;
-                            span {
-                                margin-left: 5px;
-                                font-weight: bolder;
-                            }
-                        }
-                    }
-                    .content {
-                        color: rgb(255, 255, 255);
-                        width: 100%;
-                        height: 40%;
-                        margin-top: -6%;
-                        padding: 10px;
-                        font-weight: bolder;
-                        box-sizing: border-box;
-                        background-color: rgba(0, 0, 0, 0.5);
-                        display: flex;
-                        flex-direction: column;
-                        justify-content: space-between;
-                        h1 {
-                            width: 100%;
-                            font-size: 17px;
-                            margin-bottom: 10px;
-                        }
-                        p {
-                            font-size: 12px;
-                        }
-                    }
-                }
-            }
-        }
-        .FilmReContainer {
-            width: 120%;
-            margin-left: -10%;
-            height: auto;
-            padding: 50px;
-            box-sizing: border-box;
-            margin-top: 50px;
-
-            border-radius: 20px;
-            background: #ebebeb;
-            box-shadow:  18px 18px 34px #cccccc,
-             -18px -18px 34px #ffffff;
-            .FilmReTitle {
-                width: 100%;
-                height: 100px;
-                // background-color: aqua;
-                display: flex;
-                justify-content: center;
-                align-items: center;
-            }
-            h1 {
-                // border: 1px solid red;
-                border-radius: 20px;
-                border: none !important;
-                color: white;
-                background: #da7575;
-                box-shadow:  18px 18px 34px #cccccc,
-                 -18px -18px 34px #ffffff;
-                text-align: center;
-                width: 100px;
-                position: relative;
-                animation: myAnimation 5s ease-out infinite;
-            }
-            h1 {
-                width: 230px;
-                padding: 5px 0px;
-                box-sizing: border-box;
-                text-align: center;
-                border: 1px solid red;
-                margin-bottom: 20px;
-            }
-            .Film1Container {
-                width: 100%;
-                height: 350px;
-                display: flex;
-                justify-content: space-between;
-                position: relative;
-                h1 {
-                    text-align: center;
-                }
-                .FilmReItem {
-                    width: 19%;
-                    height: 100%;
-                    background-position: center;
-                    background-size: cover;
-                    display: flex;
-                    align-items: end;
-                    div {
-                        width: 100%;
-                        height: 50px;
-                        background-color: rgba(0, 0, 0, 0.6);
-                        text-align: center;
-                        line-height: 50px;
-                        position: relative;
-                        h2 {
-                            color: rgb(83, 216, 253);
-                        }   
-                        a {
-                            text-decoration: none;
-                            color: rgb(83, 216, 253);
-                            position: absolute;
-                            display: block;
-                            width: 100%;
-                            height: 100%;
-                        }
-                    }
-                    div:hover {
-                        opacity: 0.8;
-                    }
-                }
-            }
-
-
-        }
-
-    }
-    .BodyContent {
+      .bottom {
         width: 100%;
         margin-top: 4px;
         height: 246px;
         // background-color: rgb(0, 0, 0);
         display: flex;
-        .ListBlogs {
-            width: 60%;
-            height: 100%;
-            // background-color: pink;
-            .BlogItem {
-                width: 100%;
-                // height: 170px;
-                height: auto;
-                margin-bottom: 20px;
-                border-bottom: 1px solid lightgray;
-                display: flex;
-                div {
-                    width: 30%;
-                    height: 100%;
-                    img {
-                        height: 75%;
-                        width: 100%;
-                        object-fit: cover;
-                        border-radius: 10px;
-                    }
-                }
-                .ItemInfo {
-                    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-                    flex-grow: 1;
-                    // background-color: rgb(71, 255, 80);
-                    padding: 0px 20px 20px 20px;
-                    box-sizing: border-box;
-                    h3 {
-                        font-size: 16px;
-                        font-weight: bolder;
-                        color: blue;
-                    }
-                    h4 {
-                        font-size: 18px;
-                        font-weight: 1000;
-                    }
-                    .viewCont {
-                        color: rgb(127, 127, 127);
-                        font-size: 14px;
-                        i {
-                            margin-right: 5px;
-                        }
-                    }
-                    p {
-                        color: rgb(66, 66, 66);
-                    }
-                }
+        justify-content: space-between;
+        div {
+          width: 33%;
+          height: 100%;
+          display: flex;
+          flex-direction: column;
+          align-items: end;
+          justify-content: space-between;
+          // background-color: royalblue;
+          .viewPointBot {
+            width: 100%;
+            height: 50%;
+            padding: 20px;
+            box-sizing: border-box;
+            text-align: end;
+            .viewCont {
+              box-shadow: 0px 0px 10px 3px rgb(251, 130, 130);
+              background-color: rgb(206, 204, 204);
+              padding: 4px 10px;
+              border-radius: 20px;
+              span {
+                margin-left: 5px;
+                font-weight: bolder;
+              }
             }
-            .MoreContainer {
-                width: 100%;
-                height: 50px;
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                a {
-                    cursor: pointer;
-                    font-size: 20px;
-                    font-weight: bolder;
-                    color: brown;
-                    box-sizing: border-box;
-                    padding: 10px 20px;
-                    border: 1px solid brown;
-                }
-                a:hover {
-                    background-color: brown;
-                    color: white;
-                }
-                .btn-donate {
-                    --clr-font-main: hsla(0 0% 20% / 100);
-                    --btn-bg-1: rgb(220, 51, 9);
-                    --btn-bg-2: rgb(245, 174, 169);
-                    --btn-bg-color: hsla(360 100% 100% / 1);
-                    --radii: 0.5em;
-                    cursor: pointer;
-                    padding: 0.9em 1.4em;
-                    min-width: 120px;
-                    min-height: 44px;
-                    font-size: var(--size, 1rem);
-                    font-family: "Segoe UI", system-ui, sans-serif;
-                    font-weight: 500;
-                    transition: 0.8s;
-                    background-size: 280% auto;
-                    background-image: linear-gradient(325deg, var(--btn-bg-2) 0%, var(--btn-bg-1) 55%, var(--btn-bg-2) 90%);
-                    border: none;
-                    // border-radius: var(--radii);
-                    // border-radius: 50px;
-                    color: var(--btn-bg-color);
-                    box-shadow: 0px 0px 20px rgba(71, 184, 255, 0.5), 0px 5px 5px -1px rgba(58, 125, 233, 0.25), inset 4px 4px 8px rgba(175, 230, 255, 0.5), inset -4px -4px 8px rgba(19, 95, 216, 0.35);
-                  }
-                  
-                  .btn-donate:hover {
-                    background-position: right top;
-                  }
-                  
-                  .btn-donate:is(:focus, :focus-within,:active) {
-                    outline: none;
-                    box-shadow: 0 0 0 3px var(--btn-bg-color), 0 0 0 6px var(--btn-bg-2);
-                  }
-                  
-                  @media (prefers-reduced-motion: reduce) {
-                    .btn-donate {
-                      transition: linear;
-                    }
-                  }
-                  
-            }
-        }
-
-
-
-        .ListBlogTopView {
-            margin-left: 20px;
-            flex-grow: 1;
-            position: sticky;
-            top: 40px;
+          }
+          .content {
+            color: rgb(255, 255, 255);
+            width: 100%;
+            height: 40%;
+            margin-top: -6%;
+            padding: 10px;
+            font-weight: bolder;
+            box-sizing: border-box;
+            background-color: rgba(0, 0, 0, 0.5);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
             h1 {
+              width: 100%;
               font-size: 17px;
               margin-bottom: 10px;
             }
@@ -411,7 +140,203 @@
         }
       }
     }
-    .PopupContainer {
-        // width: ;
+
+    // FilmReContainer----------------------------
+    .FilmReContainer {
+      margin-top: 50px;
+      width: 100%;
+      height: auto;
+      margin-bottom: 100px;
+      .FilmReTitle {
+        width: 100%;
+        height: 50px;
+        text-align: center;
+        h1 {
+          color: orangered;
+          text-decoration: overline coral;
+        }
+      }
+      .Film1Container {
+        width: 120%;
+        height: 350px;
+        margin-left: -10%;
+        background-color: aqua;
+        padding: 50px;
+        display: flex;
+        justify-content: space-between;
+        border-radius: 20px;
+        background: #ebebeb;
+        box-shadow:  11px 11px 9px #c5c5c5,
+             -11px -11px 9px #ffffff;
+        .FilmReItem {
+          width: 19%;
+          height: 100%;
+          background-position: center;
+          background-size: cover;
+          div {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: end;
+            h2 {
+              width: 100%;
+              height: 50px;
+              line-height: 50px;
+              text-align: center;
+              background-color: rgba(0, 0, 0, 0.5);
+              a {
+                text-decoration: none;
+                color: white;
+              }
+            }
+            h2:hover {
+              opacity: 0.5;
+            }
+          }
+        }
+      }
     }
+  }
+
+
+
+
+
+
+  .BodyContent {
+    width: 100%;
+    // height: 100vh;
+    height: auto;
+    margin-top: 50px;
+    border-top: 1px solid lightgray;
+    // background-color: aqua;
+    padding: 20px 0px 20px 0px;
+    box-sizing: border-box;
+    display: flex;
+    .ListBlogs {
+      width: 60%;
+      height: 100%;
+      // background-color: pink;
+      .BlogItem {
+        width: 100%;
+        // height: 170px;
+        height: auto;
+        margin-bottom: 20px;
+        border-bottom: 1px solid lightgray;
+        display: flex;
+        div {
+          width: 30%;
+          height: 100%;
+          img {
+            height: 75%;
+            width: 100%;
+            object-fit: cover;
+            border-radius: 10px;
+          }
+        }
+        .ItemInfo {
+          font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+          flex-grow: 1;
+          // background-color: rgb(71, 255, 80);
+          padding: 0px 20px 20px 20px;
+          box-sizing: border-box;
+          h3 {
+            font-size: 16px;
+            font-weight: bolder;
+            color: blue;
+          }
+          h4 {
+            font-size: 18px;
+            font-weight: 1000;
+          }
+          .viewCont {
+            color: rgb(127, 127, 127);
+            font-size: 14px;
+            i {
+              margin-right: 5px;
+            }
+          }
+          p {
+            color: rgb(66, 66, 66);
+          }
+        }
+      }
+      .MoreContainer {
+        width: 100%;
+        height: 50px;
+        text-align: center;
+        .btn-donate {
+          --clr-font-main: hsla(0 0% 20% / 100);
+          --btn-bg-1: rgb(255, 97, 97);
+          --btn-bg-2: rgb(255, 31, 31);
+          --btn-bg-color: hsla(360 100% 100% / 1);
+          --radii: 0.5em;
+          cursor: pointer;
+          padding: 0.9em 1.4em;
+          min-width: 120px;
+          min-height: 44px;
+          font-size: var(--size, 1rem);
+          font-family: "Segoe UI", system-ui, sans-serif;
+          font-weight: 500;
+          transition: 0.8s;
+          background-size: 280% auto;
+          background-image: linear-gradient(325deg, var(--btn-bg-2) 0%, var(--btn-bg-1) 55%, var(--btn-bg-2) 90%);
+          border: none;
+          color: var(--btn-bg-color);
+          box-shadow: 0px 0px 20px rgba(71, 184, 255, 0.5), 0px 5px 5px -1px rgba(58, 125, 233, 0.25), inset 4px 4px 8px rgba(175, 230, 255, 0.5), inset -4px -4px 8px rgba(19, 95, 216, 0.35);
+        }
+        
+        .btn-donate:hover {
+          background-position: right top;
+        }
+        
+        .btn-donate:is(:focus, :focus-within,:active) {
+          outline: none;
+          box-shadow: 0 0 0 3px var(--btn-bg-color), 0 0 0 6px var(--btn-bg-2);
+        }
+        
+        @media (prefers-reduced-motion: reduce) {
+          .btn-donate {
+            transition: linear;
+          }
+        }
+      }
+    }
+
+    .ListBlogTopView {
+      margin-left: 20px;
+      flex-grow: 1;
+      h1 {
+        font-size: 20px;
+      }
+      .TopViewContainer {
+        width: 100%;
+        height: 100%;
+        .TopViewItem {
+          width: 100%;
+          height: 120px;
+          display: flex;
+          margin-bottom: 20px;
+          img {
+            border-radius: 10px;
+            object-fit: cover;
+            width: 190px;
+            height: 110px;
+          }
+          .ItemInfo {
+            flex-grow: 1;
+            padding-left: 10px;
+            h4 {
+              color: tomato;
+            }
+            p {
+              margin-top: 10px;
+              font-weight: bolder;
+              font-size: 14px;
+            }
+          }
+        }
+      }
+    }
+  }
 }
