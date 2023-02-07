@@ -25,7 +25,7 @@ export default function UserEdit() {
         requestOptions
       ).then((response) => {
         if (response.status === 200) {
-          Cookies.set("Password", newPass);
+          Cookies.set("Password", newPass, { expires: 1 });
           nav("/");
         }
       });
@@ -49,7 +49,7 @@ export default function UserEdit() {
       requestOptions
     ).then((response) => {
       if (response.status === 200) {
-        Cookies.set("Name", name);
+        Cookies.set("Name", name, { expires: 1 });
         nav("/");
       }
     });

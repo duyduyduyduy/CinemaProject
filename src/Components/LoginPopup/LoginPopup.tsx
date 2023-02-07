@@ -39,8 +39,8 @@ function LoginPopup(props: any) {
     });
   };
   const handleOnClickLogin = () => {
-    Cookies.set("Email", username);
-    Cookies.set("Password", password);
+    Cookies.set("Email", username, { expires: 1 });
+    Cookies.set("Password", password, { expires: 1 });
     const requestOptions = {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -55,7 +55,7 @@ function LoginPopup(props: any) {
     )
       .then((response) => response.json())
       .then((data) => {
-        Cookies.set("Name", data.Name);
+        Cookies.set("Name", data.Name, { expires: 1 });
       });
     fetch(
       "https://vietcpq.name.vn/U2FsdGVkX1+ibKkbj+HGKjeepxUwFVviPP1AkhuyHto=/user/Login",
