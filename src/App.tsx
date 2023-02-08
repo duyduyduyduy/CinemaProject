@@ -11,6 +11,8 @@ import Cookies from "js-cookie";
 import UserEdit from "./Components/UserEdit/UserEdit";
 import ListOfCinema from "./Components/ListOfCinema/ListOfCinema";
 import CinemaInfo from "./Components/CinemaInfo/CinemaInfo";
+import Ticker from "./Components/Ticker/Ticker";
+import Seat from "./Components/Seat/Seat";
 function App(props: any) {
   useEffect(() => {
     props.fetchdatafromfirstapi();
