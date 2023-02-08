@@ -110,7 +110,7 @@
     height: auto;
     padding: 20px;
     border-radius: 15px;
-    background-color: #2B2727;
+    background-color: #2b2727;
     animation-name: animatetop;
     animation-duration: 0.4s;
     z-index: 100;
@@ -155,7 +155,7 @@
           margin-right: 10px;
           cursor: pointer;
           text-decoration: none;
-          color: white
+          color: white;
         }
         .a-clo {
           cursor: pointer;
@@ -166,7 +166,7 @@
           font-weight: bolder;
           cursor: pointer;
           text-decoration: none;
-          color: white
+          color: white;
         }
         a {
           transition: 0.3s;
@@ -183,12 +183,6 @@
     }
   }
 }
-
-
-
-
-
-
 
 .scheduleMainsize {
   width: 1200px;
@@ -340,16 +334,26 @@
   }
 }
 .dateInfo {
-  width: 800px;
-  padding-bottom: 15px;
+  width: 750px;
   display: flex;
   transition: 1s;
+  overflow: hidden;
+}
+.dateContainer {
+  min-width: 249.85px;
+  height: 100%;
+  display: flex;
+  transition: 0.4s;
+  justify-content: center;
+  box-sizing: border-box;
+  padding: 20px;
 }
 .dateInfoContainer {
   margin-top: 20px;
-  padding-top: 10px;
   box-sizing: border-box;
   width: 800px;
+  display: flex;
+  justify-content: center;
   min-height: 70px;
   overflow-x: hidden;
   position: relative;
@@ -359,15 +363,11 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 10px 20px;
     border-radius: 5px;
     transition: 0.2s;
     font-weight: bolder;
     cursor: pointer;
-    margin-left: 90px;
-  }
-  .Date:not(:first-child) {
-    margin-left: 120px;
+    padding: 7px 25px 7px 25px;
   }
   a {
     position: absolute;
@@ -387,9 +387,8 @@
   color: white;
 }
 .active {
-  color: white;
-  font-weight: bolder;
   background-color: #f97407;
+  color: white;
 }
 .version2D {
   background: #f4760f;

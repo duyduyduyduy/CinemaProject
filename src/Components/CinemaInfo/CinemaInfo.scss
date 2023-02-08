@@ -17,25 +17,25 @@
   overflow-x: hidden;
   position: relative;
   img {
-    width: 450px;
+    min-width: 450px;
     margin-left: 4px;
     transition: 0.5s;
   }
 }
 .prevbuttonTimeCinema {
   position: absolute;
-  top: 40%;
+  top: 35%;
   left: 5px;
   color: white;
-  font-size: 30px;
+  font-size: 50px;
   cursor: pointer;
 }
 .nextbuttonTimeCinema {
   position: absolute;
-  top: 40%;
+  top: 35%;
   right: 5px;
   color: white;
-  font-size: 30px;
+  font-size: 50px;
   cursor: pointer;
 }
 .CinemaFilmContainer {
@@ -88,7 +88,6 @@
   padding-left: 10px;
   padding-right: 10px;
   box-sizing: border-box;
-  border-radius: 5px 5px 0px 0px;
 }
 .DateFilmMainSizeInCinema {
   width: 700px;

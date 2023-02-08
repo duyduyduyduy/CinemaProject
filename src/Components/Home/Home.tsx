@@ -52,7 +52,10 @@ function Home(props: any) {
             if (index < (tmp > a ? tmp * 5 + b : tmp * 5)) {
               return (
                 <div className="Film">
-                  <div className="imageContainer shine">
+                  <div
+                    className="imageContainer shine"
+                    onClick={() => nav("/Film/" + item.id)}
+                  >
                     <img alt="Bùi Thanh Duy" src={item.imagePortrait} />
                   </div>
                   <p>

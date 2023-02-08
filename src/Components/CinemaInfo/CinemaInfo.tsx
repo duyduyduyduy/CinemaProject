@@ -10,7 +10,6 @@ export default function CinemaInfo() {
   const [tmp, setTmp] = useState<number>(0);
   const [length, setlength] = useState<number>(0);
   const [Index, setIndex] = useState<number>(0);
-  const [selectedDate, setSeDate] = useState<string>("");
   const [detaiSchedule, setSchedule] = useState<Array<eFilmInCinema>>([]);
   const nav = useNavigate();
   const HandleOnClickPrevButtonCinema = (a: number) => {
@@ -75,7 +74,7 @@ export default function CinemaInfo() {
               src={CinemaInfo[0]?.imageUrls[0]}
             />
             {CinemaInfo[0]?.imageUrls.map((item, index) => {
-              if (index > 0) {
+              if (index > 0 && index <= 2) {
                 return <img src={item} />;
               }
             })}

@@ -147,17 +147,7 @@ function FilmInfo(props: any) {
     setPopupCinema(false);
   };
   const handleOnClickTime = (a: number) => {
-    let number =
-      lengthTime % 3 === 0
-        ? Math.floor(lengthTime / 3 - 1)
-        : Math.floor(lengthTime / 3);
-    if (numTime + a > number) {
-      setNumTime(0);
-    } else if (numTime + a < 0) {
-      setNumTime(number);
-    } else {
-      setNumTime(numTime + a);
-    }
+    setNumTime(numTime + a);
   };
 
   return (
@@ -438,25 +428,55 @@ function FilmInfo(props: any) {
             </div>
           </div>
           <div className="dateInfoContainer">
-            <a className="prevbuttonTime" onClick={() => handleOnClickTime(-1)}>
-              ❮
-            </a>
-            <a className="nextbuttonTime" onClick={() => handleOnClickTime(1)}>
-              ❯
-            </a>
-            <div
-              className="dateInfo"
-              style={{ marginLeft: `${numTime * 3 * 250 * -1}px` }}
-            >
+            {lengthTime - 3 > 0 && (
+              <>
+                {numTime !== 0 && (
+                  <a
+                    className="prevbuttonTime"
+                    onClick={() => handleOnClickTime(-1)}
+                  >
+                    ❮
+                  </a>
+                )}
+                {numTime !== lengthTime - 3 && (
+                  <a
+                    className="nextbuttonTime"
+                    onClick={() => handleOnClickTime(1)}
+                  >
+                    ❯
+                  </a>
+                )}
+              </>
+            )}
+
+            <div className="dateInfo">
+              <div
+                onClick={() => setIndexDate(0)}
+                className={`dateContainer`}
+                style={{ marginLeft: `${-1 * 249.85 * numTime}px` }}
+              >
+                <div className={`Date  ${IndexDate === 0 ? "active" : ""}`}>
+                  <span>{detaiSchedule[0]?.dates[0].dayOfWeekLabel}</span>
+                  <span>{detaiSchedule[0]?.dates[0].showDate}</span>
+                </div>
+              </div>
               {detaiSchedule[0]?.dates?.map((item, index) => {
                 return (
-                  <div
-                    className={index === IndexDate ? "Date active" : "Date"}
-                    onClick={() => setIndexDate(index)}
-                  >
-                    <span>{item?.dayOfWeekLabel}</span>
-                    <span>{item?.showDate}</span>
-                  </div>
+                  index > 0 && (
+                    <div
+                      onClick={() => setIndexDate(index)}
+                      className={`dateContainer `}
+                    >
+                      <div
+                        className={`Date  ${
+                          IndexDate === index ? "active" : ""
+                        }`}
+                      >
+                        <span>{item.dayOfWeekLabel}</span>
+                        <span>{item.showDate}</span>
+                      </div>
+                    </div>
+                  )
                 );
               })}
             </div>
@@ -472,46 +492,51 @@ function FilmInfo(props: any) {
                 .filter((n) => n.cityId.includes(CityObject.cityID))
                 .map((item) => {
                   return (
-                    <div className="duycontainer">
-                      <div className="lefthand">
-                        <h3>{item?.name}</h3>
-                        <p>{item?.address}</p>
+                    item.dates.filter((n) =>
+                      n.showDate.includes(
+                        detaiSchedule[0]?.dates[IndexDate].showDate
+                      )
+                    ).length > 0 && (
+                      <div className="duycontainer">
+                        <div className="lefthand">
+                          <h3>{item?.name}</h3>
+                          <p>{item?.address}</p>
+                        </div>
+                        <div className="righthand">
+                          {item.dates
+                            .filter((n) =>
+                              n.showDate.includes(
+                                detaiSchedule[0]?.dates[IndexDate].showDate
+                              )
+                            )
+                            .map((n: any) => {
+                              return (
+                                <>
+                                  {n.bundles.map((m: any) => {
+                                    return (
+                                      <>
+                                        {" "}
+                                        <div className="D2">
+                                          <span className="version2D">
+                                            {m.version.toUpperCase()}
+                                          </span>
+                                          {m.sessions.map((x: any) => {
+                                            return (
+                                              <span className="time">
+                                                {x.showTime}
+                                              </span>
+                                            );
+                                          })}
+                                        </div>
+                                      </>
+                                    );
+                                  })}
+                                </>
+                              );
+                            })}
+                        </div>
                       </div>
-                      <div className="righthand">
-                        {item?.dates[IndexDate]?.bundles[0]?.version && (
-                          <div className="D2">
-                            <span className="version2D">
-                              {item?.dates[
-                                IndexDate
-                              ]?.bundles[0]?.version.toUpperCase()}
-                            </span>
-                            {item?.dates[IndexDate]?.bundles[0]?.sessions.map(
-                              (d) => {
-                                return (
-                                  <span className="time">{d.showTime}</span>
-                                );
-                              }
-                            )}
-                          </div>
-                        )}
-                        {item?.dates[IndexDate]?.bundles[1] && (
-                          <div className="D3">
-                            <span className="version3D">
-                              {item?.dates[
-                                IndexDate
-                              ]?.bundles[1]?.version.toUpperCase()}
-                            </span>
-                            {item?.dates[IndexDate]?.bundles[1]?.sessions.map(
-                              (d) => {
-                                return (
-                                  <span className="time">{d.showTime}</span>
-                                );
-                              }
-                            )}
-                          </div>
-                        )}
-                      </div>
-                    </div>
+                    )
                   );
                 })}
             </div>
