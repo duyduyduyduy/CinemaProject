@@ -2,6 +2,7 @@ import React from 'react'
 import './Ticker.scss'
 
 export default function Ticker() {
+    const num = 90000;
   return (
     <div className='Ticker'> 
         <div className='mainSize'>
@@ -64,7 +65,7 @@ export default function Ticker() {
                                     </div>
                                 </td>
 
-                                <td style={{textAlign: 'end'}}>80,000</td>
+                                <td style={{textAlign: 'end'}}>80000</td>
                                 <td style={{textAlign: 'end'}}>0</td>
                             </tr>
                             <tr>
@@ -232,6 +233,10 @@ export default function Ticker() {
                         <b>Ghế:</b>
                         <span></span>
                     </div>
+                </div>
+                <div className='TotalRender'>
+                    <b>Tổng:</b>
+                    <span>0 VNĐ</span>
                 </div>
                 <div className='totalEnd'>
                     <button>TIẾP TỤC <i className="fa-solid fa-arrow-right-long"></i>
