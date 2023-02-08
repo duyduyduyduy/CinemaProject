@@ -522,7 +522,8 @@ function FilmInfo(props: any) {
                                           </span>
                                           {m.sessions.map((x: any) => {
                                             return (
-                                              <span className="time">
+  // sadlfkjsldfkjlkjsdf
+                                              <span className="time" onClick={() => nav("/Ticker")}>
                                                 {x.showTime}
                                               </span>
                                             );

@@ -11,7 +11,6 @@ import Cookies from "js-cookie";
 import UserEdit from "./Components/UserEdit/UserEdit";
 import ListOfCinema from "./Components/ListOfCinema/ListOfCinema";
 import CinemaInfo from "./Components/CinemaInfo/CinemaInfo";
-import Seat from "./Components/Seat/Seat";
 function App(props: any) {
   useEffect(() => {
     props.fetchdatafromfirstapi();
@@ -49,6 +48,7 @@ function App(props: any) {
           ></Route>
           <Route path="/Film/:id" element={<FilmInfo />}></Route>
           <Route path="/BlogFilm" element={<BlogFilm />}></Route>
+          <Route path="/Ticker" element={<Ticker />}></Route>
           <Route path="/edit-user" element={<UserEdit />}></Route>
           <Route path="/list-cinema" element={<ListOfCinema />}></Route>
           <Route path="/booking-seat" element={<Seat />}></Route>
