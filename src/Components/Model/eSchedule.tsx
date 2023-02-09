@@ -11,6 +11,7 @@ export default interface eSchedule {
       version: string;
       sessions: Array<{
         showTime: string;
+        screenName: string;
       }>;
     }>;
   }>;

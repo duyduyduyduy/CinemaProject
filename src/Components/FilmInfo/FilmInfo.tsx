@@ -32,6 +32,16 @@ function FilmInfo(props: any) {
     slug: "",
     name: "Tất cả các rạp",
   });
+  const handleOnClickShowTime = (data: any) => {
+    nav("/Ticker");
+    props.dispatchInfotoBooking({
+      nameFilm: FilmInfo[0]?.name,
+      age: FilmInfo[0]?.age,
+      Cinema: data.cinema,
+      showTime: data.showTime,
+      filmImg: FilmInfo[0]?.imageLandscape,
+    });
+  };
   useEffect(() => {
     fetch(
       "https://vietcpq.name.vn/U2FsdGVkX1+ibKkbj+HGKjeepxUwFVviPP1AkhuyHto=/cinema/city"
@@ -187,21 +197,15 @@ function FilmInfo(props: any) {
           </div>
 
           <div>
-            <span className="age_3">16+</span>
+            <span className={ageClassName(parseInt(FilmInfo[0]?.age))}>
+              {FilmInfo[0]?.age === "0" ? "P" : FilmInfo[0]?.age + " +"}
+            </span>
             <h1 className="title">{FilmInfo[0]?.name}</h1>
             <h3>
               {FilmInfo[0]?.name} · 2002 · {FilmInfo[0]?.duration} phút
             </h3>
 
             <h2 className="nd-h2">Nội dung</h2>
-
-            {/* <p>
-              Lấy bối cảnh sau hơn một thập kỷ kể từ phần phim đầu tiên, Avatar:
-              Dòng Chảy Của Nước kể về câu chuyện của gia đình Sully (Jake,
-              Neytiri, và con của họ), những vấn đề xung quanh họ, những nỗ lực
-              để bảo vệ sự an toàn của gia đình, những cuộc chiến sinh tồn, và
-              những hiểm họa mà họ phải đối mặt.
-            </p> */}
             <p
               dangerouslySetInnerHTML={{
                 __html:
@@ -522,8 +526,27 @@ function FilmInfo(props: any) {
                                           </span>
                                           {m.sessions.map((x: any) => {
                                             return (
-  // sadlfkjsldfkjlkjsdf
-                                              <span className="time" onClick={() => nav("/Ticker")}>
+                                              <span
+                                                className="time"
+                                                onClick={() =>
+                                                  handleOnClickShowTime({
+                                                    cinema:
+                                                      item.name +
+                                                      " | " +
+                                                      x.screenName,
+                                                    showTime:
+                                                      x.showTime +
+                                                      " | " +
+                                                      detaiSchedule[0]?.dates[
+                                                        IndexDate
+                                                      ].dayOfWeekLabel +
+                                                      ", " +
+                                                      detaiSchedule[0]?.dates[
+                                                        IndexDate
+                                                      ].showDate,
+                                                  })
+                                                }
+                                              >
                                                 {x.showTime}
                                               </span>
                                             );
@@ -728,6 +751,12 @@ const mapDispatchToProps = (dispatch: any, ownProps: any) => {
     failCurFilm: () => {
       dispatch({
         type: "IS_FAILED_CUR_FILM",
+      });
+    },
+    dispatchInfotoBooking: (data: any) => {
+      dispatch({
+        type: "GET_FILM_INFO_TO_TICKET",
+        payload: data,
       });
     },
   };
