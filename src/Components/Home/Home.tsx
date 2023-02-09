@@ -52,12 +52,17 @@ function Home(props: any) {
             if (index < (tmp > a ? tmp * 5 + b : tmp * 5)) {
               return (
                 <div className="Film">
-                  <div
-                    className="imageContainer shine"
-                    onClick={() => nav("/Film/" + item.id)}
-                  >
-                    <img alt="Bùi Thanh Duy" src={item.imagePortrait} />
-                  </div>
+                  <a className="aClear" href={`/Film/${item.id}#FilmBanner`} onClick={() => handleOnclickMuaVe(item.id)}>
+                    <div
+                      className="imageContainer shine"
+                      // onClick={() => nav("/Film/" + item.id)}
+                    >
+                      {/* <a href={`/Film/${item.id}#FilmBanner`} onClick={() => handleOnclickMuaVe(item.id)} className="aIMGFilm">
+                        <img alt="Bùi Thanh Duy" src={item.imagePortrait} />
+                      </a> */}
+                        <img alt="Bùi Thanh Duy" src={item.imagePortrait} />
+                    </div>
+                  </a>
                   <p>
                     {item.name.length > 30
                       ? item.name.slice(0, 30) + " ..."
@@ -71,6 +76,7 @@ function Home(props: any) {
                     }}
                   >
                     <a
+                      className="aDuy"
                       href={`/Film/${item.id}#FilmBanner`}
                       onClick={() => handleOnclickMuaVe(item.id)}
                     >
