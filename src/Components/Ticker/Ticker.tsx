@@ -4,11 +4,56 @@ import "./Ticker.scss";
 import handleDisplayPrice from "../FunctionHandle/HandleDisPlayPrice";
 import eTicket from "../Model/eTicket";
 import InfoFilm from "../InfoFilm/InfoFilm";
-export default function Ticker() {
+import { connect } from "react-redux";
+function Ticker(props: any) {
   const [ConcessionItems, setConcessionitem] = useState<
     Array<eConcessionItems>
   >([]);
   const [TicketItems, setTicketItems] = useState<Array<eTicket>>([]);
+  const [arrayTicket, setArray] = useState<any>([]);
+  const [arrayCombo, setCombo] = useState<any>([]);
+  const handleOnClickTicket = (num: number, name: string) => {
+    const newArray = arrayTicket.map((item: any) => {
+      if (item.name === name) {
+        return { ...item, quantity: item.quantity + num };
+      }
+      return item;
+    });
+    setArray(newArray);
+  };
+  const handleOnClickCombo = (num: number, id: string) => {
+    const newArray = arrayCombo.map((item: any) => {
+      if (item.id === id) {
+        return { ...item, quantity: item.quantity + num };
+      }
+      return item;
+    });
+    setCombo(newArray);
+  };
+  const FunctionCalculateFinalSum = () => {
+    let result1 = 0;
+    let result2 = 0;
+    arrayTicket.map((item: any) => {
+      result1 += item.quantity * item.price;
+    });
+    arrayCombo.map((item: any) => {
+      result2 += item.quantity * item.price;
+    });
+    return result1 + result2;
+  };
+  const FunctionMergeString = () => {
+    let result = "";
+    arrayCombo.map((item: any) => {
+      if (item.quantity !== 0) {
+        result += item.name + "(" + item.quantity + ")" + ", ";
+      }
+    });
+    return result;
+  };
+  useEffect(() => {
+    props.CalculateFinalSum(FunctionCalculateFinalSum());
+    props.GetCombo(FunctionMergeString());
+  }, [arrayTicket, arrayCombo]);
   useEffect(() => {
     fetch(
       "https://vietcpq.name.vn/U2FsdGVkX1+ibKkbj+HGKjeepxUwFVviPP1AkhuyHto=/cinema/booking/detail"
@@ -17,8 +62,41 @@ export default function Ticker() {
       .then((data) => {
         setConcessionitem(data.consession[0].concessionItems);
         setTicketItems(data.ticket);
+        setCombo(
+          data.consession[0].concessionItems.map((item: any, index: number) => {
+            return {
+              quantity: 0,
+              id: item.id,
+              price: item.displayPrice,
+              name: item.description,
+            };
+          })
+        );
+        setArray(
+          data.ticket.map((item: any, index: number) => {
+            return {
+              quantity: 0,
+              name: item.name,
+              price: item.displayPrice,
+            };
+          })
+        );
       });
   }, []);
+  const handleCalculateSumCombo = () => {
+    let result = 0;
+    arrayCombo.map((item: any) => {
+      result += item.quantity * item.price;
+    });
+    return result;
+  };
+  const handleCalculateSumTicket = () => {
+    let result = 0;
+    arrayTicket.map((item: any) => {
+      result += item.quantity * item.price;
+    });
+    return result;
+  };
   return (
     <div className="Ticker">
       <div className="mainSize">
@@ -36,7 +114,7 @@ export default function Ticker() {
               </thead>
 
               <tbody>
-                {TicketItems?.map((item) => {
+                {TicketItems?.map((item, index) => {
                   return (
                     <tr>
                       <td>
@@ -47,13 +125,31 @@ export default function Ticker() {
                         <div>
                           <span>
                             <button>
-                              <i className="fa-solid fa-circle-minus"></i>
+                              <i
+                                className={`fa-solid fa-circle-minus ${
+                                  arrayTicket[index].quantity === 0
+                                    ? "disableButton"
+                                    : ""
+                                }`}
+                                onClick={() =>
+                                  arrayTicket[index].quantity !== 0 &&
+                                  handleOnClickTicket(-1, item.name)
+                                }
+                              ></i>
                             </button>
                           </span>
-                          <input type="text" />
+                          <input
+                            type="text"
+                            value={arrayTicket[index].quantity}
+                          />
                           <span>
                             <button>
-                              <i className="fa-solid fa-circle-plus"></i>
+                              <i
+                                className="fa-solid fa-circle-plus"
+                                onClick={() =>
+                                  handleOnClickTicket(1, item.name)
+                                }
+                              ></i>
                             </button>
                           </span>
                         </div>
@@ -62,7 +158,11 @@ export default function Ticker() {
                       <td style={{ textAlign: "end" }}>
                         {handleDisplayPrice(item?.displayPrice)}
                       </td>
-                      <td style={{ textAlign: "end" }}>0</td>
+                      <td style={{ textAlign: "end" }}>
+                        {handleDisplayPrice(
+                          arrayTicket[index].quantity * arrayTicket[index].price
+                        )}
+                      </td>
                     </tr>
                   );
                 })}
@@ -76,7 +176,9 @@ export default function Ticker() {
                   }}
                 >
                   <td colSpan={3}>Tổng</td>
-                  <td style={{ textAlign: "end" }}>0</td>
+                  <td style={{ textAlign: "end" }}>
+                    {handleDisplayPrice(handleCalculateSumTicket())}
+                  </td>
                 </tr>
               </tbody>
             </table>
@@ -93,7 +195,7 @@ export default function Ticker() {
               </thead>
 
               <tbody>
-                {ConcessionItems?.map((item) => {
+                {ConcessionItems?.map((item: any, index: number) => {
                   return (
                     <tr>
                       <td style={{ display: "flex" }}>
@@ -107,13 +209,29 @@ export default function Ticker() {
                         <div>
                           <span>
                             <button>
-                              <i className="fa-solid fa-circle-minus"></i>
+                              <i
+                                className={`fa-solid fa-circle-minus ${
+                                  arrayCombo[index].quantity === 0
+                                    ? "disableButton"
+                                    : ""
+                                }`}
+                                onClick={() =>
+                                  arrayCombo[index].quantity !== 0 &&
+                                  handleOnClickCombo(-1, item.id)
+                                }
+                              ></i>
                             </button>
                           </span>
-                          <input type="text" value={"0"} />
+                          <input
+                            type="text"
+                            value={arrayCombo[index].quantity}
+                          />
                           <span>
                             <button>
-                              <i className="fa-solid fa-circle-plus"></i>
+                              <i
+                                className="fa-solid fa-circle-plus"
+                                onClick={() => handleOnClickCombo(1, item.id)}
+                              ></i>
                             </button>
                           </span>
                         </div>
@@ -121,7 +239,11 @@ export default function Ticker() {
                       <td style={{ textAlign: "end" }}>
                         {handleDisplayPrice(item?.displayPrice)}
                       </td>
-                      <td style={{ textAlign: "end" }}>0</td>
+                      <td style={{ textAlign: "end" }}>
+                        {handleDisplayPrice(
+                          arrayCombo[index]?.quantity * arrayCombo[index]?.price
+                        )}
+                      </td>
                     </tr>
                   );
                 })}
@@ -135,7 +257,9 @@ export default function Ticker() {
                   }}
                 >
                   <td colSpan={3}>Tổng</td>
-                  <td style={{ textAlign: "end" }}>0</td>
+                  <td style={{ textAlign: "end" }}>
+                    {handleDisplayPrice(handleCalculateSumCombo())}
+                  </td>
                 </tr>
               </tbody>
             </table>
@@ -146,3 +270,26 @@ export default function Ticker() {
     </div>
   );
 }
+const mapStateToProps = (state: any, ownProps: any) => {
+  return {
+    CurrentFilmState: state.CurrentFilmState,
+    NextFilmState: state.NextFilmState,
+  };
+};
+const mapDispatchToProps = (dispatch: any, ownProps: any) => {
+  return {
+    CalculateFinalSum: (data: any) => {
+      dispatch({
+        type: "CALCULATE_FINAL_SUM",
+        payload: data,
+      });
+    },
+    GetCombo: (data: any) => {
+      dispatch({
+        type: "GET_COMBO",
+        payload: data,
+      });
+    },
+  };
+};
+export default connect(mapStateToProps, mapDispatchToProps)(Ticker);

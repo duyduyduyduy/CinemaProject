@@ -210,7 +210,7 @@ function FilmInfo(props: any) {
               dangerouslySetInnerHTML={{
                 __html:
                   FilmInfo[0]?.description.length > 1000
-                    ? FilmInfo[0]?.description.slice(0, 1000) + "..."
+                    ? FilmInfo[0]?.description.slice(0, 600) + "..."
                     : FilmInfo[0]?.description,
               }}
             ></p>
@@ -249,8 +249,8 @@ function FilmInfo(props: any) {
           >
             {/* <i className="fa-regular fa-circle-xmark"></i> Lỗi icon */}
             <iframe
-              width="1000px"
-              height="580"
+              width="560px"
+              height="310"
               src={`https://www.youtube.com/embed/${FilmInfo[0]?.trailer.replace(
                 "https://www.youtube.com/watch?v=",
                 ""
@@ -269,7 +269,7 @@ function FilmInfo(props: any) {
                   dangerouslySetInnerHTML={{
                     __html:
                       FilmInfo[0]?.description.length > 1000
-                        ? FilmInfo[0]?.description.slice(0, 900) + "..."
+                        ? FilmInfo[0]?.description.slice(0, 235) + "..."
                         : FilmInfo[0]?.description,
                   }}
                 ></p>
