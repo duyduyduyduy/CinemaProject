@@ -126,7 +126,7 @@ function Header1(props: any) {
               <i className="fa-solid fa-angle-down"></i>
               {eventModal && (
                 <div className="event">
-                  <p>Ưu đãi</p>
+                  <p onClick={() => nav('/PromotionHeader')}>Ưu đãi</p>
                   <p>Phim hay tháng</p>
                 </div>
               )}
