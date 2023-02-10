@@ -339,11 +339,27 @@
       }
     }
   }
-  .PopupBlogFilm {
-    width: 1200px;
-    height: 800px;
-    background-color: rgb(45, 219, 245);
+  .BlackPopup {
+    width: 100vw;
+    height: 100vh;
+    z-index: 100;
+    margin-top: -80px;
     position: fixed;
-    border-radius: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.7);
+    .PopupBlogFilm {
+      width: 1200px;
+      height: 800px;
+      background-color: rgb(45, 219, 245);
+      border-radius: 20px;
+      padding: 20px;
+      box-sizing: border-box;
+      h3 {
+        text-align: center;
+        color: rgb(127, 127, 127);
+      }
+    }
   }
 }

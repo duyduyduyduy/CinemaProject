@@ -49,7 +49,7 @@ function Home(props: any) {
         </div>
         <div className="lsFilmContainer">
           {lsfilm?.map((item, index) => {
-            if (index < (tmp > a ? tmp * 5 + b : tmp * 5)) {
+            if (index < (tmp > a ? tmp * 4 + b : tmp * 4)) {
               return (
                 <div className="Film">
                   <a className="aClear" href={`/Film/${item.id}#FilmBanner`} onClick={() => handleOnclickMuaVe(item.id)}>
