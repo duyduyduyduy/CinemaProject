@@ -249,8 +249,8 @@ function FilmInfo(props: any) {
           >
             {/* <i className="fa-regular fa-circle-xmark"></i> Lỗi icon */}
             <iframe
-              width="900px"
-              height="500px"
+              width="800px"
+              height="400px"
               src={`https://www.youtube.com/embed/${FilmInfo[0]?.trailer.replace(
                 "https://www.youtube.com/watch?v=",
                 ""
