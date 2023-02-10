@@ -714,7 +714,7 @@ function FilmInfo(props: any) {
           >
             <a
               // href="/#section1Home"
-              href="/#Homepage1"
+              hrefLang="/#Homepage1"
               // onClick={() => nav("/#section1Home")}
               onClick={() => nav("/#Homepage1")}
               className="moreButtoninRe"
