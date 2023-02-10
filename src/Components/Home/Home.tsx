@@ -35,6 +35,7 @@ function Home(props: any) {
         {assignVar()}
         <div className="titleContainer">
           <span
+            style={{marginLeft:'-50px'}}
             onClick={() => setIsClick(1)}
             className={isClick === 1 ? "Active" : ""}
           >

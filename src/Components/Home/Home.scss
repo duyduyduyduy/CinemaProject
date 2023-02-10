@@ -17,11 +17,13 @@
   justify-content: center;
   margin-bottom: 20px;
   font-size: 20px;
+  // background-color: aliceblue;
   color: white;
   span:not(:last-child) {
     margin-right: 30px;
   }
   span {
+    // margin-left: -100px;
     transition: 0.5s;
     cursor: pointer;
   }
