@@ -24,6 +24,9 @@ function Home(props: any) {
     b = lsfilm.length - 5 * Math.floor(lsfilm.length / 5);
     return false;
   };
+  useEffect(() => {
+    console.log("check redux", props.FilmSummaryState);
+  }, []);
   const nav = useNavigate();
   const handleOnclickMuaVe = (id: string) => {
     nav("/Film/" + id);
@@ -35,7 +38,7 @@ function Home(props: any) {
         {assignVar()}
         <div className="titleContainer">
           <span
-            style={{marginLeft:'-50px'}}
+            style={{ marginLeft: "-50px" }}
             onClick={() => setIsClick(1)}
             className={isClick === 1 ? "Active" : ""}
           >
@@ -53,7 +56,11 @@ function Home(props: any) {
             if (index < (tmp > a ? tmp * 4 + b : tmp * 4)) {
               return (
                 <div className="Film">
-                  <a className="aClear" href={`/Film/${item.id}#FilmBanner`} onClick={() => handleOnclickMuaVe(item.id)}>
+                  <a
+                    className="aClear"
+                    href={`/Film/${item.id}#FilmBanner`}
+                    onClick={() => handleOnclickMuaVe(item.id)}
+                  >
                     <div
                       className="imageContainer shine"
                       // onClick={() => nav("/Film/" + item.id)}
@@ -61,7 +68,7 @@ function Home(props: any) {
                       {/* <a href={`/Film/${item.id}#FilmBanner`} onClick={() => handleOnclickMuaVe(item.id)} className="aIMGFilm">
                         <img alt="Bùi Thanh Duy" src={item.imagePortrait} />
                       </a> */}
-                        <img alt="Bùi Thanh Duy" src={item.imagePortrait} />
+                      <img alt="Bùi Thanh Duy" src={item.imagePortrait} />
                     </div>
                   </a>
                   <p>
@@ -124,6 +131,7 @@ const mapStateToProps = (state: any, ownProps: any) => {
   return {
     CurrentFilmState: state.CurrentFilmState,
     NextFilmState: state.NextFilmState,
+    FilmSummaryState: state.FilmSummaryState,
   };
 };
 const mapDispatchToProps = (dispatch: any, ownProps: any) => {
