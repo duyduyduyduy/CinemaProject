@@ -3,7 +3,8 @@ import { useNavigate, useParams } from "react-router-dom";
 import eCinema from "../Model/eCinema";
 import eFilmInCinema from "../Model/eFimInCinema";
 import "./CinemaInfo.scss";
-export default function CinemaInfo() {
+import { connect } from "react-redux";
+function CinemaInfo(props: any) {
   const { id } = useParams();
   const [CinemaInfo, setCinemaInfo] = useState<Array<eCinema>>([]);
   const [moving, setMoving] = useState<boolean>(true);
@@ -14,6 +15,23 @@ export default function CinemaInfo() {
   const nav = useNavigate();
   const HandleOnClickPrevButtonCinema = (a: number) => {
     setTmp(tmp + a);
+  };
+  const handleOnClickShowTime = (data: any) => {
+    nav("/Ticker");
+    props.dispatchInfotoBooking({
+      nameFilm: data.nameFilm,
+      age: data.age,
+      Cinema: data.cinema,
+      showTime: data.showTime,
+      filmImg: data.imageLandscape,
+    });
+    // console.log("Dispatched data: ", {
+    //   nameFilm: data.nameFilm,
+    //   age: data.age,
+    //   Cinema: data.cinema,
+    //   showTime: data.showTime,
+    //   filmImg: data.imageLandscape,
+    // });
   };
   useEffect(() => {
     fetch(
@@ -33,9 +51,14 @@ export default function CinemaInfo() {
         setlength(data[0].dates.length);
       });
   }, []);
+  const consoleLog = () => {
+    console.log("CinemaInfo: ", CinemaInfo);
+    return false;
+  };
   return (
     <>
       <div className="subheadContainer">
+        {consoleLog()}
         <div className="subheadMainSize">
           <i className="fa-solid fa-house" onClick={() => nav("/")}></i>
           <i className="fa-solid fa-angle-right"></i>
@@ -184,7 +207,31 @@ export default function CinemaInfo() {
                                         <div className="ShowTimeContainer">
                                           {m.sessions.map((x) => {
                                             return (
-                                              <span className="time">
+                                              <span
+                                                className="time"
+                                                onClick={() =>
+                                                  handleOnClickShowTime({
+                                                    cinema:
+                                                      CinemaInfo[0].name +
+                                                      " | " +
+                                                      x.screenName,
+                                                    showTime:
+                                                      x.showTime +
+                                                      " | " +
+                                                      detaiSchedule[0]?.dates[
+                                                        Index
+                                                      ].dayOfWeekLabel +
+                                                      ", " +
+                                                      detaiSchedule[0]?.dates[
+                                                        Index
+                                                      ].showDate,
+                                                    age: item.age,
+                                                    imageLandscape:
+                                                      item.imageLandscape,
+                                                    nameFilm: item.name,
+                                                  })
+                                                }
+                                              >
                                                 {x.showTime}
                                               </span>
                                             );
@@ -236,3 +283,20 @@ export default function CinemaInfo() {
     </>
   );
 }
+const mapStateToProps = (state: any, ownProps: any) => {
+  return {
+    CurrentFilmState: state.CurrentFilmState,
+    NextFilmState: state.NextFilmState,
+  };
+};
+const mapDispatchToProps = (dispatch: any, ownProps: any) => {
+  return {
+    dispatchInfotoBooking: (data: any) => {
+      dispatch({
+        type: "GET_FILM_INFO_TO_TICKET",
+        payload: data,
+      });
+    },
+  };
+};
+export default connect(mapStateToProps, mapDispatchToProps)(CinemaInfo);
