@@ -21,7 +21,6 @@ function Header1(props: any) {
     Cookies.remove("Password");
     Cookies.remove("Name");
     props.unLogin();
-    console.log("Log out");
   };
   const nav = useNavigate();
   const HandleClickBuy = (id: string) => {

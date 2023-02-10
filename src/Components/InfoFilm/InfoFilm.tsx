@@ -2,9 +2,14 @@ import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
 import handleDisplayPrice from "../FunctionHandle/HandleDisPlayPrice";
 function InfoFilm(props: any) {
+  const ConsoleLog = () => {
+    console.log("Updated data:", props.FilmSummaryState);
+    return false;
+  };
   return (
     props.FilmSummaryState && (
       <div className="infoFilm">
+        {ConsoleLog()}
         <div className="ImgContainer">
           <img src={props.FilmSummaryState.filmImg} alt="" />
           <h3>{props.FilmSummaryState.nameFilm}</h3>

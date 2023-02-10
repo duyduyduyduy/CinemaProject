@@ -21,6 +21,9 @@ const FilmSummaryReducer = (
         Cinema: action.payload.Cinema,
         showTime: action.payload.showTime,
         filmImg: action.payload.filmImg,
+        Combo: "",
+        Seat: "",
+        Sum: 0,
       };
     case "CALCULATE_FINAL_SUM":
       return {
@@ -28,7 +31,6 @@ const FilmSummaryReducer = (
         Sum: action.payload,
       };
     case "GET_COMBO":
-      console.log("State: ", state);
       return {
         ...state,
         Combo: action.payload,
