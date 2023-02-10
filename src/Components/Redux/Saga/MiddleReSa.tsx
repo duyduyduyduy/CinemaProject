@@ -7,7 +7,6 @@ const FetchDataFromFirstAPI = async () => {
   return data;
 };
 function* getdatafromFirstAPI(action: any): any {
-  console.log("The number of fetching API");
   let data = yield call(FetchDataFromFirstAPI);
   yield put({
     type: "GET_CURRENT_FILM",
