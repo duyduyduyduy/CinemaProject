@@ -713,8 +713,10 @@ function FilmInfo(props: any) {
             }}
           >
             <a
-              href="/#section1Home"
-              onClick={() => nav("/#section1Home")}
+              // href="/#section1Home"
+              hrefLang="/#Homepage1"
+              // onClick={() => nav("/#section1Home")}
+              onClick={() => nav("/#Homepage1")}
               className="moreButtoninRe"
               style={{
                 padding: "5px 15px",
