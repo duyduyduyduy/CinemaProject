@@ -184,10 +184,13 @@ function BlogFilm(props: any) {
             </div>
 
         </div>
-
-        <div className='PopupBlogFilm'>
+        <div>
             
         </div>
+
+        {/* <div className='PopupBlogFilm'>
+            
+        </div> */}
     </div>
   )
 }
