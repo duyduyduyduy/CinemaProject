@@ -6,6 +6,7 @@ const initialState = {
   showTime: "",
   Combo: "",
   Seat: "",
+  Sum: 0,
 };
 const FilmSummaryReducer = (
   state = initialState,
@@ -20,6 +21,17 @@ const FilmSummaryReducer = (
         Cinema: action.payload.Cinema,
         showTime: action.payload.showTime,
         filmImg: action.payload.filmImg,
+      };
+    case "CALCULATE_FINAL_SUM":
+      return {
+        ...state,
+        Sum: action.payload,
+      };
+    case "GET_COMBO":
+      console.log("State: ", state);
+      return {
+        ...state,
+        Combo: action.payload,
       };
     default:
       return state;

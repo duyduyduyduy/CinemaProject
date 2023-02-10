@@ -1,9 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
+import handleDisplayPrice from "../FunctionHandle/HandleDisPlayPrice";
 function InfoFilm(props: any) {
-  useEffect(() => {
-    console.log(props.FilmSummaryState);
-  }, [props]);
   return (
     props.FilmSummaryState && (
       <div className="infoFilm">
@@ -34,7 +32,7 @@ function InfoFilm(props: any) {
           </div>
           <div>
             <b>Combo:</b>
-            <span></span>
+            <span>{props.FilmSummaryState.Combo}</span>
           </div>
           <div>
             <b>Ghế:</b>
@@ -42,7 +40,7 @@ function InfoFilm(props: any) {
           </div>
           <div className="TotalRender">
             <b>Tổng:</b>
-            <span>0 VNĐ</span>
+            <span>{handleDisplayPrice(props.FilmSummaryState.Sum)} VNĐ</span>
           </div>
         </div>
 
