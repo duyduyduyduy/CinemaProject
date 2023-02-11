@@ -1,23 +1,10 @@
-import { connect } from 'react-redux'
-import React, { useEffect, useState } from 'react'
-import eFilm from '../Model/eFilm'
 import './PromotionHeader.scss'
 import { useNavigate } from 'react-router-dom'
+import FilmReInheri from '../CompoInheri/FilmReInheri/FilmReInheri'
 
-function PromotionHeader(props: any) {
-    const [lsfilm, setLsFilm] = useState<Array<eFilm>>([])
-
-    useEffect(() => {
-        setLsFilm(props.CurrentFilmState.lsCurFilm)
-    }, [props])
+export default function PromotionHeader() {
 
     const nav = useNavigate();
-    const HandleClick = (id: string) => {
-        nav("/Film/" + id);
-    }
-
-
-
 
   return (
     <div className='PromotionHeader'>
@@ -58,45 +45,10 @@ function PromotionHeader(props: any) {
                 </div>
             </div>
 
-
-
-
             <div className='FilmRecomment'>
-                <h3>Phim đang chiếu</h3>
-                <div className='FilmReContainer'>
-                    {lsfilm?.map((item, index) => {
-                        return (
-                            index <= 3 && (
-                                <div className='FilmReOver'>
-                                    <div className='FilmReItem' style={{backgroundImage: `url(${item.imageLandscape})`}}>
-                                        <div onClick={() => HandleClick(item.id)} className='TitleCon'>
-                                            <h4>Muốn Gặp Anh</h4>
-                                        </div>
-                                    </div>
-                                </div>
-                            )
-                        )
-                    })}
-                    
-                </div>
-                <div className='More'>
-                    <a  onClick={() => nav("/#Homepage1")} hrefLang="/#Homepage1">
-                        Xem Thêm
-                    </a>
-                </div>
+                <FilmReInheri />
             </div>
         </div>
     </div>
   )
 }
-
-
-const mapStateToProps = (state: any) => {
-    return {
-        CurrentFilmState: state.CurrentFilmState
-    }
-}
-
-
-
-export default connect(mapStateToProps, null)(PromotionHeader)
