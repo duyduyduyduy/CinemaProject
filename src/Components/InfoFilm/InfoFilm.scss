@@ -1,84 +1,84 @@
 .infoFilm {
-    width: 340px;
-    // background-color: rgb(166, 0, 255);
+  width: 340px;
+  // background-color: rgb(166, 0, 255);
+  box-sizing: border-box;
+  .ImgContainer {
     box-sizing: border-box;
-    .ImgContainer {
-      box-sizing: border-box;
-      width: 100%;
-      height: 200px;
-      padding-top: 10px;
-      color: #43464b;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
+    width: 100%;
+    height: 200px;
+    padding-top: 10px;
+    color: #43464b;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 
-      img {
-        width: 250px;
-      }
-      h3 {
-        margin-top: 2px;
-        font-size: 18px;
-        font-weight: bolder;
-      }
+    img {
+      width: 250px;
     }
-    .infoContainer {
-      width: 100%;
-      height: auto;
-      padding: 20px;
-      box-sizing: border-box;
-      // background-color: #f2e238;
-      .warning {
-        width: 100%;
-        height: 100%;
-        .spanWar {
-          font-size: 14px;
-          padding: 2px 5px;
-          color: white;
-          background-color: #f26b38 !important;
-        }
-        span {
-          font-weight: bolder;
-          font-size: 12px;
-          color: rgb(254, 44, 44);
-        }
-      }
+    h3 {
+      margin-top: 2px;
+      font-size: 18px;
+      font-weight: bolder;
     }
-    .RapInfo {
+  }
+  .infoContainer {
+    width: 100%;
+    height: auto;
+    padding: 20px;
+    box-sizing: border-box;
+    // background-color: #f2e238;
+    .warning {
       width: 100%;
-      height: auto;
-      // background-color: rgb(243, 145, 145);
-      padding: 20px;
-      box-sizing: border-box;
-      div {
-        margin-bottom: 15px;
-        border-bottom: 1px solid lightgray;
-        b {
-          margin-right: 10px;
-        }
-        span {
-          font-size: 16px;
-        }
-      }
-    }
-    .totalEnd {
-      width: 100%;
-      height: 60px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      button {
-        padding: 10px 20px;
-        border: none;
-        background-color: #f26b38;
+      height: 100%;
+      .spanWar {
+        font-size: 14px;
+        padding: 2px 5px;
         color: white;
-        font-size: 18px;
-        font-weight: bolder;
-        i {
-          margin-left: 10px;
-        }
+        background-color: #f26b38 !important;
       }
-      button:hover {
-        background-color: #c34b1f;
+      span {
+        font-weight: bolder;
+        font-size: 12px;
+        color: rgb(254, 44, 44);
       }
     }
   }
+  .RapInfo {
+    width: 100%;
+    height: auto;
+    // background-color: rgb(243, 145, 145);
+    padding: 20px;
+    box-sizing: border-box;
+    div {
+      margin-bottom: 15px;
+      border-bottom: 1px solid lightgray;
+      b {
+        margin-right: 10px;
+      }
+      span {
+        font-size: 16px;
+      }
+    }
+  }
+  .totalEnd {
+    width: 100%;
+    height: 60px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    button {
+      padding: 10px 20px;
+      border: none;
+      background-color: #f26b38;
+      color: white;
+      font-size: 18px;
+      font-weight: bolder;
+      i {
+        margin-left: 10px;
+      }
+    }
+    button:hover {
+      background-color: #c34b1f;
+    }
+  }
+}
