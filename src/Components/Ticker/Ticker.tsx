@@ -5,10 +5,12 @@ import handleDisplayPrice from "../FunctionHandle/HandleDisPlayPrice";
 import eTicket from "../Model/eTicket";
 import InfoFilm from "../InfoFilm/InfoFilm";
 import { connect } from "react-redux";
+import { useNavigate } from "react-router-dom";
 function Ticker(props: any) {
   const [ConcessionItems, setConcessionitem] = useState<
     Array<eConcessionItems>
   >([]);
+  const nav = useNavigate();
   const [TicketItems, setTicketItems] = useState<Array<eTicket>>([]);
   const [arrayTicket, setArray] = useState<any>([]);
   const [arrayCombo, setCombo] = useState<any>([]);
@@ -50,6 +52,22 @@ function Ticker(props: any) {
     });
     return result;
   };
+  const SumSeat = () => {
+    let result1 = 0;
+    let result2 = 0;
+    arrayTicket.map((item: any) => {
+      if (item.areaCategoryCode === "0000000002") {
+        result1 += item.quantity;
+      } else if (item.areaCategoryCode === "0000000004") {
+        result2 += item.quantity;
+      }
+    });
+    return { Standard: result1, VIP: result2 };
+  };
+  const handleOnClickContinue = () => {
+    nav("/booking-seat");
+    props.UpdateNumSeat(SumSeat());
+  };
   useEffect(() => {
     props.CalculateFinalSum(FunctionCalculateFinalSum());
     props.GetCombo(FunctionMergeString());
@@ -78,6 +96,7 @@ function Ticker(props: any) {
               quantity: 0,
               name: item.name,
               price: item.displayPrice,
+              areaCategoryCode: item.areaCategoryCode,
             };
           })
         );
@@ -265,7 +284,15 @@ function Ticker(props: any) {
             </table>
           </div>
         </div>
-        <InfoFilm />
+        <div>
+          {" "}
+          <InfoFilm />
+          <div className="totalEnd">
+            <button onClick={() => handleOnClickContinue()}>
+              TIẾP TỤC <i className="fa-solid fa-arrow-right-long"></i>
+            </button>
+          </div>
+        </div>
       </div>
     </div>
   );
@@ -287,6 +314,12 @@ const mapDispatchToProps = (dispatch: any, ownProps: any) => {
     GetCombo: (data: any) => {
       dispatch({
         type: "GET_COMBO",
+        payload: data,
+      });
+    },
+    UpdateNumSeat: (data: any) => {
+      dispatch({
+        type: "UPDATE_NUM_SEAT",
         payload: data,
       });
     },

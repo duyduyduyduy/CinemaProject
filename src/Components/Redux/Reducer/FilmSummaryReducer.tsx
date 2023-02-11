@@ -6,6 +6,8 @@ const initialState = {
   showTime: "",
   Combo: "",
   Seat: "",
+  nStandardSeat: 0,
+  nVIPSeat: 0,
   Sum: 0,
 };
 const FilmSummaryReducer = (
@@ -34,6 +36,17 @@ const FilmSummaryReducer = (
       return {
         ...state,
         Combo: action.payload,
+      };
+    case "UPDATE_NUM_SEAT":
+      return {
+        ...state,
+        nVIPSeat: action.payload.VIP,
+        nStandardSeat: action.payload.Standard,
+      };
+    case "GET_SEAT":
+      return {
+        ...state,
+        Seat: action.payload,
       };
     default:
       return state;

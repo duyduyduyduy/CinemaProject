@@ -4,11 +4,6 @@ import { useNavigate } from "react-router-dom";
 import handleDisplayPrice from "../FunctionHandle/HandleDisPlayPrice";
 import "./InfoFilm.scss";
 function InfoFilm(props: any) {
-  const ConsoleLog = () => {
-    console.log("Updated data:", props.FilmSummaryState);
-    return false;
-  };
-  const nav = useNavigate();
   return (
     props.FilmSummaryState && (
       <div className="infoFilm">
@@ -43,18 +38,12 @@ function InfoFilm(props: any) {
           </div>
           <div>
             <b>Ghế:</b>
-            <span></span>
+            <span>{props.FilmSummaryState.Seat}</span>
           </div>
           <div className="TotalRender">
             <b>Tổng:</b>
-            <span>{handleDisplayPrice(props.FilmSummaryState.Sum)} VNĐ</span>
+            <span>{handleDisplayPrice(props.FilmSummaryState?.Sum)} VNĐ</span>
           </div>
-        </div>
-
-        <div className="totalEnd">
-          <button onClick={() => nav("/booking-seat")}>
-            TIẾP TỤC <i className="fa-solid fa-arrow-right-long"></i>
-          </button>
         </div>
       </div>
     )

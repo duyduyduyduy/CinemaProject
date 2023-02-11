@@ -1,15 +1,16 @@
 import React, { useEffect, useState } from "react";
 import InfoFilm from "../InfoFilm/InfoFilm";
 import "./Seat.scss";
-
-export default function Seat() {
+import { connect } from "react-redux";
+function Seat(props: any) {
   const [seatStandard, SetSeatStandard] = useState<any>();
   const [seatVIP, SetSeatVIP] = useState<any>();
   const [num1, setNum1] = useState<number>(0);
   const [num2, setNum2] = useState<number>(0);
   const [StandardSeat, setStandardSeat] = useState<any>([]);
+  const [VIPSeat, setVIPSeat] = useState<any>([]);
   let Standard = 6;
-  let Vip = 0;
+  let Vip = 2;
   //------------------- 3 ghế thường ( Standard ) -------------------
   //------------------- 1 ghế couple ( Standard ) -------------------
   useEffect(() => {
@@ -22,16 +23,26 @@ export default function Seat() {
         SetSeatVIP(data.seatPlan.seatLayoutData.areas[1]?.rows);
       });
   }, []);
-  useEffect(() => {
-    console.log(StandardSeat);
-  }, [StandardSeat]);
+  const handleBookingVIP = (data: string) => {
+    if (VIPSeat.includes(data) === true) {
+      setVIPSeat(VIPSeat.filter((n: string) => n !== data));
+      setNum2(num2 - 1);
+    } else {
+      if (num2 < props.FilmSummaryState.nVIPSeat) {
+        if (VIPSeat.includes(data) === false) {
+          setVIPSeat([...VIPSeat, data]);
+          setNum2(num2 + 1);
+        }
+      }
+    }
+  };
   //Function booking standard seat
   const HandleBookingStandard = (data: string) => {
     if (StandardSeat.includes(data) === true) {
       setStandardSeat(StandardSeat.filter((n: string) => n !== data));
       setNum1(num1 - 1);
     } else {
-      if (num1 < Standard) {
+      if (num1 < props.FilmSummaryState.nStandardSeat) {
         if (StandardSeat.includes(data) === false) {
           setStandardSeat([...StandardSeat, data]);
           setNum1(num1 + 1);
@@ -39,6 +50,17 @@ export default function Seat() {
       }
     }
   };
+  useEffect(() => {
+    let result = "";
+    StandardSeat?.map((item: any) => {
+      result += item + ",";
+    });
+    VIPSeat?.map((item: any) => {
+      result += "[ " + item + " ]" + ",";
+    });
+    props.getDetailSeat(result.slice(0, -1));
+  }, [StandardSeat, VIPSeat]);
+
   return (
     <div className="SeatContainer">
       <div className="SeatMainSize">
@@ -78,25 +100,52 @@ export default function Seat() {
                         className="columnContainer"
                         style={{ marginBottom: "30px" }}
                       >
-                        {item?.seats.map((item: any, index: number) => {
+                        {item?.seats.map((n: any, index: number) => {
                           return (
                             index % 2 === 0 && (
-                              <div>
+                              <div
+                                style={{ display: "flex", marginRight: "10px" }}
+                                onClick={() =>
+                                  props.FilmSummaryState.nVIPSeat !== 0 &&
+                                  handleBookingVIP(
+                                    String(item.physicalName) +
+                                      String(n.id) +
+                                      "," +
+                                      String(item.physicalName) +
+                                      String(n.id * 1 + 1)
+                                  )
+                                }
+                              >
                                 <div
                                   className={`seatNumberVIP ${
-                                    Vip === 0 ? "blockSeat" : ""
+                                    VIPSeat.includes(
+                                      String(item.physicalName) +
+                                        String(n.id) +
+                                        "," +
+                                        String(item.physicalName) +
+                                        String(n.id * 1 + 1)
+                                    ) === true
+                                      ? "activeSeatNumber"
+                                      : ""
                                   }`}
                                   style={{ marginRight: "2px" }}
                                 >
-                                  {item.id}
+                                  {n.id}
                                 </div>
                                 <div
                                   className={`seatNumberVIP ${
-                                    Vip === 0 ? "blockSeat" : ""
+                                    VIPSeat.includes(
+                                      String(item.physicalName) +
+                                        String(n.id) +
+                                        "," +
+                                        String(item.physicalName) +
+                                        String(n.id * 1 + 1)
+                                    ) === true
+                                      ? "activeSeatNumber"
+                                      : ""
                                   }`}
-                                  style={{ marginRight: "10px" }}
                                 >
-                                  {item.id * 1 + 1}
+                                  {n.id * 1 + 1}
                                 </div>
                               </div>
                             )
@@ -177,8 +226,28 @@ export default function Seat() {
             </div>
           </div>
         </div>
-        <div className="rightSeatBorder"><InfoFilm /></div>
+        <div className="rightSeatBorder">
+          <InfoFilm />
+        </div>
       </div>
     </div>
   );
 }
+const mapStateToProps = (state: any, ownProps: any) => {
+  return {
+    CurrentFilmState: state.CurrentFilmState,
+    NextFilmState: state.NextFilmState,
+    FilmSummaryState: state.FilmSummaryState,
+  };
+};
+const mapDispatchToProps = (dispatch: any, ownProps: any) => {
+  return {
+    getDetailSeat: (data: any) => {
+      dispatch({
+        type: "GET_SEAT",
+        payload: data,
+      });
+    },
+  };
+};
+export default connect(mapStateToProps, mapDispatchToProps)(Seat);

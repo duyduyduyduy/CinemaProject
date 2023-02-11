@@ -25,13 +25,7 @@ function CinemaInfo(props: any) {
       showTime: data.showTime,
       filmImg: data.imageLandscape,
     });
-    // console.log("Dispatched data: ", {
-    //   nameFilm: data.nameFilm,
-    //   age: data.age,
-    //   Cinema: data.cinema,
-    //   showTime: data.showTime,
-    //   filmImg: data.imageLandscape,
-    // });
+
   };
   useEffect(() => {
     fetch(
@@ -51,14 +45,10 @@ function CinemaInfo(props: any) {
         setlength(data[0].dates.length);
       });
   }, []);
-  const consoleLog = () => {
-    console.log("CinemaInfo: ", CinemaInfo);
-    return false;
-  };
+
   return (
     <>
       <div className="subheadContainer">
-        {consoleLog()}
         <div className="subheadMainSize">
           <i className="fa-solid fa-house" onClick={() => nav("/")}></i>
           <i className="fa-solid fa-angle-right"></i>

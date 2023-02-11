@@ -60,25 +60,26 @@
       }
     }
   }
-  .totalEnd {
-    width: 100%;
-    height: 60px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    button {
-      padding: 10px 20px;
-      border: none;
-      background-color: #f26b38;
-      color: white;
-      font-size: 18px;
-      font-weight: bolder;
-      i {
-        margin-left: 10px;
-      }
+}
+.totalEnd {
+  width: 100%;
+  height: 60px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  button {
+    padding: 10px 20px;
+    border: none;
+    background-color: #f26b38;
+    color: white;
+    font-size: 18px;
+    font-weight: bolder;
+    cursor: pointer;
+    i {
+      margin-left: 10px;
     }
-    button:hover {
-      background-color: #c34b1f;
-    }
+  }
+  button:hover {
+    background-color: #c34b1f;
   }
 }
