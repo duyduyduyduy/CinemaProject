@@ -1,17 +1,20 @@
 import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import handleDisplayPrice from "../FunctionHandle/HandleDisPlayPrice";
+import './InfoFilm.scss'
 function InfoFilm(props: any) {
   const ConsoleLog = () => {
     console.log("Updated data:", props.FilmSummaryState);
     return false;
   };
+  const nav = useNavigate();
   return (
     props.FilmSummaryState && (
       <div className="infoFilm">
         {ConsoleLog()}
         <div className="ImgContainer">
-          <img src={props.FilmSummaryState.filmImg} alt="" />
+          <img src={props.FilmSummaryState.filmImg} alt=""/>
           <h3>{props.FilmSummaryState.nameFilm}</h3>
         </div>
         <div className="infoContainer">
@@ -50,7 +53,7 @@ function InfoFilm(props: any) {
         </div>
 
         <div className="totalEnd">
-          <button>
+          <button onClick={() => nav("/booking-seat")}>
             TIẾP TỤC <i className="fa-solid fa-arrow-right-long"></i>
           </button>
         </div>

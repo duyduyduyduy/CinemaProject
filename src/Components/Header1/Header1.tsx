@@ -126,7 +126,7 @@ function Header1(props: any) {
               {eventModal && (
                 <div className="event">
                   <p onClick={() => nav('/PromotionHeader')}>Ưu đãi</p>
-                  <p>Phim hay tháng</p>
+                  <p>Phim hay tháng</p> 
                 </div>
               )}
             </li>
@@ -161,9 +161,9 @@ function Header1(props: any) {
                   <h3>
                     {" "}
                     {Cookies.get("Name") &&
-                    String(Cookies.get("Name"))?.length <= 10
+                    String(Cookies.get("Name"))?.length <= 20
                       ? Cookies.get("Name")
-                      : Cookies.get("Name")?.slice(0, 10) + "..."}
+                      : Cookies.get("Name")?.slice(0, 20) + "..."}
                   </h3>
                   <p>{Cookies.get("Email")}</p>
                 </div>
