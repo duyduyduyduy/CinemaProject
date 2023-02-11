@@ -177,7 +177,7 @@ export default function Seat() {
             </div>
           </div>
         </div>
-        <div className="rightSeatBorder">{/* <InfoFilm /> */}</div>
+        <div className="rightSeatBorder"><InfoFilm /></div>
       </div>
     </div>
   );

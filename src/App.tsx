@@ -14,6 +14,7 @@ import CinemaInfo from "./Components/CinemaInfo/CinemaInfo";
 import Ticker from "./Components/Ticker/Ticker";
 import Seat from "./Components/Seat/Seat";
 import PromotionHeader from "./Components/PromotionHeader/PromotionHeader";
+import PromoItem from "./Components/PromotionHeader/PromoItem/PromoItem";
 function App(props: any) {
   useEffect(() => {
     props.fetchdatafromfirstapi();
@@ -52,6 +53,7 @@ function App(props: any) {
           <Route path="/BlogFilm" element={<BlogFilm />}></Route>
           <Route path="/Ticker" element={<Ticker />}></Route>
           <Route path="/PromotionHeader" element={<PromotionHeader />}></Route>
+          <Route path="/PromoItem" element={<PromoItem />}></Route>
           <Route path="/edit-user" element={<UserEdit />}></Route>
           <Route path="/list-cinema" element={<ListOfCinema />}></Route>
           <Route path="/booking-seat" element={<Seat />}></Route>
