@@ -24,9 +24,7 @@ function Home(props: any) {
     b = lsfilm.length - 5 * Math.floor(lsfilm.length / 5);
     return false;
   };
-  useEffect(() => {
-    console.log("check redux", props.FilmSummaryState);
-  }, []);
+
   const nav = useNavigate();
   const handleOnclickMuaVe = (id: string) => {
     nav("/Film/" + id);
