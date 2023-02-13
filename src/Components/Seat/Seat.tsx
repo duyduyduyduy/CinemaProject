@@ -2,13 +2,16 @@ import React, { useEffect, useState } from "react";
 import InfoFilm from "../InfoFilm/InfoFilm";
 import "./Seat.scss";
 import { connect } from "react-redux";
+import { useParams } from "react-router-dom";
 function Seat(props: any) {
+  const { CinemaID, FilmID, SessionID } = useParams();
   const [seatStandard, SetSeatStandard] = useState<any>();
   const [seatVIP, SetSeatVIP] = useState<any>();
   const [num1, setNum1] = useState<number>(0);
   const [num2, setNum2] = useState<number>(0);
   const [StandardSeat, setStandardSeat] = useState<any>([]);
   const [VIPSeat, setVIPSeat] = useState<any>([]);
+  const [ticket, setTicket] = useState<string>("");
 
   //------------------- 3 ghế thường ( Standard ) -------------------
   //------------------- 1 ghế couple ( Standard ) -------------------
@@ -20,6 +23,23 @@ function Seat(props: any) {
       .then((data) => {
         SetSeatStandard(data.seatPlan.seatLayoutData.areas[0]?.rows);
         SetSeatVIP(data.seatPlan.seatLayoutData.areas[1]?.rows);
+      });
+    const requestOptions = {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ ShowCode: `${CinemaID}-${SessionID}` }),
+    };
+    fetch(
+      "https://vietcpq.name.vn/U2FsdGVkX1+ibKkbj+HGKjeepxUwFVviPP1AkhuyHto=/cinema/TicketByShowCode",
+      requestOptions
+    )
+      .then((res) => res.json())
+      .then((data) => {
+        let tmp = "";
+        data.map((item: any) => {
+          tmp = tmp + item.SeatCode + ",";
+        });
+        setTicket(tmp);
       });
   }, []);
   const handleBookingVIP = (data: string) => {
@@ -34,6 +54,10 @@ function Seat(props: any) {
         }
       }
     }
+  };
+  const consoleLog = () => {
+    console.log(ticket);
+    return false;
   };
   //Function booking standard seat
   const HandleBookingStandard = (data: string) => {
@@ -55,13 +79,14 @@ function Seat(props: any) {
       result += item + ",";
     });
     VIPSeat?.map((item: any) => {
-      result += "[ " + item + " ]" + ",";
+      result += item + ",";
     });
     props.getDetailSeat(result.slice(0, -1));
   }, [StandardSeat, VIPSeat]);
 
   return (
     <div className="leftSeatBorder">
+      {consoleLog()}
       <h2 style={{ color: "white" }}>CHỌN GHẾ:</h2>
       <div className="seatTable">
         <div className="seatGridContainer">
@@ -123,6 +148,17 @@ function Seat(props: any) {
                                 ) === true
                                   ? "activeSeatNumber"
                                   : ""
+                              } ${
+                                ticket?.includes(
+                                  String(item.physicalName) +
+                                    String(n.id) +
+                                    "," +
+                                    String(item.physicalName) +
+                                    String(n.id * 1 + 1) +
+                                    ","
+                                ) === true
+                                  ? "bookedSeatNumber"
+                                  : ""
                               }`}
                               style={{ marginRight: "2px" }}
                             >
@@ -132,6 +168,17 @@ function Seat(props: any) {
                               className={`seatNumberVIP ${
                                 props.FilmSummaryState.nVIPSeat === 0
                                   ? "blockSeat"
+                                  : ""
+                              } ${
+                                ticket?.includes(
+                                  String(item.physicalName) +
+                                    String(n.id) +
+                                    "," +
+                                    String(item.physicalName) +
+                                    String(n.id * 1 + 1) +
+                                    ","
+                                ) === true
+                                  ? "bookedSeatNumber"
                                   : ""
                               } ${
                                 VIPSeat.includes(
@@ -172,6 +219,12 @@ function Seat(props: any) {
                               String(item.physicalName) + String(m.id)
                             ) === true
                               ? "activeSeatNumber"
+                              : ""
+                          } ${
+                            ticket?.includes(
+                              String(item.physicalName) + String(m.id) + ","
+                            ) === true
+                              ? "bookedSeatNumber"
                               : ""
                           }`}
                           onClick={() =>

@@ -134,6 +134,12 @@
   font-weight: bolder;
   color: white;
 }
+.bookedSeatNumber {
+  background-color: #e11c01 !important;
+  font-weight: bolder;
+  color: white;
+  pointer-events: none !important;
+ }
 .seatNumberVIP {
   background-color: #5a38f2;
   cursor: pointer;
