@@ -20,27 +20,26 @@ function FilmReInheri(props: any) {
   return (
     <div className='FilmReInheri'>
         <h3>Phim đang chiếu</h3>
-            <div className='FilmReContainer'>
-                {lsfilm?.map((item, index) => {
-                    return (
-                        index <= 3 && (
-                            <div className='FilmReOver'>
-                                <div className='FilmReItem' style={{backgroundImage: `url(${item.imageLandscape})`}}>
-                                    <div onClick={() => HandleClick(item.id)} className='TitleCon'>
-                                        <h4>Muốn Gặp Anh</h4>
-                                    </div>
+        <div className='FilmReContainer'>
+            {lsfilm?.map((item, index) => {
+                return (
+                    index <= 3 && (
+                        <div className='FilmReOver'>
+                            <div className='FilmReItem' style={{backgroundImage: `url(${item.imageLandscape})`}}>
+                                <div onClick={() => HandleClick(item.id)} className='TitleCon'>
+                                    <h4>Muốn Gặp Anh</h4>
                                 </div>
                             </div>
-                        )
+                        </div>
                     )
-                })}
-                
-            </div>
-            <div className='More'>
-                <a  onClick={() => nav("/#Homepage1")} hrefLang="/#Homepage1">
-                    Xem Thêm
-                </a>
-            </div>
+                )
+            })}
+        </div>
+        <div className='More'>
+            <a  onClick={() => nav("/#Homepage1")} hrefLang="/#Homepage1">
+                Xem Thêm
+            </a>
+        </div>
     </div>
   )
 }
