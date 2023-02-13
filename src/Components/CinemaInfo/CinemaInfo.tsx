@@ -17,9 +17,13 @@ function CinemaInfo(props: any) {
     setTmp(tmp + a);
   };
   const handleOnClickShowTime = (data: any) => {
-    nav(
-      `/Ticker/CinemaId=/${data.CinemaID}/FilmID=/${data.FilmID}/SessionID=/${data.SessionID}`
-    );
+    if (props.ModalPopupState.login === true) {
+      nav(
+        `/Ticker/CinemaId=/${data.CinemaID}/FilmID=/${data.FilmID}/SessionID=/${data.SessionID}`
+      );
+    } else {
+      props.openSignIn();
+    }
   };
   useEffect(() => {
     fetch(
@@ -256,6 +260,7 @@ const mapStateToProps = (state: any, ownProps: any) => {
   return {
     CurrentFilmState: state.CurrentFilmState,
     NextFilmState: state.NextFilmState,
+    ModalPopupState: state.ModalPopupState,
   };
 };
 const mapDispatchToProps = (dispatch: any, ownProps: any) => {
@@ -264,6 +269,11 @@ const mapDispatchToProps = (dispatch: any, ownProps: any) => {
       dispatch({
         type: "GET_FILM_INFO_TO_TICKET",
         payload: data,
+      });
+    },
+    openSignIn: () => {
+      dispatch({
+        type: "OPEN_SIGN_IN_MODAL",
       });
     },
   };

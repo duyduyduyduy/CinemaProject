@@ -1,6 +1,6 @@
 const initialState = {
   signinmodal: false,
-  login: false,
+  login: true,
 };
 const ModalPopup = (state = initialState, action: { type: string }) => {
   switch (action.type) {

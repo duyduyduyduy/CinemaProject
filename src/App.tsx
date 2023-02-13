@@ -29,7 +29,7 @@ function App(props: any) {
       "https://vietcpq.name.vn/U2FsdGVkX1+ibKkbj+HGKjeepxUwFVviPP1AkhuyHto=/user/Login",
       requestOptions
     ).then((response) => {
-      response.status === 200 && props.successlogin();
+      response.status === 200 ? props.successlogin() : props.faillogin();
     });
   }, []);
   return (
@@ -80,6 +80,11 @@ const mapDispatchToProps = (dispatch: any, ownProps: any) => {
     successlogin: () => {
       dispatch({
         type: "ALREADY_LOGIN",
+      });
+    },
+    faillogin: () => {
+      dispatch({
+        type: "UN_LOGIN",
       });
     },
   };

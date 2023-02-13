@@ -5,11 +5,12 @@ import handleDisplayPrice from "../FunctionHandle/HandleDisPlayPrice";
 import eTicket from "../Model/eTicket";
 import InfoFilm from "../InfoFilm/InfoFilm";
 import { connect } from "react-redux";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import Seat from "../Seat/Seat";
 import eFilm from "../Model/eFilm";
 function Ticker(props: any) {
   const { CinemaID, FilmID, SessionID } = useParams();
+  const nav = useNavigate();
   const [ConcessionItems, setConcessionitem] = useState<
     Array<eConcessionItems>
   >([]);
@@ -35,6 +36,11 @@ function Ticker(props: any) {
     });
     setCombo(newArray);
   };
+  useEffect(() => {
+    if (props.ModalPopupState.login === false) {
+      nav("/");
+    }
+  }, [props.ModalPopupState.login]);
   const FunctionCalculateFinalSum = () => {
     let result1 = 0;
     let result2 = 0;
@@ -78,7 +84,6 @@ function Ticker(props: any) {
     props.CalculateFinalSum(FunctionCalculateFinalSum());
     props.GetCombo(FunctionMergeString());
     props.UpdateNumSeat(SumSeat());
-    console.log("Runned!!");
   }, [arrayTicket, arrayCombo]);
   useEffect(() => {
     fetch(
@@ -374,6 +379,7 @@ const mapStateToProps = (state: any, ownProps: any) => {
   return {
     CurrentFilmState: state.CurrentFilmState,
     NextFilmState: state.NextFilmState,
+    ModalPopupState: state.ModalPopupState,
   };
 };
 const mapDispatchToProps = (dispatch: any, ownProps: any) => {

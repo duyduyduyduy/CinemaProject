@@ -58,7 +58,6 @@ function Seat(props: any) {
       result += "[ " + item + " ]" + ",";
     });
     props.getDetailSeat(result.slice(0, -1));
-
   }, [StandardSeat, VIPSeat]);
 
   return (
@@ -111,6 +110,10 @@ function Seat(props: any) {
                           >
                             <div
                               className={`seatNumberVIP ${
+                                props.FilmSummaryState.nVIPSeat === 0
+                                  ? "blockSeat"
+                                  : ""
+                              } ${
                                 VIPSeat.includes(
                                   String(item.physicalName) +
                                     String(n.id) +
@@ -127,6 +130,10 @@ function Seat(props: any) {
                             </div>
                             <div
                               className={`seatNumberVIP ${
+                                props.FilmSummaryState.nVIPSeat === 0
+                                  ? "blockSeat"
+                                  : ""
+                              } ${
                                 VIPSeat.includes(
                                   String(item.physicalName) +
                                     String(n.id) +
@@ -157,6 +164,10 @@ function Seat(props: any) {
                       return (
                         <div
                           className={`seatNumber ${
+                            props.FilmSummaryState.nStandardSeat === 0
+                              ? "blockSeat"
+                              : ""
+                          }  ${
                             StandardSeat.includes(
                               String(item.physicalName) + String(m.id)
                             ) === true

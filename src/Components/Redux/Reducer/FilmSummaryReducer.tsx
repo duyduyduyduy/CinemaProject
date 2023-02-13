@@ -52,6 +52,11 @@ const FilmSummaryReducer = (
         ...state,
         Seat: action.payload,
       };
+    case "RE_SET":
+      return {
+        
+        ...state,
+      };
     default:
       return state;
   }
