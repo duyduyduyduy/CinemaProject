@@ -3,6 +3,7 @@ export default interface eFilmInCinema {
   startdate: string;
   duration: string;
   age: string;
+  id: string;
   imageLandscape: string;
   imagePortrait: string;
   dates: Array<{
@@ -11,6 +12,7 @@ export default interface eFilmInCinema {
     bundles: Array<{
       version: string;
       sessions: Array<{
+        sessionId: string;
         showTime: string;
         screenName: string;
       }>;

@@ -9,8 +9,7 @@ function Seat(props: any) {
   const [num2, setNum2] = useState<number>(0);
   const [StandardSeat, setStandardSeat] = useState<any>([]);
   const [VIPSeat, setVIPSeat] = useState<any>([]);
-  let Standard = 6;
-  let Vip = 2;
+
   //------------------- 3 ghế thường ( Standard ) -------------------
   //------------------- 1 ghế couple ( Standard ) -------------------
   useEffect(() => {
@@ -59,175 +58,159 @@ function Seat(props: any) {
       result += "[ " + item + " ]" + ",";
     });
     props.getDetailSeat(result.slice(0, -1));
+
   }, [StandardSeat, VIPSeat]);
 
   return (
-    <div className="SeatContainer">
-      <div className="SeatMainSize">
-        <div className="leftSeatBorder">
-          <h2 style={{ color: "white" }}>CHỌN GHẾ:</h2>
-          <div className="seatTable">
-            <div className="seatGridContainer">
-              <div className="LeftLetterContainer">
-                {seatVIP?.map((item: any) => {
-                  return (
-                    item.physicalName &&
-                    item.seats && (
-                      <p
-                        className="seatLetter"
-                        style={{ marginBottom: "30px" }}
-                      >
-                        {item.physicalName}
-                      </p>
-                    )
-                  );
-                })}
-                {seatStandard?.map((item: any) => {
-                  return (
-                    item.physicalName &&
-                    item.seats && (
-                      <p className="seatLetter">{item.physicalName}</p>
-                    )
-                  );
-                })}
-              </div>
-              <div className="seatGrid">
-                {seatVIP?.map((item: any) => {
-                  return (
-                    item.physicalName &&
-                    item.seats && (
-                      <div
-                        className="columnContainer"
-                        style={{ marginBottom: "30px" }}
-                      >
-                        {item?.seats.map((n: any, index: number) => {
-                          return (
-                            index % 2 === 0 && (
-                              <div
-                                style={{ display: "flex", marginRight: "10px" }}
-                                onClick={() =>
-                                  props.FilmSummaryState.nVIPSeat !== 0 &&
-                                  handleBookingVIP(
-                                    String(item.physicalName) +
-                                      String(n.id) +
-                                      "," +
-                                      String(item.physicalName) +
-                                      String(n.id * 1 + 1)
-                                  )
-                                }
-                              >
-                                <div
-                                  className={`seatNumberVIP ${
-                                    VIPSeat.includes(
-                                      String(item.physicalName) +
-                                        String(n.id) +
-                                        "," +
-                                        String(item.physicalName) +
-                                        String(n.id * 1 + 1)
-                                    ) === true
-                                      ? "activeSeatNumber"
-                                      : ""
-                                  }`}
-                                  style={{ marginRight: "2px" }}
-                                >
-                                  {n.id}
-                                </div>
-                                <div
-                                  className={`seatNumberVIP ${
-                                    VIPSeat.includes(
-                                      String(item.physicalName) +
-                                        String(n.id) +
-                                        "," +
-                                        String(item.physicalName) +
-                                        String(n.id * 1 + 1)
-                                    ) === true
-                                      ? "activeSeatNumber"
-                                      : ""
-                                  }`}
-                                >
-                                  {n.id * 1 + 1}
-                                </div>
-                              </div>
-                            )
-                          );
-                        })}
-                      </div>
-                    )
-                  );
-                })}
-                {seatStandard?.map((item: any, index: number) => {
-                  return (
-                    item.physicalName &&
-                    item.seats && (
-                      <div className="columnContainer">
-                        {item?.seats.map((m: any) => {
-                          return (
+    <div className="leftSeatBorder">
+      <h2 style={{ color: "white" }}>CHỌN GHẾ:</h2>
+      <div className="seatTable">
+        <div className="seatGridContainer">
+          <div className="LeftLetterContainer">
+            {seatVIP?.map((item: any) => {
+              return (
+                item.physicalName &&
+                item.seats && (
+                  <p className="seatLetter" style={{ marginBottom: "30px" }}>
+                    {item.physicalName}
+                  </p>
+                )
+              );
+            })}
+            {seatStandard?.map((item: any) => {
+              return (
+                item.physicalName &&
+                item.seats && <p className="seatLetter">{item.physicalName}</p>
+              );
+            })}
+          </div>
+          <div className="seatGrid">
+            {seatVIP?.map((item: any) => {
+              return (
+                item.physicalName &&
+                item.seats && (
+                  <div
+                    className="columnContainer"
+                    style={{ marginBottom: "30px" }}
+                  >
+                    {item?.seats.map((n: any, index: number) => {
+                      return (
+                        index % 2 === 0 && (
+                          <div
+                            style={{ display: "flex", marginRight: "10px" }}
+                            onClick={() =>
+                              props.FilmSummaryState.nVIPSeat !== 0 &&
+                              handleBookingVIP(
+                                String(item.physicalName) +
+                                  String(n.id) +
+                                  "," +
+                                  String(item.physicalName) +
+                                  String(n.id * 1 + 1)
+                              )
+                            }
+                          >
                             <div
-                              className={`seatNumber ${
-                                StandardSeat.includes(
-                                  String(item.physicalName) + String(m.id)
+                              className={`seatNumberVIP ${
+                                VIPSeat.includes(
+                                  String(item.physicalName) +
+                                    String(n.id) +
+                                    "," +
+                                    String(item.physicalName) +
+                                    String(n.id * 1 + 1)
                                 ) === true
                                   ? "activeSeatNumber"
                                   : ""
                               }`}
-                              onClick={() =>
-                                HandleBookingStandard(
-                                  String(item.physicalName) + String(m.id)
-                                )
-                              }
+                              style={{ marginRight: "2px" }}
                             >
-                              {m.id}
+                              {n.id}
                             </div>
-                          );
-                        })}
-                      </div>
-                    )
-                  );
-                })}
-              </div>
-              <div className="LeftLetterContainer">
-                {" "}
-                {seatVIP?.map((item: any) => {
-                  return (
-                    item.physicalName &&
-                    item.seats && (
-                      <p
-                        className="seatLetter"
-                        style={{ marginBottom: "30px" }}
-                      >
-                        {item.physicalName}
-                      </p>
-                    )
-                  );
-                })}
-                {seatStandard?.map((item: any) => {
-                  return (
-                    item.physicalName &&
-                    item.seats && (
-                      <p className="seatLetter">{item.physicalName}</p>
-                    )
-                  );
-                })}
-              </div>
-            </div>
-
-            <div className="ScreenCon">
-              {" "}
-              <p className="Screen">Màn hình</p>
-            </div>
-            <div className="SeatInfoContainer">
-              <div>
-                <span className="greensquare">Ghế đang chọn</span>
-                <span className="redsquare">Ghế đã bán</span>
-                <span className="graysquare">Có thể chọn</span>
-                <span className="bluesquare">Khổng thể chọn</span>
-                <span className="purplequare">Ghế COUPLE</span>
-              </div>
-            </div>
+                            <div
+                              className={`seatNumberVIP ${
+                                VIPSeat.includes(
+                                  String(item.physicalName) +
+                                    String(n.id) +
+                                    "," +
+                                    String(item.physicalName) +
+                                    String(n.id * 1 + 1)
+                                ) === true
+                                  ? "activeSeatNumber"
+                                  : ""
+                              }`}
+                            >
+                              {n.id * 1 + 1}
+                            </div>
+                          </div>
+                        )
+                      );
+                    })}
+                  </div>
+                )
+              );
+            })}
+            {seatStandard?.map((item: any, index: number) => {
+              return (
+                item.physicalName &&
+                item.seats && (
+                  <div className="columnContainer">
+                    {item?.seats.map((m: any) => {
+                      return (
+                        <div
+                          className={`seatNumber ${
+                            StandardSeat.includes(
+                              String(item.physicalName) + String(m.id)
+                            ) === true
+                              ? "activeSeatNumber"
+                              : ""
+                          }`}
+                          onClick={() =>
+                            HandleBookingStandard(
+                              String(item.physicalName) + String(m.id)
+                            )
+                          }
+                        >
+                          {m.id}
+                        </div>
+                      );
+                    })}
+                  </div>
+                )
+              );
+            })}
+          </div>
+          <div className="LeftLetterContainer">
+            {" "}
+            {seatVIP?.map((item: any) => {
+              return (
+                item.physicalName &&
+                item.seats && (
+                  <p className="seatLetter" style={{ marginBottom: "30px" }}>
+                    {item.physicalName}
+                  </p>
+                )
+              );
+            })}
+            {seatStandard?.map((item: any) => {
+              return (
+                item.physicalName &&
+                item.seats && <p className="seatLetter">{item.physicalName}</p>
+              );
+            })}
           </div>
         </div>
-        <div className="rightSeatBorder">
-          <InfoFilm />
+
+        <div className="ScreenCon">
+          {" "}
+          <p className="Screen">Màn hình</p>
+        </div>
+        <div className="SeatInfoContainer">
+          <div>
+            <span className="greensquare">Ghế đang chọn</span>
+            <span className="redsquare">Ghế đã bán</span>
+            <span className="graysquare">Có thể chọn</span>
+            <span className="bluesquare">Khổng thể chọn</span>
+            <span className="purplequare">Ghế COUPLE</span>
+          </div>
         </div>
       </div>
     </div>

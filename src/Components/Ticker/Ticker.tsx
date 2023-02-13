@@ -5,15 +5,18 @@ import handleDisplayPrice from "../FunctionHandle/HandleDisPlayPrice";
 import eTicket from "../Model/eTicket";
 import InfoFilm from "../InfoFilm/InfoFilm";
 import { connect } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { useParams } from "react-router-dom";
+import Seat from "../Seat/Seat";
+import eFilm from "../Model/eFilm";
 function Ticker(props: any) {
+  const { CinemaID, FilmID, SessionID } = useParams();
   const [ConcessionItems, setConcessionitem] = useState<
     Array<eConcessionItems>
   >([]);
-  const nav = useNavigate();
   const [TicketItems, setTicketItems] = useState<Array<eTicket>>([]);
   const [arrayTicket, setArray] = useState<any>([]);
   const [arrayCombo, setCombo] = useState<any>([]);
+  const [navTmp, setNavTmp] = useState<boolean>(true);
   const handleOnClickTicket = (num: number, name: string) => {
     const newArray = arrayTicket.map((item: any) => {
       if (item.name === name) {
@@ -50,7 +53,7 @@ function Ticker(props: any) {
         result += item.name + "(" + item.quantity + ")" + ", ";
       }
     });
-    return result;
+    return result.slice(0, -2);
   };
   const SumSeat = () => {
     let result1 = 0;
@@ -65,12 +68,17 @@ function Ticker(props: any) {
     return { Standard: result1, VIP: result2 };
   };
   const handleOnClickContinue = () => {
-    nav("/booking-seat");
-    props.UpdateNumSeat(SumSeat());
+    setNavTmp(false);
+  };
+  const handleOnClickBack = () => {
+    setNavTmp(true);
+    props.getDetailSeat("");
   };
   useEffect(() => {
     props.CalculateFinalSum(FunctionCalculateFinalSum());
     props.GetCombo(FunctionMergeString());
+    props.UpdateNumSeat(SumSeat());
+    console.log("Runned!!");
   }, [arrayTicket, arrayCombo]);
   useEffect(() => {
     fetch(
@@ -102,6 +110,59 @@ function Ticker(props: any) {
         );
       });
   }, []);
+  useEffect(() => {
+    if (props.CurrentFilmState && props.NextFilmState) {
+      let ObjectFilmInfo = props.CurrentFilmState.lsCurFilm?.filter(
+        (n: eFilm) => n.id === FilmID
+      );
+      if (!ObjectFilmInfo[0]) {
+        ObjectFilmInfo = props.NextFilmState.lsNextFilm?.filter(
+          (n: eFilm) => n.id === FilmID
+        );
+      }
+      if (ObjectFilmInfo) {
+        props.dispatchInfotoBooking({
+          nameFilm: ObjectFilmInfo[0]?.name,
+          age: ObjectFilmInfo[0]?.age,
+          filmImg: ObjectFilmInfo[0]?.imageLandscape,
+        });
+      }
+    }
+  }, [FilmID, props]);
+
+  useEffect(() => {
+    const fetchScheduleAPI = async () => {
+      let res = await fetch(
+        "https://vietcpq.name.vn/U2FsdGVkX1+ibKkbj+HGKjeepxUwFVviPP1AkhuyHto=/cinema/movie/" +
+          FilmID
+      );
+      let data = await res.json();
+      if (data) {
+        data?.map((item: any) => {
+          if (item.code === CinemaID) {
+            item.dates.map((n: any) => {
+              n?.bundles.map((m: any) => {
+                m.sessions?.map((x: any) => {
+                  if (x.sessionId === SessionID) {
+                    props.dispatchCinemaInfoShowtime({
+                      Cinema: item.name + " | " + x.screenName,
+                      showTime:
+                        x.showTime +
+                        " | " +
+                        n.dayOfWeekLabel +
+                        ", " +
+                        x.showDate,
+                    });
+                  }
+                });
+              });
+            });
+          }
+        });
+      }
+    };
+    fetchScheduleAPI();
+  }, [FilmID]);
   const handleCalculateSumCombo = () => {
     let result = 0;
     arrayCombo.map((item: any) => {
@@ -119,177 +180,189 @@ function Ticker(props: any) {
   return (
     <div className="Ticker">
       <div className="mainSize">
-        <div className="TickerContainer">
-          <h1>CHỌN VÉ/THỨC ĂN</h1>
-          <div className="FullTable">
-            <table className="tableTop">
-              <thead>
-                <tr>
-                  <th className="tbth1">Loại vé</th>
-                  <th className="tbth2">Số lượng</th>
-                  <th className="tbth3">Giá(VNĐ)</th>
-                  <th className="tbth4">Tổng(VNĐ)</th>
-                </tr>
-              </thead>
+        {navTmp === true ? (
+          <div className="TickerContainer">
+            <h1>CHỌN VÉ/THỨC ĂN</h1>
+            <div className="FullTable">
+              <table className="tableTop">
+                <thead>
+                  <tr>
+                    <th className="tbth1">Loại vé</th>
+                    <th className="tbth2">Số lượng</th>
+                    <th className="tbth3">Giá(VNĐ)</th>
+                    <th className="tbth4">Tổng(VNĐ)</th>
+                  </tr>
+                </thead>
 
-              <tbody>
-                {TicketItems?.map((item, index) => {
-                  return (
-                    <tr>
-                      <td>
-                        <b>{item?.name}</b>
-                        <p>{item?.description}</p>
-                      </td>
-                      <td className="tdSoLuong">
-                        <div>
-                          <span>
-                            <button>
-                              <i
-                                className={`fa-solid fa-circle-minus ${
-                                  arrayTicket[index].quantity === 0
-                                    ? "disableButton"
-                                    : ""
-                                }`}
-                                onClick={() =>
-                                  arrayTicket[index].quantity !== 0 &&
-                                  handleOnClickTicket(-1, item.name)
-                                }
-                              ></i>
-                            </button>
-                          </span>
-                          <input
-                            type="text"
-                            value={arrayTicket[index].quantity}
-                          />
-                          <span>
-                            <button>
-                              <i
-                                className="fa-solid fa-circle-plus"
-                                onClick={() =>
-                                  handleOnClickTicket(1, item.name)
-                                }
-                              ></i>
-                            </button>
-                          </span>
-                        </div>
-                      </td>
+                <tbody>
+                  {TicketItems?.map((item, index) => {
+                    return (
+                      <tr>
+                        <td>
+                          <b>{item?.name}</b>
+                          <p>{item?.description}</p>
+                        </td>
+                        <td className="tdSoLuong">
+                          <div>
+                            <span>
+                              <button>
+                                <i
+                                  className={`fa-solid fa-circle-minus ${
+                                    arrayTicket[index].quantity === 0
+                                      ? "disableButton"
+                                      : ""
+                                  }`}
+                                  onClick={() =>
+                                    arrayTicket[index].quantity !== 0 &&
+                                    handleOnClickTicket(-1, item.name)
+                                  }
+                                ></i>
+                              </button>
+                            </span>
+                            <input
+                              type="text"
+                              value={arrayTicket[index].quantity}
+                            />
+                            <span>
+                              <button>
+                                <i
+                                  className="fa-solid fa-circle-plus"
+                                  onClick={() =>
+                                    handleOnClickTicket(1, item.name)
+                                  }
+                                ></i>
+                              </button>
+                            </span>
+                          </div>
+                        </td>
 
-                      <td style={{ textAlign: "end" }}>
-                        {handleDisplayPrice(item?.displayPrice)}
-                      </td>
-                      <td style={{ textAlign: "end" }}>
-                        {handleDisplayPrice(
-                          arrayTicket[index].quantity * arrayTicket[index].price
-                        )}
-                      </td>
-                    </tr>
-                  );
-                })}
+                        <td style={{ textAlign: "end" }}>
+                          {handleDisplayPrice(item?.displayPrice)}
+                        </td>
+                        <td style={{ textAlign: "end" }}>
+                          {handleDisplayPrice(
+                            arrayTicket[index].quantity *
+                              arrayTicket[index].price
+                          )}
+                        </td>
+                      </tr>
+                    );
+                  })}
 
-                <tr
-                  className="total"
-                  style={{
-                    color: "orangered",
-                    fontSize: "18px",
-                    fontWeight: "bolder",
-                  }}
-                >
-                  <td colSpan={3}>Tổng</td>
-                  <td style={{ textAlign: "end" }}>
-                    {handleDisplayPrice(handleCalculateSumTicket())}
-                  </td>
-                </tr>
-              </tbody>
-            </table>
+                  <tr
+                    className="total"
+                    style={{
+                      color: "orangered",
+                      fontSize: "18px",
+                      fontWeight: "bolder",
+                    }}
+                  >
+                    <td colSpan={3}>Tổng</td>
+                    <td style={{ textAlign: "end" }}>
+                      {handleDisplayPrice(handleCalculateSumTicket())}
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
 
-            {/* ----------------------------------------------------------------- */}
-            <table className="tableTop">
-              <thead>
-                <tr>
-                  <th className="tbth1">Combo</th>
-                  <th className="tbth2">Số lượng</th>
-                  <th className="tbth3">Giá(VNĐ)</th>
-                  <th className="tbth4">Tổng(VNĐ)</th>
-                </tr>
-              </thead>
+              {/* ----------------------------------------------------------------- */}
+              <table className="tableTop">
+                <thead>
+                  <tr>
+                    <th className="tbth1">Combo</th>
+                    <th className="tbth2">Số lượng</th>
+                    <th className="tbth3">Giá(VNĐ)</th>
+                    <th className="tbth4">Tổng(VNĐ)</th>
+                  </tr>
+                </thead>
 
-              <tbody>
-                {ConcessionItems?.map((item: any, index: number) => {
-                  return (
-                    <tr>
-                      <td style={{ display: "flex" }}>
-                        <img src={item?.imageUrl} width={"100px"} alt="" />
-                        <div className="comboContainer">
-                          <b>{item?.description}</b>
-                          <p>{item?.extendedDescription}</p>
-                        </div>
-                      </td>
-                      <td className="tdSoLuong">
-                        <div>
-                          <span>
-                            <button>
-                              <i
-                                className={`fa-solid fa-circle-minus ${
-                                  arrayCombo[index].quantity === 0
-                                    ? "disableButton"
-                                    : ""
-                                }`}
-                                onClick={() =>
-                                  arrayCombo[index].quantity !== 0 &&
-                                  handleOnClickCombo(-1, item.id)
-                                }
-                              ></i>
-                            </button>
-                          </span>
-                          <input
-                            type="text"
-                            value={arrayCombo[index].quantity}
-                          />
-                          <span>
-                            <button>
-                              <i
-                                className="fa-solid fa-circle-plus"
-                                onClick={() => handleOnClickCombo(1, item.id)}
-                              ></i>
-                            </button>
-                          </span>
-                        </div>
-                      </td>
-                      <td style={{ textAlign: "end" }}>
-                        {handleDisplayPrice(item?.displayPrice)}
-                      </td>
-                      <td style={{ textAlign: "end" }}>
-                        {handleDisplayPrice(
-                          arrayCombo[index]?.quantity * arrayCombo[index]?.price
-                        )}
-                      </td>
-                    </tr>
-                  );
-                })}
+                <tbody>
+                  {ConcessionItems?.map((item: any, index: number) => {
+                    return (
+                      <tr>
+                        <td style={{ display: "flex" }}>
+                          <img src={item?.imageUrl} width={"100px"} alt="" />
+                          <div className="comboContainer">
+                            <b>{item?.description}</b>
+                            <p>{item?.extendedDescription}</p>
+                          </div>
+                        </td>
+                        <td className="tdSoLuong">
+                          <div>
+                            <span>
+                              <button>
+                                <i
+                                  className={`fa-solid fa-circle-minus ${
+                                    arrayCombo[index].quantity === 0
+                                      ? "disableButton"
+                                      : ""
+                                  }`}
+                                  onClick={() =>
+                                    arrayCombo[index].quantity !== 0 &&
+                                    handleOnClickCombo(-1, item.id)
+                                  }
+                                ></i>
+                              </button>
+                            </span>
+                            <input
+                              type="text"
+                              value={arrayCombo[index].quantity}
+                            />
+                            <span>
+                              <button>
+                                <i
+                                  className="fa-solid fa-circle-plus"
+                                  onClick={() => handleOnClickCombo(1, item.id)}
+                                ></i>
+                              </button>
+                            </span>
+                          </div>
+                        </td>
+                        <td style={{ textAlign: "end" }}>
+                          {handleDisplayPrice(item?.displayPrice)}
+                        </td>
+                        <td style={{ textAlign: "end" }}>
+                          {handleDisplayPrice(
+                            arrayCombo[index]?.quantity *
+                              arrayCombo[index]?.price
+                          )}
+                        </td>
+                      </tr>
+                    );
+                  })}
 
-                <tr
-                  className="total"
-                  style={{
-                    color: "orangered",
-                    fontSize: "18px",
-                    fontWeight: "bolder",
-                  }}
-                >
-                  <td colSpan={3}>Tổng</td>
-                  <td style={{ textAlign: "end" }}>
-                    {handleDisplayPrice(handleCalculateSumCombo())}
-                  </td>
-                </tr>
-              </tbody>
-            </table>
+                  <tr
+                    className="total"
+                    style={{
+                      color: "orangered",
+                      fontSize: "18px",
+                      fontWeight: "bolder",
+                    }}
+                  >
+                    <td colSpan={3}>Tổng</td>
+                    <td style={{ textAlign: "end" }}>
+                      {handleDisplayPrice(handleCalculateSumCombo())}
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
           </div>
-        </div>
+        ) : (
+          <Seat />
+        )}
+
         <div>
           {" "}
           <InfoFilm />
           <div className="totalEnd">
+            {navTmp === false && (
+              <button onClick={() => handleOnClickBack()}>
+                <i className="fa-solid fa-arrow-left-long"></i> QUAY LẠI
+              </button>
+            )}{" "}
             <button onClick={() => handleOnClickContinue()}>
-              TIẾP TỤC <i className="fa-solid fa-arrow-right-long"></i>
+              TIẾP TỤC<i className="fa-solid fa-arrow-right-long"></i>
             </button>
           </div>
         </div>
@@ -320,6 +393,24 @@ const mapDispatchToProps = (dispatch: any, ownProps: any) => {
     UpdateNumSeat: (data: any) => {
       dispatch({
         type: "UPDATE_NUM_SEAT",
+        payload: data,
+      });
+    },
+    dispatchInfotoBooking: (data: any) => {
+      dispatch({
+        type: "GET_FILM_INFO_TO_TICKET",
+        payload: data,
+      });
+    },
+    dispatchCinemaInfoShowtime: (data: any) => {
+      dispatch({
+        type: "GET_CINEMAINFO_SHOWTIME",
+        payload: data,
+      });
+    },
+    getDetailSeat: (data: any) => {
+      dispatch({
+        type: "GET_SEAT",
         payload: data,
       });
     },

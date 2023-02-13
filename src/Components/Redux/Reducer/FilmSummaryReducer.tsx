@@ -20,12 +20,16 @@ const FilmSummaryReducer = (
         ...state,
         nameFilm: action.payload.nameFilm,
         age: action.payload.age,
-        Cinema: action.payload.Cinema,
-        showTime: action.payload.showTime,
         filmImg: action.payload.filmImg,
         Combo: "",
         Seat: "",
         Sum: 0,
+      };
+    case "GET_CINEMAINFO_SHOWTIME":
+      return {
+        ...state,
+        Cinema: action.payload.Cinema,
+        showTime: action.payload.showTime,
       };
     case "CALCULATE_FINAL_SUM":
       return {

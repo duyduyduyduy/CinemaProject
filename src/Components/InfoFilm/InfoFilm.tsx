@@ -37,6 +37,22 @@ function InfoFilm(props: any) {
             <span>{props.FilmSummaryState.Combo}</span>
           </div>
           <div>
+            <b>Số lượng ghế:</b>
+            <span>
+              <span style={{ fontStyle: "italic" }}>
+                {props.FilmSummaryState.nStandardSeat}
+              </span>{" "}
+              Ghế Standard
+            </span>
+            <span>, </span>
+            <span>
+              <span style={{ fontStyle: "italic" }}>
+                {props.FilmSummaryState.nVIPSeat}
+              </span>{" "}
+              Ghế Couple
+            </span>
+          </div>
+          <div>
             <b>Ghế:</b>
             <span>{props.FilmSummaryState.Seat}</span>
           </div>

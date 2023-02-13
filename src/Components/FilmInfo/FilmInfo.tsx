@@ -8,7 +8,6 @@ import eCity from "../Model/eCity";
 import LoaderFilmInfo from "./LoaderFilmInfo/LoaderFilmInfo";
 function FilmInfo(props: any) {
   const [trailer, setTrailer] = useState<Boolean>(false);
-
   const { id } = useParams();
   const [FilmInfo, setFilmInfo] = useState<Array<eFilm>>([]);
   const [FilmRe, setFilmRe] = useState<Array<eFilm>>([]);
@@ -33,14 +32,9 @@ function FilmInfo(props: any) {
     name: "Tất cả các rạp",
   });
   const handleOnClickShowTime = (data: any) => {
-    nav("/Ticker");
-    props.dispatchInfotoBooking({
-      nameFilm: FilmInfo[0]?.name,
-      age: FilmInfo[0]?.age,
-      Cinema: data.cinema,
-      showTime: data.showTime,
-      filmImg: FilmInfo[0]?.imageLandscape,
-    });
+    nav(
+      `/Ticker/CinemaId=/${data.CinemaID}/FilmID=/${data.FilmID}/SessionID=/${data.SessionID}`
+    );
   };
   useEffect(() => {
     fetch(
@@ -530,20 +524,9 @@ function FilmInfo(props: any) {
                                                 className="time"
                                                 onClick={() =>
                                                   handleOnClickShowTime({
-                                                    cinema:
-                                                      item.name +
-                                                      " | " +
-                                                      x.screenName,
-                                                    showTime:
-                                                      x.showTime +
-                                                      " | " +
-                                                      detaiSchedule[0]?.dates[
-                                                        IndexDate
-                                                      ].dayOfWeekLabel +
-                                                      ", " +
-                                                      detaiSchedule[0]?.dates[
-                                                        IndexDate
-                                                      ].showDate,
+                                                    FilmID: id,
+                                                    CinemaID: x.cinemaId,
+                                                    SessionID: x.sessionId,
                                                   })
                                                 }
                                               >
