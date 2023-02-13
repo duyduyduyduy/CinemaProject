@@ -58,6 +58,7 @@ function Seat(props: any) {
       result += "[ " + item + " ]" + ",";
     });
     props.getDetailSeat(result.slice(0, -1));
+
   }, [StandardSeat, VIPSeat]);
 
   return (

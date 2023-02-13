@@ -12,7 +12,6 @@ import UserEdit from "./Components/UserEdit/UserEdit";
 import ListOfCinema from "./Components/ListOfCinema/ListOfCinema";
 import CinemaInfo from "./Components/CinemaInfo/CinemaInfo";
 import Ticker from "./Components/Ticker/Ticker";
-import Seat from "./Components/Seat/Seat";
 import PromotionHeader from "./Components/PromotionHeader/PromotionHeader";
 import PromoItem from "./Components/PromotionHeader/PromoItem/PromoItem";
 function App(props: any) {
@@ -51,7 +50,10 @@ function App(props: any) {
           ></Route>
           <Route path="/Film/:id" element={<FilmInfo />}></Route>
           <Route path="/BlogFilm" element={<BlogFilm />}></Route>
-          <Route path="/Ticker" element={<Ticker />}></Route>
+          <Route
+            path="/Ticker/CinemaId=/:CinemaID/FilmID=/:FilmID/SessionID=/:SessionID"
+            element={<Ticker />}
+          ></Route>
           <Route path="/PromotionHeader" element={<PromotionHeader />}></Route>
           <Route path="/PromoItem" element={<PromoItem />}></Route>
           <Route path="/edit-user" element={<UserEdit />}></Route>

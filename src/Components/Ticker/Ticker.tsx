@@ -5,13 +5,14 @@ import handleDisplayPrice from "../FunctionHandle/HandleDisPlayPrice";
 import eTicket from "../Model/eTicket";
 import InfoFilm from "../InfoFilm/InfoFilm";
 import { connect } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import Seat from "../Seat/Seat";
+import eFilm from "../Model/eFilm";
 function Ticker(props: any) {
+  const { CinemaID, FilmID, SessionID } = useParams();
   const [ConcessionItems, setConcessionitem] = useState<
     Array<eConcessionItems>
   >([]);
-  const nav = useNavigate();
   const [TicketItems, setTicketItems] = useState<Array<eTicket>>([]);
   const [arrayTicket, setArray] = useState<any>([]);
   const [arrayCombo, setCombo] = useState<any>([]);
@@ -68,11 +69,16 @@ function Ticker(props: any) {
   };
   const handleOnClickContinue = () => {
     setNavTmp(false);
-    props.UpdateNumSeat(SumSeat());
+  };
+  const handleOnClickBack = () => {
+    setNavTmp(true);
+    props.getDetailSeat("");
   };
   useEffect(() => {
     props.CalculateFinalSum(FunctionCalculateFinalSum());
     props.GetCombo(FunctionMergeString());
+    props.UpdateNumSeat(SumSeat());
+    console.log("Runned!!");
   }, [arrayTicket, arrayCombo]);
   useEffect(() => {
     fetch(
@@ -104,6 +110,59 @@ function Ticker(props: any) {
         );
       });
   }, []);
+  useEffect(() => {
+    if (props.CurrentFilmState && props.NextFilmState) {
+      let ObjectFilmInfo = props.CurrentFilmState.lsCurFilm?.filter(
+        (n: eFilm) => n.id === FilmID
+      );
+      if (!ObjectFilmInfo[0]) {
+        ObjectFilmInfo = props.NextFilmState.lsNextFilm?.filter(
+          (n: eFilm) => n.id === FilmID
+        );
+      }
+      if (ObjectFilmInfo) {
+        props.dispatchInfotoBooking({
+          nameFilm: ObjectFilmInfo[0]?.name,
+          age: ObjectFilmInfo[0]?.age,
+          filmImg: ObjectFilmInfo[0]?.imageLandscape,
+        });
+      }
+    }
+  }, [FilmID, props]);
+
+  useEffect(() => {
+    const fetchScheduleAPI = async () => {
+      let res = await fetch(
+        "https://vietcpq.name.vn/U2FsdGVkX1+ibKkbj+HGKjeepxUwFVviPP1AkhuyHto=/cinema/movie/" +
+          FilmID
+      );
+      let data = await res.json();
+      if (data) {
+        data?.map((item: any) => {
+          if (item.code === CinemaID) {
+            item.dates.map((n: any) => {
+              n?.bundles.map((m: any) => {
+                m.sessions?.map((x: any) => {
+                  if (x.sessionId === SessionID) {
+                    props.dispatchCinemaInfoShowtime({
+                      Cinema: item.name + " | " + x.screenName,
+                      showTime:
+                        x.showTime +
+                        " | " +
+                        n.dayOfWeekLabel +
+                        ", " +
+                        x.showDate,
+                    });
+                  }
+                });
+              });
+            });
+          }
+        });
+      }
+    };
+    fetchScheduleAPI();
+  }, [FilmID]);
   const handleCalculateSumCombo = () => {
     let result = 0;
     arrayCombo.map((item: any) => {
@@ -297,8 +356,13 @@ function Ticker(props: any) {
           {" "}
           <InfoFilm />
           <div className="totalEnd">
+            {navTmp === false && (
+              <button onClick={() => handleOnClickBack()}>
+                <i className="fa-solid fa-arrow-left-long"></i> QUAY LẠI
+              </button>
+            )}{" "}
             <button onClick={() => handleOnClickContinue()}>
-              TIẾP TỤC <i className="fa-solid fa-arrow-right-long"></i>
+              TIẾP TỤC<i className="fa-solid fa-arrow-right-long"></i>
             </button>
           </div>
         </div>
@@ -329,6 +393,24 @@ const mapDispatchToProps = (dispatch: any, ownProps: any) => {
     UpdateNumSeat: (data: any) => {
       dispatch({
         type: "UPDATE_NUM_SEAT",
+        payload: data,
+      });
+    },
+    dispatchInfotoBooking: (data: any) => {
+      dispatch({
+        type: "GET_FILM_INFO_TO_TICKET",
+        payload: data,
+      });
+    },
+    dispatchCinemaInfoShowtime: (data: any) => {
+      dispatch({
+        type: "GET_CINEMAINFO_SHOWTIME",
+        payload: data,
+      });
+    },
+    getDetailSeat: (data: any) => {
+      dispatch({
+        type: "GET_SEAT",
         payload: data,
       });
     },

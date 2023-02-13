@@ -17,15 +17,9 @@ function CinemaInfo(props: any) {
     setTmp(tmp + a);
   };
   const handleOnClickShowTime = (data: any) => {
-    nav("/Ticker");
-    props.dispatchInfotoBooking({
-      nameFilm: data.nameFilm,
-      age: data.age,
-      Cinema: data.cinema,
-      showTime: data.showTime,
-      filmImg: data.imageLandscape,
-    });
-
+    nav(
+      `/Ticker/CinemaId=/${data.CinemaID}/FilmID=/${data.FilmID}/SessionID=/${data.SessionID}`
+    );
   };
   useEffect(() => {
     fetch(
@@ -201,24 +195,9 @@ function CinemaInfo(props: any) {
                                                 className="time"
                                                 onClick={() =>
                                                   handleOnClickShowTime({
-                                                    cinema:
-                                                      CinemaInfo[0].name +
-                                                      " | " +
-                                                      x.screenName,
-                                                    showTime:
-                                                      x.showTime +
-                                                      " | " +
-                                                      detaiSchedule[0]?.dates[
-                                                        Index
-                                                      ].dayOfWeekLabel +
-                                                      ", " +
-                                                      detaiSchedule[0]?.dates[
-                                                        Index
-                                                      ].showDate,
-                                                    age: item.age,
-                                                    imageLandscape:
-                                                      item.imageLandscape,
-                                                    nameFilm: item.name,
+                                                    FilmID: item.id,
+                                                    CinemaID: id,
+                                                    SessionID: x.sessionId,
                                                   })
                                                 }
                                               >

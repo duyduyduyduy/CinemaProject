@@ -1,4 +1,6 @@
 export default interface eSchedule {
+  id: string;
+  code: string;
   name: string;
   address: string;
   mapEmbeb: string;
