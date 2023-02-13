@@ -85,7 +85,7 @@ function Header1(props: any) {
                   </div>
                   {/* upcomingFilm */}
                   <div className="upcomingFilm currentFilm">
-                    <span>Phim đang chiếu</span>
+                    <span>Phim sắp chiếu</span>
                     <div className="currentFilmcontainer">
                       {lsSoonFilm?.map((item, index) => {
                         return (
