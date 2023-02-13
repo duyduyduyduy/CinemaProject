@@ -85,7 +85,7 @@ function Header1(props: any) {
                   </div>
                   {/* upcomingFilm */}
                   <div className="upcomingFilm currentFilm">
-                    <span>Phim đang chiếu</span>
+                    <span>Phim sắp chiếu</span>
                     <div className="currentFilmcontainer">
                       {lsSoonFilm?.map((item, index) => {
                         return (
@@ -125,8 +125,8 @@ function Header1(props: any) {
               <i className="fa-solid fa-angle-down"></i>
               {eventModal && (
                 <div className="event">
-                  <p onClick={() => nav('/PromotionHeader')}>Ưu đãi</p>
-                  <p>Phim hay tháng</p> 
+                  <p onClick={() => nav("/PromotionHeader")}>Ưu đãi</p>
+                  <p>Phim hay tháng</p>
                 </div>
               )}
             </li>

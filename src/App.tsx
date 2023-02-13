@@ -56,7 +56,6 @@ function App(props: any) {
           <Route path="/PromoItem" element={<PromoItem />}></Route>
           <Route path="/edit-user" element={<UserEdit />}></Route>
           <Route path="/list-cinema" element={<ListOfCinema />}></Route>
-          <Route path="/booking-seat" element={<Seat />}></Route>
           <Route path="/Cinema/:id" element={<CinemaInfo />}></Route>
         </Routes>
         <Footer />
