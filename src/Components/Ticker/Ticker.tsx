@@ -8,6 +8,7 @@ import { connect } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 import Seat from "../Seat/Seat";
 import eFilm from "../Model/eFilm";
+import Payment from "../Payment/Payment";
 function Ticker(props: any) {
   const { CinemaID, FilmID, SessionID } = useParams();
   const nav = useNavigate();
@@ -18,6 +19,7 @@ function Ticker(props: any) {
   const [arrayTicket, setArray] = useState<any>([]);
   const [arrayCombo, setCombo] = useState<any>([]);
   const [navTmp, setNavTmp] = useState<boolean>(true);
+  const [payment, setPayment] = useState<boolean>(true);
   const handleOnClickTicket = (num: number, name: string) => {
     const newArray = arrayTicket.map((item: any) => {
       if (item.name === name) {
@@ -75,6 +77,10 @@ function Ticker(props: any) {
   };
   const handleOnClickContinue = () => {
     setNavTmp(false);
+  };
+  const handleOnClickPay = () => {
+    setNavTmp(true);
+    setPayment(false);
   };
   const handleOnClickBack = () => {
     setNavTmp(true);
@@ -182,10 +188,15 @@ function Ticker(props: any) {
     });
     return result;
   };
+  const handleOnClickBackPhase3 = () => {
+    setNavTmp(false);
+    setPayment(true);
+    // props.getDetailSeat("");
+  };
   return (
     <div className="Ticker">
       <div className="mainSize">
-        {navTmp === true ? (
+        {navTmp === true && payment === true ? (
           <div className="TickerContainer">
             <h1>CHỌN VÉ/THỨC ĂN</h1>
             <div className="FullTable">
@@ -353,22 +364,43 @@ function Ticker(props: any) {
               </table>
             </div>
           </div>
-        ) : (
+        ) : navTmp === false && payment === true ? (
           <Seat />
+        ) : (
+          <Payment />
         )}
-
         <div>
           {" "}
           <InfoFilm />
           <div className="totalEnd">
-            {navTmp === false && (
-              <button onClick={() => handleOnClickBack()}>
-                <i className="fa-solid fa-arrow-left-long"></i> QUAY LẠI
+            {navTmp === false && payment === true ? (
+              <>
+                {" "}
+                <button onClick={() => handleOnClickBack()}>
+                  <i className="fa-solid fa-arrow-left-long"></i> QUAY LẠI
+                </button>
+                <button onClick={() => handleOnClickPay()}>
+                  TIẾP TỤC<i className="fa-solid fa-arrow-right-long"></i>
+                </button>
+              </>
+            ) : navTmp === true && payment === true ? (
+              <button onClick={() => handleOnClickContinue()}>
+                TIẾP TỤC<i className="fa-solid fa-arrow-right-long"></i>
               </button>
+            ) : (
+              navTmp === true &&
+              payment === false && (
+                <>
+                  {" "}
+                  <button onClick={handleOnClickBackPhase3}>
+                    <i className="fa-solid fa-arrow-left-long"></i> QUAY LẠI
+                  </button>
+                  <button>
+                    THANH TOÁN<i className="fa-solid fa-arrow-right-long"></i>
+                  </button>
+                </>
+              )
             )}{" "}
-            <button onClick={() => handleOnClickContinue()}>
-              TIẾP TỤC<i className="fa-solid fa-arrow-right-long"></i>
-            </button>
           </div>
         </div>
       </div>
