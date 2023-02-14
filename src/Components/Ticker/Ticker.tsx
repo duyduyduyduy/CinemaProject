@@ -20,6 +20,7 @@ function Ticker(props: any) {
   const [arrayCombo, setCombo] = useState<any>([]);
   const [navTmp, setNavTmp] = useState<boolean>(true);
   const [payment, setPayment] = useState<boolean>(true);
+  const [buy, setBuy] = useState<boolean>(false);
   const handleOnClickTicket = (num: number, name: string) => {
     const newArray = arrayTicket.map((item: any) => {
       if (item.name === name) {
@@ -192,6 +193,9 @@ function Ticker(props: any) {
     setNavTmp(false);
     setPayment(true);
     // props.getDetailSeat("");
+  };
+  const handleOnClickPayment = () => {
+    setBuy(!buy);
   };
   return (
     <div className="Ticker">
@@ -367,7 +371,7 @@ function Ticker(props: any) {
         ) : navTmp === false && payment === true ? (
           <Seat />
         ) : (
-          <Payment />
+          <Payment buy={buy} />
         )}
         <div>
           {" "}
@@ -395,7 +399,7 @@ function Ticker(props: any) {
                   <button onClick={handleOnClickBackPhase3}>
                     <i className="fa-solid fa-arrow-left-long"></i> QUAY LẠI
                   </button>
-                  <button>
+                  <button onClick={handleOnClickPayment}>
                     THANH TOÁN<i className="fa-solid fa-arrow-right-long"></i>
                   </button>
                 </>

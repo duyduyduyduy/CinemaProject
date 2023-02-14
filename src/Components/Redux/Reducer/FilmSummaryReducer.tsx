@@ -54,7 +54,6 @@ const FilmSummaryReducer = (
       };
     case "RE_SET":
       return {
-        
         ...state,
       };
     default:
