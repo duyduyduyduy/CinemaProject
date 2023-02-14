@@ -93,7 +93,34 @@ function Payment(props: any) {
       </div>
 
       <div className="contentContainer">
-        <div className="">dfadsa</div>
+        <div className="LeftHandPayment">   
+          <div className="ATMContainer" style={{
+            backgroundImage: `url(${require('./1.png')})`
+          }}>
+            <div className="NameATM">
+              <img src='https://cdn.haitrieu.com/wp-content/uploads/2022/02/Icon-TPBank.png' alt="" />
+              <h1>TP Bank</h1>
+            </div>
+
+            <div className="NumCard">
+              <h3>XXXX-XXXX-XXXX-XXXX</h3>
+              <p>2717</p>
+            </div>
+
+            <div className="UserInfo">
+              <h3>NGUYEN HOANG VU</h3>
+              <div>
+                <span className="nameDay">VALID FROM</span>
+                <span className="day">04/22</span>
+                <span className="nameDay">GOOD THRU</span>
+                <span className="day">04/28</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+
         <div className="RightHandPayment">
           {" "}
           <div className="intContainer">
@@ -144,8 +171,8 @@ function Payment(props: any) {
           </div>
           <div className="intContainer">
             <span>
-              (*) Bằng việc click/chạm vào THANH TOÁN, bạn đã xác nhận hiểu rõ
-              các Quy Định Giao Dịch Trực Tuyến của Galaxy Cinema.
+              (*) Bằng việc click/chạm vào <b>THANH TOÁN</b>, bạn đã xác nhận hiểu rõ
+              các <b>Quy Định Giao Dịch Trực Tuyến</b> của Galaxy Cinema.
             </span>
           </div>
           <div className="intContainer">
