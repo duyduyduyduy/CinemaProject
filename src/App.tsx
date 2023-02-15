@@ -16,6 +16,8 @@ import PromotionHeader from "./Components/PromotionHeader/PromotionHeader";
 import PromoItem from "./Components/PromotionHeader/PromoItem/PromoItem";
 import Payment from "./Components/Payment/Payment";
 import Error404 from "./Components/ErrorPage/Error404/Error404";
+import Success from "./Components/Success/Success";
+import InfoTicker from "./Components/InfoTicker/InfoTicker";
 function App(props: any) {
   useEffect(() => {
     props.fetchdatafromfirstapi();
@@ -60,6 +62,8 @@ function App(props: any) {
           <Route path="/PromoItem" element={<PromoItem />}></Route>
           <Route path="/edit-user" element={<UserEdit />}></Route>
           <Route path="/Error404" element={<Error404 />}></Route>
+          <Route path="/Success" element={<Success />}></Route>
+          <Route path="/InfoTicker" element={<InfoTicker />}></Route>
           <Route path="/list-cinema" element={<ListOfCinema />}></Route>
           <Route path="/Cinema/:id" element={<CinemaInfo />}></Route>
         </Routes>

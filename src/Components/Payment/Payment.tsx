@@ -48,7 +48,7 @@ function Payment(props: any) {
         CardNumber: cardNumber,
         CardName: name,
         ExpireDate: expire,
-        CVV: "",
+        CVV: CVV,
         Price: props.FilmSummaryState?.Sum,
         ShowCode: `${CinemaID}-${SessionID}`,
         Email: Cookies.get("Email"),
