@@ -399,9 +399,6 @@ function Ticker(props: any) {
                   <button onClick={handleOnClickBackPhase3}>
                     <i className="fa-solid fa-arrow-left-long"></i> QUAY LẠI
                   </button>
-                  <button onClick={handleOnClickPayment}>
-                    THANH TOÁN<i className="fa-solid fa-arrow-right-long"></i>
-                  </button>
                 </>
               )
             )}{" "}

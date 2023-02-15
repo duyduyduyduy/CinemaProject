@@ -2,7 +2,7 @@ import Cookies from "js-cookie";
 import React, { useState, useEffect } from "react";
 import "./Payment.scss";
 import { connect } from "react-redux";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 function Payment(props: any) {
   const [numBank, setNumBank] = useState<number>(0);
   const { CinemaID, FilmID, SessionID } = useParams();
@@ -11,7 +11,7 @@ function Payment(props: any) {
   const [CVV, setCVV] = useState<string>("");
   const [expire, setExpire] = useState<string>("");
   const handleOnChangeBank = (event: any) => {
-    setNumBank(event.target.value);
+    setNumBank(event.target.value * 1);
   };
   const handleOnChangeCardName = (event: any) => {
     setcardNumber(event.target.value);
@@ -32,20 +32,23 @@ function Payment(props: any) {
       year: tmp.slice(-4),
     };
   };
+  const nav = useNavigate();
   const handleSplitCinema = (tmp: string) => {
     return {
       cinema: tmp.slice(0, tmp.indexOf("|") - 1),
       theater: tmp.slice(tmp.indexOf("|") + 2, tmp.length),
     };
   };
-  useEffect(() => {
-    numBank !== 0 &&
-      console.log("Info: ", {
-        BankId: numBank,
+  const handleOnClickPayment = () => {
+    const requestOptions = {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        BankId: numBank * 1,
         CardNumber: cardNumber,
         CardName: name,
         ExpireDate: expire,
-        CVV: CVV,
+        CVV: "",
         Price: props.FilmSummaryState?.Sum,
         ShowCode: `${CinemaID}-${SessionID}`,
         Email: Cookies.get("Email"),
@@ -59,32 +62,19 @@ function Payment(props: any) {
         }-${handleSplitString(props.FilmSummaryState?.showTime).month}-${
           handleSplitString(props.FilmSummaryState?.showTime).day
         } ${props.FilmSummaryState?.showTime.slice(0, 5)}`,
+      }),
+    };
+    numBank !== 0 &&
+      fetch(
+        "https://vietcpq.name.vn/U2FsdGVkX1+ibKkbj+HGKjeepxUwFVviPP1AkhuyHto=/cinema/Ticket",
+        requestOptions
+      ).then((response) => {
+        if (response.status === 200) {
+          alert("Đặt vé thành công");
+          nav("/");
+        }
       });
-    // const requestOptions = {
-    //   method: "POST",
-    //   headers: { "Content-Type": "application/json" },
-    //   body: JSON.stringify({
-    //     BankId: numBank,
-    //     CardNumber: cardNumber,
-    //     CardName: name,
-    //     ExpireDate: expire,
-    //     CVV: CVV,
-    //     Price: 0,
-    //     ShowCode: `${CinemaID}-${SessionID}`,
-    //     Email: Cookies.get("Email"),
-    //     CinemaName: "Galaxy Nguyen Du",
-    //     TheaterName: "RAP 1",
-    //     FilmName: props.FilmSummaryState.nameFilm,
-    //     Combo: props.FilmSummaryState.Combo,
-    //     SeatCode: props.FilmSummaryState.Seat,
-    //     ShowTime: "2023-02-14 21:15",
-    //   }),
-    // };
-    // fetch(
-    //   "https://vietcpq.name.vn/U2FsdGVkX1+ibKkbj+HGKjeepxUwFVviPP1AkhuyHto=/cinema/Ticket",
-    //   requestOptions
-    // ).then((response) => {});
-  }, [props.buy]);
+  };
   return (
     <div className="PaymentContainer">
       <div className="title">
@@ -93,12 +83,18 @@ function Payment(props: any) {
       </div>
 
       <div className="contentContainer">
-        <div className="LeftHandPayment">   
-          <div className="ATMContainer" style={{
-            backgroundImage: `url(${require('./1.png')})`
-          }}>
+        <div className="LeftHandPayment">
+          <div
+            className="ATMContainer"
+            style={{
+              backgroundImage: `url(${require("./1.png")})`,
+            }}
+          >
             <div className="NameATM">
-              <img src='https://cdn.haitrieu.com/wp-content/uploads/2022/02/Icon-TPBank.png' alt="" />
+              <img
+                src="https://cdn.haitrieu.com/wp-content/uploads/2022/02/Icon-TPBank.png"
+                alt=""
+              />
               <h1>TP Bank</h1>
             </div>
 
@@ -119,13 +115,11 @@ function Payment(props: any) {
           </div>
         </div>
 
-
-
         <div className="RightHandPayment">
           {" "}
           <div className="intContainer">
             <select name="Chọn Loại Thẻ" onChange={handleOnChangeBank}>
-              <option value="#">Chọn thẻ</option>
+              <option value="0">Chọn thẻ</option>
               <option value="1">TP Bank</option>
               <option value="2">Agribank</option>
             </select>
@@ -171,12 +165,13 @@ function Payment(props: any) {
           </div>
           <div className="intContainer">
             <span>
-              (*) Bằng việc click/chạm vào <b>THANH TOÁN</b>, bạn đã xác nhận hiểu rõ
-              các <b>Quy Định Giao Dịch Trực Tuyến</b> của Galaxy Cinema.
+              (*) Bằng việc click/chạm vào <b>THANH TOÁN</b>, bạn đã xác nhận
+              hiểu rõ các <b>Quy Định Giao Dịch Trực Tuyến</b> của Galaxy
+              Cinema.
             </span>
           </div>
           <div className="intContainer">
-            <button>ÁP DỤNG</button>
+            <button onClick={handleOnClickPayment}>THANH TOÁN</button>
           </div>
         </div>
       </div>
