@@ -3,6 +3,7 @@ import eConcessionItems from "../Model/eConcessionItems";
 import "./Ticker.scss";
 import handleDisplayPrice from "../FunctionHandle/HandleDisPlayPrice";
 import eTicket from "../Model/eTicket";
+import ChooseBankCard from "../ChooseBankCard/ChooseBankCard";
 import InfoFilm from "../InfoFilm/InfoFilm";
 import { connect } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
@@ -80,7 +81,7 @@ function Ticker(props: any) {
     setNavTmp(false);
   };
   const handleOnClickPay = () => {
-    setNavTmp(true);
+    setNavTmp(false);
     setPayment(false);
   };
   const handleOnClickBack = () => {
@@ -200,7 +201,8 @@ function Ticker(props: any) {
   return (
     <div className="Ticker">
       <div className="mainSize">
-        {navTmp === true && payment === true ? (
+        {props.NavigateState.navTmp === true &&
+        props.NavigateState.payment === true ? (
           <div className="TickerContainer">
             <h1>CHỌN VÉ/THỨC ĂN</h1>
             <div className="FullTable">
@@ -239,10 +241,7 @@ function Ticker(props: any) {
                                 ></i>
                               </button>
                             </span>
-                            <input
-                              type="text"
-                              value={arrayTicket[index].quantity}
-                            />
+                            <a>{arrayTicket[index].quantity}</a>
                             <span>
                               <button>
                                 <i
@@ -324,10 +323,7 @@ function Ticker(props: any) {
                                 ></i>
                               </button>
                             </span>
-                            <input
-                              type="text"
-                              value={arrayCombo[index].quantity}
-                            />
+                            <a>{arrayCombo[index].quantity}</a>
                             <span>
                               <button>
                                 <i
@@ -368,40 +364,49 @@ function Ticker(props: any) {
               </table>
             </div>
           </div>
-        ) : navTmp === false && payment === true ? (
+        ) : props.NavigateState.navTmp === false &&
+          props.NavigateState.payment === true ? (
           <Seat />
+        ) : props.NavigateState.navTmp === false &&
+          props.NavigateState.payment === false ? (
+          <ChooseBankCard />
         ) : (
           <Payment buy={buy} />
         )}
         <div>
-          {" "}
           <InfoFilm />
-          
           <div className="totalEnd">
-            {navTmp === false && payment === true ? (
+            {props.NavigateState.navTmp === false &&
+            props.NavigateState.payment === true ? (
               <>
                 {" "}
-                <button onClick={() => handleOnClickBack()}>
+                <button onClick={props.navigatePhase1}>
                   <i className="fa-solid fa-arrow-left-long"></i> QUAY LẠI
                 </button>
-                <button onClick={() => handleOnClickPay()}>
+                <button onClick={props.navigatePhase4}>
                   TIẾP TỤC<i className="fa-solid fa-arrow-right-long"></i>
                 </button>
               </>
-            ) : navTmp === true && payment === true ? (
-              <button onClick={() => handleOnClickContinue()}>
+            ) : props.NavigateState.navTmp === true &&
+              props.NavigateState.payment === true ? (
+              <button onClick={props.navigatePhase3}>
                 TIẾP TỤC<i className="fa-solid fa-arrow-right-long"></i>
               </button>
+            ) : props.NavigateState.navTmp === true &&
+              props.NavigateState.payment === false ? (
+              <>
+                {" "}
+                <button onClick={props.navigatePhase3}>
+                  <i className="fa-solid fa-arrow-left-long"></i> QUAY LẠI
+                </button>
+              </>
             ) : (
-              navTmp === true &&
-              payment === false && (
-                <>
-                  {" "}
-                  <button onClick={handleOnClickBackPhase3}>
-                    <i className="fa-solid fa-arrow-left-long"></i> QUAY LẠI
-                  </button>
-                </>
-              )
+              <>
+                {" "}
+                <button onClick={props.navigatePhase3}>
+                  <i className="fa-solid fa-arrow-left-long"></i> QUAY LẠI
+                </button>
+              </>
             )}{" "}
           </div>
         </div>
@@ -414,6 +419,7 @@ const mapStateToProps = (state: any, ownProps: any) => {
     CurrentFilmState: state.CurrentFilmState,
     NextFilmState: state.NextFilmState,
     ModalPopupState: state.ModalPopupState,
+    NavigateState: state.NavigateState,
   };
 };
 const mapDispatchToProps = (dispatch: any, ownProps: any) => {
@@ -452,6 +458,26 @@ const mapDispatchToProps = (dispatch: any, ownProps: any) => {
       dispatch({
         type: "GET_SEAT",
         payload: data,
+      });
+    },
+    navigatePhase1: () => {
+      dispatch({
+        type: "PHASE_1",
+      });
+    },
+    navigatePhase2: () => {
+      dispatch({
+        type: "PHASE_2",
+      });
+    },
+    navigatePhase3: () => {
+      dispatch({
+        type: "PHASE_3",
+      });
+    },
+    navigatePhase4: () => {
+      dispatch({
+        type: "PHASE_4",
       });
     },
   };

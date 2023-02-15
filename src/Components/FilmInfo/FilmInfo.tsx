@@ -406,8 +406,8 @@ function FilmInfo(props: any) {
             <div className="titleFilm">
               <p>
                 Lịch chiếu{" "}
-                {FilmInfo[0]?.name.length > 35
-                  ? FilmInfo[0]?.name.slice(0, 35) + " ... "
+                {FilmInfo[0]?.name.length > 13
+                  ? FilmInfo[0]?.name.slice(0, 20) + " ... "
                   : FilmInfo[0]?.name}
               </p>
             </div>

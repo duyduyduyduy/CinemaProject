@@ -86,12 +86,15 @@
                       }
                     }
                   }
-                  input {
-                    text-align: center;
+                  a {
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
                     width: 50px;
                     height: 30px;
+                    border: 1px solid lightgray;
                   }
-                  input:focus {
+                  a:focus {
                     outline: none !important;
                     border: 2px solid #66afe9;
                     // padding: 2px;

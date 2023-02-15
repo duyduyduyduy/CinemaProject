@@ -48,7 +48,7 @@ function Payment(props: any) {
         CardNumber: cardNumber,
         CardName: name,
         ExpireDate: expire,
-        CVV: "",
+        CVV: CVV,
         Price: props.FilmSummaryState?.Sum,
         ShowCode: `${CinemaID}-${SessionID}`,
         Email: Cookies.get("Email"),
@@ -69,6 +69,7 @@ function Payment(props: any) {
         "https://vietcpq.name.vn/U2FsdGVkX1+ibKkbj+HGKjeepxUwFVviPP1AkhuyHto=/cinema/Ticket",
         requestOptions
       ).then((response) => {
+        console.log("Check : ", requestOptions.body);
         if (response.status === 200) {
           alert("Đặt vé thành công");
           nav("/");
@@ -77,11 +78,18 @@ function Payment(props: any) {
   };
   return (
     <div className="PaymentContainer">
-      <div className="title">
-        <h1>VUI LÒNG THANH TOÁN</h1>
-        <span>18:20</span>
+      <div style={{ display: "flex" }}>
+        <h1 className="title">Thanh toán bằng tài khoản ngân hàng có sẵn</h1>
+        <h1
+          className="title "
+          style={{ marginLeft: "10px", marginRight: "10px" }}
+        >
+          /
+        </h1>
+        <h1 className="title activeBankCard">
+          Thanh toán bằng tài khoản ngân hàng mới
+        </h1>
       </div>
-
       <div className="contentContainer">
         <div className="LeftHandPayment">
           <div
