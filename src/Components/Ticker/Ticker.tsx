@@ -376,6 +376,7 @@ function Ticker(props: any) {
         <div>
           {" "}
           <InfoFilm />
+          
           <div className="totalEnd">
             {navTmp === false && payment === true ? (
               <>

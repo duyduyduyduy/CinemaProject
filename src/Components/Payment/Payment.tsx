@@ -125,7 +125,7 @@ function Payment(props: any) {
           {" "}
           <div className="intContainer">
             <select name="Chọn Loại Thẻ" onChange={handleOnChangeBank}>
-              <option value="#">Chọn thẻ</option>
+              <option hidden value="#">Chọn thẻ</option>
               <option value="1">TP Bank</option>
               <option value="2">Agribank</option>
             </select>
