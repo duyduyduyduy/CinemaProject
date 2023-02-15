@@ -29,9 +29,9 @@ function Ticker(props: any) {
     });
     setArray(newArray);
   };
-  // useEffect(() => {
-  //   props.navigatePhase1();
-  // }, []);
+  useEffect(() => {
+    props.navigatePhase1();
+  }, []);
   const handleOnClickCombo = (num: number, id: string) => {
     const newArray = arrayCombo.map((item: any) => {
       if (item.id === id) {
