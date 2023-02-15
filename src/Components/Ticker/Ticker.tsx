@@ -19,8 +19,6 @@ function Ticker(props: any) {
   const [TicketItems, setTicketItems] = useState<Array<eTicket>>([]);
   const [arrayTicket, setArray] = useState<any>([]);
   const [arrayCombo, setCombo] = useState<any>([]);
-  const [navTmp, setNavTmp] = useState<boolean>(true);
-  const [payment, setPayment] = useState<boolean>(true);
   const [buy, setBuy] = useState<boolean>(false);
   const handleOnClickTicket = (num: number, name: string) => {
     const newArray = arrayTicket.map((item: any) => {
@@ -31,9 +29,9 @@ function Ticker(props: any) {
     });
     setArray(newArray);
   };
-  useEffect(() => {
-    props.navigatePhase1();
-  }, []);
+  // useEffect(() => {
+  //   props.navigatePhase1();
+  // }, []);
   const handleOnClickCombo = (num: number, id: string) => {
     const newArray = arrayCombo.map((item: any) => {
       if (item.id === id) {
@@ -79,17 +77,6 @@ function Ticker(props: any) {
       }
     });
     return { Standard: result1, VIP: result2 };
-  };
-  const handleOnClickContinue = () => {
-    setNavTmp(false);
-  };
-  const handleOnClickPay = () => {
-    setNavTmp(false);
-    setPayment(false);
-  };
-  const handleOnClickBack = () => {
-    setNavTmp(true);
-    props.getDetailSeat("");
   };
   useEffect(() => {
     props.CalculateFinalSum(FunctionCalculateFinalSum());
@@ -192,14 +179,6 @@ function Ticker(props: any) {
       result += item.quantity * item.price;
     });
     return result;
-  };
-  const handleOnClickBackPhase3 = () => {
-    setNavTmp(false);
-    setPayment(true);
-    // props.getDetailSeat("");
-  };
-  const handleOnClickPayment = () => {
-    setBuy(!buy);
   };
   return (
     <div className="Ticker">
@@ -374,7 +353,7 @@ function Ticker(props: any) {
           props.NavigateState.payment === false ? (
           <ChooseBankCard />
         ) : (
-          <Payment buy={buy} />
+          <Payment />
         )}
         <div>
           <InfoFilm />

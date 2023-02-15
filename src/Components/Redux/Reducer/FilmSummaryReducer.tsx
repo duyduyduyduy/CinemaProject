@@ -21,9 +21,6 @@ const FilmSummaryReducer = (
         nameFilm: action.payload.nameFilm,
         age: action.payload.age,
         filmImg: action.payload.filmImg,
-        Combo: "",
-        Seat: "",
-        Sum: 0,
       };
     case "GET_CINEMAINFO_SHOWTIME":
       return {
