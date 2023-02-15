@@ -24,14 +24,8 @@ function Seat(props: any) {
         SetSeatStandard(data.seatPlan.seatLayoutData.areas[0]?.rows);
         SetSeatVIP(data.seatPlan.seatLayoutData.areas[1]?.rows);
       });
-    const requestOptions = {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ ShowCode: `${CinemaID}-${SessionID}` }),
-    };
     fetch(
-      "https://vietcpq.name.vn/U2FsdGVkX1+ibKkbj+HGKjeepxUwFVviPP1AkhuyHto=/cinema/TicketByShowCode",
-      requestOptions
+      `https://vietcpq.name.vn/U2FsdGVkX1+ibKkbj+HGKjeepxUwFVviPP1AkhuyHto=/cinema/TicketByShowCode/${CinemaID}-${SessionID}`
     )
       .then((res) => res.json())
       .then((data) => {
