@@ -46,13 +46,7 @@ function Header1(props: any) {
               onMouseEnter={() => setFilmModal(true)}
               onMouseLeave={() => setFilmModal(false)}
             >
-              <a
-                href="#"
-                // onMouseEnter={() => setFilmModal(true)}
-                // onMouseLeave={() => setFilmModal(false)}
-              >
-                PHIM
-              </a>
+              <a href="#">PHIM</a>
               <i className="fa-solid fa-angle-down"></i>
               {/* FilmDropdown */}
               {filmModal && (
@@ -64,7 +58,10 @@ function Header1(props: any) {
                       {lsCurrentFilm?.map((item, index) => {
                         return (
                           index <= 3 && (
-                            <div onClick={() => HandleClickBuy(item.id)}>
+                            <div
+                              key={index}
+                              onClick={() => HandleClickBuy(item.id)}
+                            >
                               <div>
                                 <img
                                   src={item.imageLandscape}
@@ -90,7 +87,10 @@ function Header1(props: any) {
                       {lsSoonFilm?.map((item, index) => {
                         return (
                           index <= 3 && (
-                            <div onClick={() => HandleClickBuy(item.id)}>
+                            <div
+                              key={index}
+                              onClick={() => HandleClickBuy(item.id)}
+                            >
                               <div>
                                 <img
                                   src={item.imageLandscape}
@@ -173,6 +173,13 @@ function Header1(props: any) {
                 >
                   {" "}
                   <i className="fa-solid fa-pen-to-square"></i> Edit Profile
+                </h2>
+                <h2
+                  style={{ cursor: "pointer" }}
+                  onClick={() => nav("/InfoTicker")}
+                >
+                  {" "}
+                  <i className="fa-solid fa-ticket"></i> Vé đã đặt
                 </h2>
                 <h2
                   className="clear-h2"

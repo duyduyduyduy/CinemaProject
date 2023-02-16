@@ -38,6 +38,7 @@ export default function Promotion() {
             if (index < (tmp > a ? tmp * 4 + b : tmp * 4)) {
               return (
                 <div
+                  key={index}
                   className="promotion"
                   onMouseEnter={() => setStyle(index)}
                   onMouseLeave={() => setStyle(-1)}

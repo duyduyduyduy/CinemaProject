@@ -32,9 +32,9 @@ export default function InfoTicker() {
 
       <div className="mainSizeMini">
         <div className="TickerContainer">
-          {tmp?.map((item: any) => {
+          {tmp?.map((item: any, index: number) => {
             return (
-              <div className="TickerItem">
+              <div className="TickerItem" key={index}>
                 <div className="infLeft">
                   <h3>{item.FilmName}</h3>
                   <h4>CinemaName: {item.CinemaName}</h4>

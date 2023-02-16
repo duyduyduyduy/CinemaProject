@@ -23,6 +23,7 @@ export default function Carousel() {
       {imgArray.map((item, index) => {
         return (
           <img
+            key={index}
             alt="jflkdsj"
             src={item}
             className={index === Index ? "mySlide active" : "mySlide"}
@@ -38,7 +39,10 @@ export default function Carousel() {
       <div>
         {imgArray.map((item, index) => {
           return (
-            <span className={index === Index ? "dot activeDot" : "dot"}></span>
+            <span
+              key={index}
+              className={index === Index ? "dot activeDot" : "dot"}
+            ></span>
           );
         })}
       </div>

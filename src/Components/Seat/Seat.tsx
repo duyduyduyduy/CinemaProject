@@ -85,29 +85,38 @@ function Seat(props: any) {
       <div className="seatTable">
         <div className="seatGridContainer">
           <div className="LeftLetterContainer">
-            {seatVIP?.map((item: any) => {
+            {seatVIP?.map((item: any, index: number) => {
               return (
                 item.physicalName &&
                 item.seats && (
-                  <p className="seatLetter" style={{ marginBottom: "30px" }}>
+                  <p
+                    className="seatLetter"
+                    style={{ marginBottom: "30px" }}
+                    key={index}
+                  >
                     {item.physicalName}
                   </p>
                 )
               );
             })}
-            {seatStandard?.map((item: any) => {
+            {seatStandard?.map((item: any, index: number) => {
               return (
                 item.physicalName &&
-                item.seats && <p className="seatLetter">{item.physicalName}</p>
+                item.seats && (
+                  <p className="seatLetter" key={index}>
+                    {item.physicalName}
+                  </p>
+                )
               );
             })}
           </div>
           <div className="seatGrid">
-            {seatVIP?.map((item: any) => {
+            {seatVIP?.map((item: any, index: number) => {
               return (
                 item.physicalName &&
                 item.seats && (
                   <div
+                    key={index}
                     className="columnContainer"
                     style={{ marginBottom: "30px" }}
                   >
@@ -115,6 +124,7 @@ function Seat(props: any) {
                       return (
                         index % 2 === 0 && (
                           <div
+                            key={index}
                             style={{ display: "flex", marginRight: "10px" }}
                             onClick={() =>
                               props.FilmSummaryState.nVIPSeat !== 0 &&
@@ -200,10 +210,11 @@ function Seat(props: any) {
               return (
                 item.physicalName &&
                 item.seats && (
-                  <div className="columnContainer">
-                    {item?.seats.map((m: any) => {
+                  <div className="columnContainer" key={index}>
+                    {item?.seats.map((m: any, index: number) => {
                       return (
                         <div
+                          key={index}
                           className={`seatNumber ${
                             props.FilmSummaryState.nStandardSeat === 0
                               ? "blockSeat"
@@ -238,20 +249,28 @@ function Seat(props: any) {
           </div>
           <div className="LeftLetterContainer">
             {" "}
-            {seatVIP?.map((item: any) => {
+            {seatVIP?.map((item: any, index: any) => {
               return (
                 item.physicalName &&
                 item.seats && (
-                  <p className="seatLetter" style={{ marginBottom: "30px" }}>
+                  <p
+                    className="seatLetter"
+                    style={{ marginBottom: "30px" }}
+                    key={index}
+                  >
                     {item.physicalName}
                   </p>
                 )
               );
             })}
-            {seatStandard?.map((item: any) => {
+            {seatStandard?.map((item: any, index: any) => {
               return (
                 item.physicalName &&
-                item.seats && <p className="seatLetter">{item.physicalName}</p>
+                item.seats && (
+                  <p className="seatLetter" key={index}>
+                    {item.physicalName}
+                  </p>
+                )
               );
             })}
           </div>

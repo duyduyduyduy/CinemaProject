@@ -215,7 +215,7 @@ function Ticker(props: any) {
                 <tbody>
                   {TicketItems?.map((item, index) => {
                     return (
-                      <tr>
+                      <tr key={index}>
                         <td>
                           <b>{item?.name}</b>
                           <p>{item?.description}</p>
@@ -294,7 +294,7 @@ function Ticker(props: any) {
                 <tbody>
                   {ConcessionItems?.map((item: any, index: number) => {
                     return (
-                      <tr>
+                      <tr key={index}>
                         <td style={{ display: "flex" }}>
                           <img src={item?.imageUrl} width={"100px"} alt="" />
                           <div className="comboContainer">

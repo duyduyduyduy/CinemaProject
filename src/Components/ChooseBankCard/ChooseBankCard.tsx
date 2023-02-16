@@ -6,6 +6,9 @@ import "./ChooseBankCard.scss";
 function ChooseBankCard(props: any) {
   const [tmp, setTmp] = useState<any>([]);
   const { CinemaID, FilmID, SessionID } = useParams();
+  const [isReady, setIsReady] = useState<boolean>(true);
+  const [isSuccess, setIsSuccess] = useState<boolean>(true);
+  const [isFail, setIsFail] = useState<boolean>(true);
   useEffect(() => {
     fetch(
       "https://vietcpq.name.vn/U2FsdGVkX1+ibKkbj+HGKjeepxUwFVviPP1AkhuyHto=/Bank/CardRef/" +
@@ -57,8 +60,7 @@ function ChooseBankCard(props: any) {
     ).then((response) => {
       console.log("Check : ", requestOptions.body);
       if (response.status === 200) {
-        alert("Đặt vé thành công");
-        nav("/");
+        nav("/Success");
       }
     });
   };
@@ -69,19 +71,19 @@ function ChooseBankCard(props: any) {
           Thanh toán bằng tài khoản ngân hàng có sẵn
         </h1>
         <h1
-          className="title"
+          className="titleChooseBank"
           style={{ marginLeft: "10px", marginRight: "10px" }}
         >
           /
         </h1>
-        <h1 className="title" onClick={props.navigatePhase2}>
+        <h1 className="titleChooseBank" onClick={props.navigatePhase2}>
           Thanh toán bằng tài khoản ngân hàng mới
         </h1>
       </div>
       <div className="subMainSizeChooseBank">
-        {tmp?.map((item: any) => {
+        {tmp?.map((item: any, index: number) => {
           return (
-            <div className="bankCardContainer">
+            <div className="bankCardContainer" key={index}>
               <div
                 className="BankCard"
                 onClick={() => handleOnclickCard(item.CardNumber)}

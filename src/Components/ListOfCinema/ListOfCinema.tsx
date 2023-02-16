@@ -102,9 +102,10 @@ export default function ListOfCinema() {
             {cinema
               ?.filter((n) => n.cityId.includes(CityObject.cityID))
               .filter((n) => n.slug.includes(CinemaObject.slug))
-              .map((item) => {
+              .map((item, index) => {
                 return (
                   <div
+                    key={index}
                     className="cinemaBorder"
                     onClick={() => handleOnclickMuaVe(item.code)}
                   >

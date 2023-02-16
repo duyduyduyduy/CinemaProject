@@ -86,7 +86,7 @@ function CinemaInfo(props: any) {
             />
             {CinemaInfo[0]?.imageUrls.map((item, index) => {
               if (index > 0 && index <= 2) {
-                return <img src={item} />;
+                return <img key={index} src={item} />;
               }
             })}
           </div>
@@ -133,6 +133,7 @@ function CinemaInfo(props: any) {
                       return (
                         index > 0 && (
                           <div
+                            key={index}
                             className="DateContainerinCinema"
                             onClick={() => setIndex(index)}
                           >
@@ -149,12 +150,12 @@ function CinemaInfo(props: any) {
                 </div>
               </div>
               {/* List Film in this cinema */}
-              {detaiSchedule?.map((item) => {
+              {detaiSchedule?.map((item, index) => {
                 return (
                   item.dates.filter((n) =>
                     n.showDate.includes(detaiSchedule[0]?.dates[Index].showDate)
                   ).length > 0 && (
-                    <div className="listFilmContainer">
+                    <div key={index} className="listFilmContainer">
                       <div className="avatarFilm">
                         <img src={item.imagePortrait}></img>
                       </div>
@@ -177,12 +178,12 @@ function CinemaInfo(props: any) {
                                 detaiSchedule[0]?.dates[Index].showDate
                               )
                             )
-                            .map((n) => {
+                            .map((n, index) => {
                               return (
-                                <div>
+                                <div key={index}>
                                   {n.bundles.map((m) => {
                                     return (
-                                      <div>
+                                      <div key={index}>
                                         {" "}
                                         <p
                                           style={{
@@ -193,9 +194,10 @@ function CinemaInfo(props: any) {
                                           {m.version} - Phụ đề
                                         </p>
                                         <div className="ShowTimeContainer">
-                                          {m.sessions.map((x) => {
+                                          {m.sessions.map((x, index) => {
                                             return (
                                               <span
+                                                key={index}
                                                 className="time"
                                                 onClick={() =>
                                                   handleOnClickShowTime({

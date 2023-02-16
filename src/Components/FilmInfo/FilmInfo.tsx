@@ -324,9 +324,10 @@ function FilmInfo(props: any) {
                 {cinema &&
                   cinema
                     .filter((n) => n.cityId.includes(CityObject.cityID))
-                    .map((item) => {
+                    .map((item, index) => {
                       return (
                         <div
+                          key={index}
                           className="Cinema"
                           onClick={() =>
                             HandleOnClickCinema({
@@ -379,9 +380,10 @@ function FilmInfo(props: any) {
                     .filter((n) =>
                       n.name.toLowerCase().includes(valueInut.toLowerCase())
                     )
-                    .map((item) => {
+                    .map((item, index) => {
                       return (
                         <div
+                          key={index}
                           className="City"
                           onClick={() =>
                             handleOnClickCity({
@@ -466,6 +468,7 @@ function FilmInfo(props: any) {
                 return (
                   index > 0 && (
                     <div
+                      key={index}
                       onClick={() => setIndexDate(index)}
                       className={`dateContainer `}
                     >
@@ -492,14 +495,14 @@ function FilmInfo(props: any) {
               {detaiSchedule
                 ?.filter((n) => n.slug.includes(CinemaObject.slug))
                 .filter((n) => n.cityId.includes(CityObject.cityID))
-                .map((item) => {
+                .map((item, index) => {
                   return (
                     item.dates.filter((n) =>
                       n.showDate.includes(
                         detaiSchedule[0]?.dates[IndexDate].showDate
                       )
                     ).length > 0 && (
-                      <div className="duycontainer">
+                      <div className="duycontainer" key={index}>
                         <div className="lefthand">
                           <h3>{item?.name}</h3>
                           <p>{item?.address}</p>
@@ -511,38 +514,41 @@ function FilmInfo(props: any) {
                                 detaiSchedule[0]?.dates[IndexDate].showDate
                               )
                             )
-                            .map((n: any) => {
+                            .map((n: any, index: any) => {
                               return (
-                                <>
-                                  {n.bundles.map((m: any) => {
+                                <div key={index}>
+                                  {n.bundles.map((m: any, index: any) => {
                                     return (
-                                      <>
+                                      <div key={index}>
                                         {" "}
                                         <div className="D2">
                                           <span className="version2D">
                                             {m.version.toUpperCase()}
                                           </span>
-                                          {m.sessions.map((x: any) => {
-                                            return (
-                                              <span
-                                                className="time"
-                                                onClick={() =>
-                                                  handleOnClickShowTime({
-                                                    FilmID: id,
-                                                    CinemaID: x.cinemaId,
-                                                    SessionID: x.sessionId,
-                                                  })
-                                                }
-                                              >
-                                                {x.showTime}
-                                              </span>
-                                            );
-                                          })}
+                                          {m.sessions.map(
+                                            (x: any, index: any) => {
+                                              return (
+                                                <span
+                                                  key={index}
+                                                  className="time"
+                                                  onClick={() =>
+                                                    handleOnClickShowTime({
+                                                      FilmID: id,
+                                                      CinemaID: x.cinemaId,
+                                                      SessionID: x.sessionId,
+                                                    })
+                                                  }
+                                                >
+                                                  {x.showTime}
+                                                </span>
+                                              );
+                                            }
+                                          )}
                                         </div>
-                                      </>
+                                      </div>
                                     );
                                   })}
-                                </>
+                                </div>
                               );
                             })}
                         </div>
@@ -577,7 +583,7 @@ function FilmInfo(props: any) {
             >
               {lsActor?.map((item: any, index: any) => {
                 return (
-                  <div>
+                  <div key={index}>
                     <img src={item.imgsrc}></img>
                     <p style={{ fontSize: "14px" }}>{item.name}</p>
                     <p
@@ -652,7 +658,7 @@ function FilmInfo(props: any) {
           {FilmRe?.map((item, index) => {
             return (
               index <= 4 && (
-                <div className="FilmContainerRe">
+                <div className="FilmContainerRe" key={index}>
                   <a
                     href={`/Film/${item.id}#FilmBanner`}
                     onClick={() => handleOnclickMuaVe(item.id)}

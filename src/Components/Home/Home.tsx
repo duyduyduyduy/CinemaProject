@@ -53,7 +53,7 @@ function Home(props: any) {
           {lsfilm?.map((item, index) => {
             if (index < (tmp > a ? tmp * 4 + b : tmp * 4)) {
               return (
-                <div className="Film">
+                <div className="Film" key={index}>
                   <a
                     className="aClear"
                     href={`/Film/${item.id}#FilmBanner`}

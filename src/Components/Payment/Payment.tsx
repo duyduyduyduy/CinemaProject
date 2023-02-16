@@ -71,8 +71,7 @@ function Payment(props: any) {
       ).then((response) => {
         console.log("Check : ", requestOptions.body);
         if (response.status === 200) {
-          alert("Đặt vé thành công");
-          nav("/");
+          nav("/Success");
         }
       });
   };
