@@ -14,7 +14,6 @@ import CinemaInfo from "./Components/CinemaInfo/CinemaInfo";
 import Ticker from "./Components/Ticker/Ticker";
 import PromotionHeader from "./Components/PromotionHeader/PromotionHeader";
 import PromoItem from "./Components/PromotionHeader/PromoItem/PromoItem";
-import Payment from "./Components/Payment/Payment";
 import Error404 from "./Components/ErrorPage/Error404/Error404";
 import Success from "./Components/Success/Success";
 import InfoTicker from "./Components/InfoTicker/InfoTicker";
