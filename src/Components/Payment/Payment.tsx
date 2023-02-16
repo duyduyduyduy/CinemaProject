@@ -79,7 +79,9 @@ function Payment(props: any) {
   return (
     <div className="PaymentContainer">
       <div style={{ display: "flex" }}>
-        <h1 className="title">Thanh toán bằng tài khoản ngân hàng có sẵn</h1>
+        <h1 className="title" onClick={props.navigatePhase4}>
+          Thanh toán bằng tài khoản ngân hàng có sẵn
+        </h1>
         <h1
           className="title "
           style={{ marginLeft: "10px", marginRight: "10px" }}
@@ -190,6 +192,12 @@ const mapStateToProps = (state: any, ownProps: any) => {
   return { FilmSummaryState: state.FilmSummaryState };
 };
 const mapDispatchToProps = (dispatch: any, ownProps: any) => {
-  return {};
+  return {
+    navigatePhase4: () => {
+      dispatch({
+        type: "PHASE_4",
+      });
+    },
+  };
 };
 export default connect(mapStateToProps, mapDispatchToProps)(Payment);

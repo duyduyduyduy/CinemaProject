@@ -179,10 +179,10 @@ function CinemaInfo(props: any) {
                             )
                             .map((n) => {
                               return (
-                                <>
+                                <div>
                                   {n.bundles.map((m) => {
                                     return (
-                                      <>
+                                      <div>
                                         {" "}
                                         <p
                                           style={{
@@ -210,10 +210,10 @@ function CinemaInfo(props: any) {
                                             );
                                           })}
                                         </div>
-                                      </>
+                                      </div>
                                     );
                                   })}
-                                </>
+                                </div>
                               );
                             })}
                         </div>

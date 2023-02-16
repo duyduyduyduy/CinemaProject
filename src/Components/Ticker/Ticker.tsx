@@ -10,6 +10,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import Seat from "../Seat/Seat";
 import eFilm from "../Model/eFilm";
 import Payment from "../Payment/Payment";
+import Cookies from "js-cookie";
 function Ticker(props: any) {
   const { CinemaID, FilmID, SessionID } = useParams();
   const nav = useNavigate();
@@ -19,7 +20,6 @@ function Ticker(props: any) {
   const [TicketItems, setTicketItems] = useState<Array<eTicket>>([]);
   const [arrayTicket, setArray] = useState<any>([]);
   const [arrayCombo, setCombo] = useState<any>([]);
-  const [buy, setBuy] = useState<boolean>(false);
   const handleOnClickTicket = (num: number, name: string) => {
     const newArray = arrayTicket.map((item: any) => {
       if (item.name === name) {
@@ -77,6 +77,20 @@ function Ticker(props: any) {
       }
     });
     return { Standard: result1, VIP: result2 };
+  };
+  const handleOnClickContinuePhase1 = () => {
+    fetch(
+      "https://vietcpq.name.vn/U2FsdGVkX1+ibKkbj+HGKjeepxUwFVviPP1AkhuyHto=/Bank/CardRef/" +
+        Cookies.get("Email")
+    )
+      .then((res) => res.json())
+      .then((data) => {
+        if (data?.length > 0) {
+          props.navigatePhase4();
+        } else {
+          props.navigatePhase2();
+        }
+      });
   };
   useEffect(() => {
     props.CalculateFinalSum(FunctionCalculateFinalSum());
@@ -365,7 +379,7 @@ function Ticker(props: any) {
                 <button onClick={props.navigatePhase1}>
                   <i className="fa-solid fa-arrow-left-long"></i> QUAY LẠI
                 </button>
-                <button onClick={props.navigatePhase4}>
+                <button onClick={handleOnClickContinuePhase1}>
                   TIẾP TỤC<i className="fa-solid fa-arrow-right-long"></i>
                 </button>
               </>
