@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import "./InfoTicker.scss";
 import { connect } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import TickkerItem from "./TickkerItem/TickkerItem";
 function InfoTicker(props: any) {
   const [tmp, setTmp] = useState<any>([]);
   const month = [
@@ -38,7 +39,8 @@ function InfoTicker(props: any) {
   console.log(new Date(tmp[0]?.ShowTime).getMonth());
   return (
     <div className="InfoTicker">
-      <div className="mainSize">
+      <TickkerItem />
+      {/* <div className="mainSize">
         <div className="subheader">
           <i style={{ color: "black" }} className="fa-solid fa-house"></i>
           <i className="fa-solid fa-angle-right"></i>
@@ -84,7 +86,7 @@ function InfoTicker(props: any) {
             );
           })}
         </div>
-      </div>
+      </div> */}
     </div>
   );
 }
