@@ -35,7 +35,7 @@ function InfoTicker(props: any) {
         setTmp(data);
       });
   }, []);
-  console.log(new Date(tmp[0]?.ShowTime).getMonth());
+  console.log(new Date("2023-02-17T22:00:00.000Z"));
   return (
     <div className="InfoTicker">
       <div className="mainSize">

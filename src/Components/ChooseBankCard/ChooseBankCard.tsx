@@ -51,9 +51,10 @@ function ChooseBankCard(props: any) {
           handleSplitString(props.FilmSummaryState?.showTime).year
         }-${handleSplitString(props.FilmSummaryState?.showTime).month}-${
           handleSplitString(props.FilmSummaryState?.showTime).day
-        } ${props.FilmSummaryState?.showTime.slice(0, 5)}`,
+        }T${props.FilmSummaryState?.showTime.slice(0, 5)}Z`,
       }),
     };
+    console.log("requestOptions", requestOptions);
     fetch(
       "https://vietcpq.name.vn/U2FsdGVkX1+ibKkbj+HGKjeepxUwFVviPP1AkhuyHto=/cinema/Ticket",
       requestOptions
