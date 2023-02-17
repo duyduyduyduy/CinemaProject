@@ -18,13 +18,13 @@
       height: 40px;
       font-size: 18px;
       margin-top: 10px;
-      color: #6c7193;
+      color: #000000;
       b {
         color: black;
       }
-      span:hover {
+      .ThanhVien:hover {
         // color: white;
-        color: #d6997e;
+        color: #ee6a31;
         cursor: pointer;
         -webkit-transition: all 0.5s;
       }
@@ -34,7 +34,7 @@
         -webkit-transition: all 0.5s;
       }
       i:hover {
-        color: #d6997e !important;
+        color: #ee6a31 !important;
       }
       i {
         margin: 0px 7px 0px 4px;
@@ -52,13 +52,14 @@
         font-weight: bolder;
         margin-right: 7px;
         font-size: 25px;
-        color: #6c7193;
+        color: #000000;
       }
 
       span:hover {
-        color: #d6997e;
+        color: #ca511d;
         cursor: pointer;
-        -webkit-transition: all 0.5s;
+        -webkit-transition: all 0.2s;
+        border-bottom: 2px solid #df8159;
       }
     }
   }

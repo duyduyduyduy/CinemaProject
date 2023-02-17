@@ -1,8 +1,9 @@
 import Cookies from "js-cookie";
 import React, { useEffect, useState } from "react";
 import "./InfoTicker.scss";
-
-export default function InfoTicker() {
+import { connect } from "react-redux";
+import { useNavigate } from "react-router-dom";
+function InfoTicker(props: any) {
   const [tmp, setTmp] = useState<any>([]);
   const month = [
     "01",
@@ -18,6 +19,12 @@ export default function InfoTicker() {
     "11",
     "12",
   ];
+  const nav = useNavigate();
+  useEffect(() => {
+    if (props.ModalPopupState.login === false) {
+      nav("/");
+    }
+  }, [props.ModalPopupState.login]);
   useEffect(() => {
     fetch(
       "https://vietcpq.name.vn/U2FsdGVkX1+ibKkbj+HGKjeepxUwFVviPP1AkhuyHto=/cinema/TicketByEmail/" +
@@ -35,15 +42,17 @@ export default function InfoTicker() {
         <div className="subheader">
           <i style={{ color: "black" }} className="fa-solid fa-house"></i>
           <i className="fa-solid fa-angle-right"></i>
-          <span>Thành viên</span>
+          <span className="ThanhVien" style={{ fontWeight: "bolder" }}>
+            Thành viên
+          </span>
           <i className="fa-solid fa-angle-right"></i>
           <span>Giao dịch</span>
         </div>
 
         <div className="menuInfo">
-          <span>PHIM ĐÃ XEM</span>
+          <span className="activeBankCard">PHIM ĐÃ XEM</span>
           <span>/</span>
-          <span>PHIM SẮP XEM</span>
+          <span className="">PHIM SẮP XEM</span>
         </div>
       </div>
 
@@ -79,3 +88,13 @@ export default function InfoTicker() {
     </div>
   );
 }
+const mapStateToProps = (state: any, ownProps: any) => {
+  return {
+    FilmSummaryState: state.FilmSummaryState,
+    ModalPopupState: state.ModalPopupState,
+  };
+};
+const mapDispatchToProps = (dispatch: any, ownProps: any) => {
+  return {};
+};
+export default connect(mapStateToProps, mapDispatchToProps)(InfoTicker);
