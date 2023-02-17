@@ -5,6 +5,8 @@ import { connect } from "react-redux";
 import { useNavigate } from "react-router-dom";
 function InfoTicker(props: any) {
   const [tmp, setTmp] = useState<any>([]);
+  const [soon, setSoon] = useState<any>([]);
+  const [already, setAlready] = useState<any>([]);
   const month = [
     "01",
     "02",
@@ -32,10 +34,39 @@ function InfoTicker(props: any) {
     )
       .then((res) => res.json())
       .then((data) => {
+        // data?.map((item: any) => {
+        //   if (
+        //     Number(new Date(item.ShowTime).getTime()) -
+        //       Number(new Date().getTime()) >
+        //     0
+        //   ) {
+        //     setSoon([...soon, item]);
+        //   } else {
+        //     setAlready([...already, item]);
+        //   }
+        // });
         setTmp(data);
       });
   }, []);
-  console.log(new Date("2023-02-17T22:00:00.000Z"));
+  useEffect(() => {
+    setSoon(
+      tmp?.filter(
+        (item: any) =>
+          Number(new Date(item.ShowTime).getTime()) -
+            Number(new Date().getTime()) >
+          0
+      )
+    );
+    setAlready(
+      tmp?.filter(
+        (item: any) =>
+          Number(new Date(item.ShowTime).getTime()) -
+            Number(new Date().getTime()) <=
+          0
+      )
+    );
+  }, [tmp]);
+  console.log(soon, already);
   return (
     <div className="InfoTicker">
       <div className="mainSize">

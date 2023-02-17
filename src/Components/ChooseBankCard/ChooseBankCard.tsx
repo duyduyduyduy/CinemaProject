@@ -47,6 +47,8 @@ function ChooseBankCard(props: any) {
         FilmName: props.FilmSummaryState?.nameFilm,
         Combo: props.FilmSummaryState?.Combo,
         SeatCode: props.FilmSummaryState?.Seat,
+        ImageLandscape: props.FilmSummaryState?.filmImg,
+        ImagePortrait: props.FilmSummaryState?.filmImg,
         ShowTime: `${
           handleSplitString(props.FilmSummaryState?.showTime).year
         }-${handleSplitString(props.FilmSummaryState?.showTime).month}-${
@@ -54,12 +56,10 @@ function ChooseBankCard(props: any) {
         }T${props.FilmSummaryState?.showTime.slice(0, 5)}Z`,
       }),
     };
-    console.log("requestOptions", requestOptions);
     fetch(
       "https://vietcpq.name.vn/U2FsdGVkX1+ibKkbj+HGKjeepxUwFVviPP1AkhuyHto=/cinema/Ticket",
       requestOptions
     ).then((response) => {
-      console.log("Check : ", requestOptions.body);
       if (response.status === 200) {
         nav("/Success");
       }
