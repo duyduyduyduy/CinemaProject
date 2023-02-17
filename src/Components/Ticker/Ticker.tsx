@@ -13,6 +13,8 @@ import Payment from "../Payment/Payment";
 import Cookies from "js-cookie";
 function Ticker(props: any) {
   const { CinemaID, FilmID, SessionID } = useParams();
+  const [popUpTicket, setPopUpTicket] = useState<boolean>(false);
+  const [popUpSeat, setPopUpSeat] = useState<boolean>(false);
   const nav = useNavigate();
   const [ConcessionItems, setConcessionitem] = useState<
     Array<eConcessionItems>
@@ -79,18 +81,26 @@ function Ticker(props: any) {
     return { Standard: result1, VIP: result2 };
   };
   const handleOnClickContinuePhase1 = () => {
-    fetch(
-      "https://vietcpq.name.vn/U2FsdGVkX1+ibKkbj+HGKjeepxUwFVviPP1AkhuyHto=/Bank/CardRef/" +
-        Cookies.get("Email")
-    )
-      .then((res) => res.json())
-      .then((data) => {
-        if (data?.length > 0) {
-          props.navigatePhase4();
-        } else {
-          props.navigatePhase2();
-        }
-      });
+    if (
+      props.FilmSummaryState.nStandardSeat +
+        props.FilmSummaryState.nVIPSeat * 2 ===
+      props.FilmSummaryState.Seat.split(",").length
+    ) {
+      fetch(
+        "https://vietcpq.name.vn/U2FsdGVkX1+ibKkbj+HGKjeepxUwFVviPP1AkhuyHto=/Bank/CardRef/" +
+          Cookies.get("Email")
+      )
+        .then((res) => res.json())
+        .then((data) => {
+          if (data?.length > 0) {
+            props.navigatePhase4();
+          } else {
+            props.navigatePhase2();
+          }
+        });
+    } else {
+      setPopUpSeat(true);
+    }
   };
   useEffect(() => {
     props.CalculateFinalSum(FunctionCalculateFinalSum());
@@ -145,7 +155,7 @@ function Ticker(props: any) {
         });
       }
     }
-  }, [FilmID, props]);
+  }, [FilmID, props.CurrentFilmState, props.NextFilmState]);
 
   useEffect(() => {
     const fetchScheduleAPI = async () => {
@@ -180,6 +190,16 @@ function Ticker(props: any) {
     };
     fetchScheduleAPI();
   }, [FilmID]);
+  const handleOnCliCkPhase1 = () => {
+    if (
+      props.FilmSummaryState.nStandardSeat === 0 &&
+      props.FilmSummaryState.nVIPSeat === 0
+    ) {
+      setPopUpTicket(true);
+    } else {
+      props.navigatePhase3();
+    }
+  };
   const handleCalculateSumCombo = () => {
     let result = 0;
     arrayCombo.map((item: any) => {
@@ -196,6 +216,42 @@ function Ticker(props: any) {
   };
   return (
     <div className="Ticker">
+      {popUpTicket === true && (
+        <div className="PopupNotEnoughticket">
+          <div className="PopupNotEnoughTicketContainer">
+            <div className="Popupheader">
+              <span>THÔNG BÁO</span>
+              <i
+                style={{ cursor: "pointer" }}
+                className="fa-solid fa-x"
+                onClick={() => setPopUpTicket(false)}
+              ></i>
+            </div>
+            <p>Vui lòng chọn số lượng vé</p>
+            <div className="buttoncontainer">
+              <button onClick={() => setPopUpTicket(false)}>OK</button>
+            </div>
+          </div>
+        </div>
+      )}
+      {popUpSeat === true && (
+        <div className="PopupNotEnoughticket">
+          <div className="PopupNotEnoughTicketContainer">
+            <div className="Popupheader">
+              <span>THÔNG BÁO</span>
+              <i
+                style={{ cursor: "pointer" }}
+                className="fa-solid fa-x"
+                onClick={() => setPopUpSeat(false)}
+              ></i>
+            </div>
+            <p>Vui lòng đủ số lượng ghế</p>
+            <div className="buttoncontainer">
+              <button onClick={() => setPopUpSeat(false)}>OK</button>
+            </div>
+          </div>
+        </div>
+      )}
       <div className="mainSize">
         {props.NavigateState.navTmp === true &&
         props.NavigateState.payment === true ? (
@@ -385,7 +441,7 @@ function Ticker(props: any) {
               </>
             ) : props.NavigateState.navTmp === true &&
               props.NavigateState.payment === true ? (
-              <button onClick={props.navigatePhase3}>
+              <button onClick={handleOnCliCkPhase1}>
                 TIẾP TỤC<i className="fa-solid fa-arrow-right-long"></i>
               </button>
             ) : props.NavigateState.navTmp === true &&
@@ -416,6 +472,7 @@ const mapStateToProps = (state: any, ownProps: any) => {
     NextFilmState: state.NextFilmState,
     ModalPopupState: state.ModalPopupState,
     NavigateState: state.NavigateState,
+    FilmSummaryState: state.FilmSummaryState,
   };
 };
 const mapDispatchToProps = (dispatch: any, ownProps: any) => {

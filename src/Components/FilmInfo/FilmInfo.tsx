@@ -503,7 +503,10 @@ function FilmInfo(props: any) {
                       )
                     ).length > 0 && (
                       <div className="duycontainer" key={index}>
-                        <div className="lefthand">
+                        <div
+                          className="lefthand"
+                          onClick={() => nav("/Cinema/" + item?.code)}
+                        >
                           <h3>{item?.name}</h3>
                           <p>{item?.address}</p>
                         </div>

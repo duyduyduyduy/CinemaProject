@@ -233,13 +233,13 @@ function CinemaInfo(props: any) {
               />
               <p className="ticketpricetitle">THÔNG TIN CHI TIẾT</p>
               <p style={{ marginTop: "10px" }}>
-                <span style={{ color: "#a0a3a7", fontWeight: "bolder" }}>
+                <span style={{ color: "#5E5E5E", fontWeight: "bolder" }}>
                   Địa chỉ:
                 </span>{" "}
                 {CinemaInfo[0]?.address}
               </p>
               <p>
-                <span style={{ color: "#a0a3a7", fontWeight: "bolder" }}>
+                <span style={{ color: "#5E5E5E", fontWeight: "bolder" }}>
                   Số điện thoại:{" "}
                 </span>
                 {CinemaInfo[0]?.phone}

@@ -49,10 +49,7 @@ function Seat(props: any) {
       }
     }
   };
-  const consoleLog = () => {
-    console.log(ticket);
-    return false;
-  };
+
   //Function booking standard seat
   const HandleBookingStandard = (data: string) => {
     if (StandardSeat.includes(data) === true) {
@@ -80,7 +77,7 @@ function Seat(props: any) {
 
   return (
     <div className="leftSeatBorder">
-      {consoleLog()}
+      {" "}
       <h2 style={{ color: "white" }}>CHỌN GHẾ:</h2>
       <div className="seatTable">
         <div className="seatGridContainer">

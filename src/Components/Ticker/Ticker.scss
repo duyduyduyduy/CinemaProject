@@ -119,3 +119,68 @@
     font-weight: bolder;
   }
 }
+.PopupNotEnoughticket {
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 2;
+  background-color: rgb(79, 79, 79, 0.6);
+  top: 0;
+  .PopupNotEnoughTicketContainer {
+    width: 450px;
+    animation-name: animatetop;
+    animation-duration: 0.4s;
+    height: auto;
+    box-sizing: border-box;
+    padding: 20px;
+    background-color: white;
+    p {
+      color: rgb(118, 118, 118);
+      font-weight: bolder;
+      margin-top: 30px;
+    }
+    .buttoncontainer {
+      margin-top: 20px;
+      width: 100%;
+      display: flex;
+      justify-content: flex-end;
+      button {
+        padding: 13px 38px;
+        background-color: #f26b38;
+        color: white;
+        font-weight: bolder;
+        border: none;
+        outline: none;
+        cursor: pointer;
+        margin-top: 18px;
+      }
+      button:hover {
+        background-color: #f35218;
+      }
+    }
+  }
+  .Popupheader {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    span {
+      font-size: 27px;
+      margin-top: 15px;
+      font-weight: bolder;
+      color: #f26b38;
+    }
+  }
+}
+@keyframes animatetop {
+  from {
+    top: -300px;
+    opacity: 0;
+  }
+  to {
+    top: 0;
+    opacity: 1;
+  }
+}
