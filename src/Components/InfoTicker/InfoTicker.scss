@@ -44,23 +44,17 @@
       width: 100%;
       margin-top: 20px;
       height: 40px;
+      display: flex;
       // background-color: #d6997e;
       // border-bottom: 1px solid #6C7193;
       span {
         // display: block;
         font-weight: bolder;
-        margin-right: 30px;
+        margin-right: 7px;
         font-size: 25px;
         color: #6c7193;
       }
-      span::after {
-        display: block;
-        width: 50px;
-        height: 2.5px;
-        margin-top: 8px;
-        content: "";
-        background-color: #f26b38;
-      }
+
       span:hover {
         color: #d6997e;
         cursor: pointer;

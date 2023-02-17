@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import "./UserEdit.scss";
 import Cookies from "js-cookie";
 export default function UserEdit() {
-  const [name, setName] = useState<string>("");
+  const [name, setName] = useState<string>(String(Cookies.get("Name")));
   const [currentPass, setcurrentPass] = useState<string>("");
   const [newPass, setnewPass] = useState<string>("");
   const [newcheckedPass, setnewcheckedPass] = useState<string>("");
@@ -137,11 +137,12 @@ export default function UserEdit() {
             ) : (
               <>
                 <p>Mật khẩu hiện tại </p>
+                <></>
                 <input
                   className="currentPass"
-                  value={currentPass}
                   onChange={(event) => setcurrentPass(event.target.value)}
                 />
+                <></>
                 <p>Mật khẩu mới: </p>
                 <input
                   className="NewPass"

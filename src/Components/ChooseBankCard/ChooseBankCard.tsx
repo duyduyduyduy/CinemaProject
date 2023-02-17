@@ -67,7 +67,7 @@ function ChooseBankCard(props: any) {
   return (
     <div className="choosebankMainSize">
       <div style={{ display: "flex" }}>
-        <h1 className="title activeBankCard">
+        <h1 className="titleChooseBank activeBankCard">
           Thanh toán bằng tài khoản ngân hàng có sẵn
         </h1>
         <h1

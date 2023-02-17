@@ -87,6 +87,10 @@
   transition: 0.2s;
   cursor: pointer;
 }
+.changePasswordtitle:hover {
+  border-bottom: 3px solid rgb(201, 90, 10);
+  color: rgb(201, 90, 10);
+}
 .buttonSaveEdit {
   width: 100px;
   background-color: rgb(228, 102, 11);

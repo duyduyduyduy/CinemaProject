@@ -12,16 +12,18 @@ function InfoFilm(props: any) {
           <h3>{props.FilmSummaryState.nameFilm}</h3>
         </div>
         <div className="infoContainer">
-          <div className="warning">
-            <span className="spanWar">C{props.FilmSummaryState.age}</span>
-            <span>
-              {" "}
-              (*) Phim chỉ dành cho khán giả từ {
-                props.FilmSummaryState.age
-              }{" "}
-              tuổi trở lên
-            </span>
-          </div>
+          {props.FilmSummaryState.age * 1 > 0 && (
+            <div className="warning">
+              <span className="spanWar">C{props.FilmSummaryState.age}</span>
+              <span>
+                {" "}
+                (*) Phim chỉ dành cho khán giả từ {
+                  props.FilmSummaryState.age
+                }{" "}
+                tuổi trở lên
+              </span>
+            </div>
+          )}
         </div>
         <div className="RapInfo">
           <div>

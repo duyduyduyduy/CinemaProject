@@ -78,16 +78,16 @@ function Payment(props: any) {
   return (
     <div className="PaymentContainer">
       <div style={{ display: "flex" }}>
-        <h1 className="title" onClick={props.navigatePhase4}>
+        <h1 className="titleChooseBank" onClick={props.navigatePhase4}>
           Thanh toán bằng tài khoản ngân hàng có sẵn
         </h1>
         <h1
-          className="title "
+          className="titleChooseBank "
           style={{ marginLeft: "10px", marginRight: "10px" }}
         >
           /
         </h1>
-        <h1 className="title activeBankCard">
+        <h1 className="titleChooseBank activeBankCard">
           Thanh toán bằng tài khoản ngân hàng mới
         </h1>
       </div>
