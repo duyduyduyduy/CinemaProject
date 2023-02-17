@@ -52,6 +52,8 @@ function Payment(props: any) {
         Price: props.FilmSummaryState?.Sum,
         ShowCode: `${CinemaID}-${SessionID}`,
         Email: Cookies.get("Email"),
+        ImageLandscape: props.FilmSummaryState?.filmImg,
+        ImagePortrait: props.FilmSummaryState?.filmImg,
         CinemaName: handleSplitCinema(props.FilmSummaryState?.Cinema).cinema,
         TheaterName: handleSplitCinema(props.FilmSummaryState?.Cinema).theater,
         FilmName: props.FilmSummaryState?.nameFilm,
@@ -61,7 +63,7 @@ function Payment(props: any) {
           handleSplitString(props.FilmSummaryState?.showTime).year
         }-${handleSplitString(props.FilmSummaryState?.showTime).month}-${
           handleSplitString(props.FilmSummaryState?.showTime).day
-        } ${props.FilmSummaryState?.showTime.slice(0, 5)}`,
+        }T${props.FilmSummaryState?.showTime.slice(0, 5)}Z`,
       }),
     };
     numBank !== 0 &&
@@ -69,7 +71,6 @@ function Payment(props: any) {
         "https://vietcpq.name.vn/U2FsdGVkX1+ibKkbj+HGKjeepxUwFVviPP1AkhuyHto=/cinema/Ticket",
         requestOptions
       ).then((response) => {
-        console.log("Check : ", requestOptions.body);
         if (response.status === 200) {
           nav("/Success");
         }
