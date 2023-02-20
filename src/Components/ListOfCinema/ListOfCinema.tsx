@@ -6,6 +6,7 @@ export default function ListOfCinema() {
   const nav = useNavigate();
   const [cinema, setCinema] = useState<Array<any>>([]);
   const [valueInut, setValueinput] = useState<string>("");
+  const [isReady, setIsready] = useState<boolean>(false);
   const [city, setCity] = useState<Array<eCity>>([]);
   const [popupCinema, setPopupCinema] = useState<boolean>(false);
   const [CinemaObject, setCinemaObject] = useState<any>({

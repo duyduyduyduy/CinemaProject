@@ -12,9 +12,6 @@ function Seat(props: any) {
   const [StandardSeat, setStandardSeat] = useState<any>([]);
   const [VIPSeat, setVIPSeat] = useState<any>([]);
   const [ticket, setTicket] = useState<string>("");
-
-  //------------------- 3 ghế thường ( Standard ) -------------------
-  //------------------- 1 ghế couple ( Standard ) -------------------
   useEffect(() => {
     fetch(
       "https://vietcpq.name.vn/U2FsdGVkX1+ibKkbj+HGKjeepxUwFVviPP1AkhuyHto=/cinema/booking/detail"

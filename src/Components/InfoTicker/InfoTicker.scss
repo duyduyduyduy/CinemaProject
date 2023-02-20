@@ -1,132 +1,152 @@
-.InfoTicker {
+.InfoTickerContainer {
+  margin-top: 20px;
   width: 100%;
-  height: 100vh;
-  background-color: pink;
+  height: auto;
   display: flex;
-  // flex-direction: column;
-  justify-content: start;
-  align-items: start;
-  padding: 50px;
-
-  // background-position: center;
-  // background-size: cover;
-  // padding: 0px 0px 100px 0px;
-  .mainSize {
-    width: 1200px;
-    height: 150px;
-    // background-color: aqua;
-    .subheader {
-      width: 100%;
-      height: 40px;
-      font-size: 18px;
-      margin-top: 10px;
-      color: #000000;
-      b {
-        color: black;
-      }
-      .ThanhVien:hover {
-        // color: white;
-        color: #ee6a31;
-        cursor: pointer;
-        -webkit-transition: all 0.5s;
-      }
-      b:hover {
-        color: #d6997e;
-        cursor: pointer;
-        -webkit-transition: all 0.5s;
-      }
-      i:hover {
-        color: #ee6a31 !important;
-      }
-      i {
-        margin: 0px 7px 0px 4px;
-      }
+  justify-content: center;
+}
+.InfoTickerMainsize {
+  width: 1200px;
+  display: flex;
+}
+.TickkerItemSliderContainer {
+  margin-top: 20px;
+  width: 800px;
+}
+.TickkerItemContainer {
+  min-width: 800px;
+  display: flex;
+  justify-content: center;
+}
+.BookedTicker {
+  width: 100%;
+  margin-top: -5px;
+  display: flex;
+  justify-content: space-between;
+  div {
+    display: flex;
+    margin-top: -25px;
+    font-size: 18px;
+    h4 {
+      margin-right: 15px;
     }
-    .menuInfo {
+    .ExpiredFilm {
+      margin-right: 15px;
+      cursor: pointer;
+      height: 26px;
+      padding: 10px;
+      padding-bottom: 8px;
+      color: #ca4110;
+      border: 1px solid #f26b38;
+      border-radius: 15px;
+    }
+    .SoonFilm {
+      margin-right: 15px;
+      cursor: pointer;
+      height: 26px;
+      padding: 10px;
+      padding-bottom: 8px;
+      color: #ca4110;
+      border: 1px solid #f26b38;
+      border-radius: 15px;
+    }
+    h4:hover {
+      background-color: #f26b38;
+      border-radius: 15px;
+      transition: 0.3s;
+      color: white;
+    }
+  }
+  h3 {
+    margin-top: -20px;
+    margin-bottom: 50px;
+  }
+  h3::after {
+    display: block;
+    width: 50px;
+    height: 2.5px;
+    margin-top: 8px;
+    content: "";
+    background-color: #f26b38;
+  }
+}
+.titleFilmNow::after {
+  display: block;
+  width: 50px;
+  height: 2.5px;
+  margin-top: 8px;
+  content: "";
+  background-color: #f26b38;
+}
+.nextbuttonTicket {
+  color: black;
+  font-size: 50px;
+  position: absolute;
+  top: 45%;
+  right: 10px;
+}
+.prevbuttonTicket {
+  color: black;
+  font-size: 50px;
+  position: absolute;
+  top: 45%;
+  left: 10px;
+}
+.TableContainer {
+  overflow-y: auto;
+  height: 846px;
+  width: 100%;
+  thead {
+    tr {
       width: 100%;
-      margin-top: 20px;
-      height: 40px;
-      display: flex;
-      // background-color: #d6997e;
-      // border-bottom: 1px solid #6C7193;
-      span {
-        // display: block;
-        font-weight: bolder;
-        margin-right: 7px;
-        font-size: 25px;
-        color: #000000;
-      }
-
-      span:hover {
-        color: #ca511d;
-        cursor: pointer;
-        -webkit-transition: all 0.2s;
-        border-bottom: 2px solid #df8159;
+      th {
+        width: 200px;
+        border: 1px solid #47251c;
+        background-color: #47251c;
+        color: white;
+        position: sticky;
+        top: 0px;
+        border: none;
+        height: 50px;
       }
     }
   }
-
-  .mainSizeMini {
-    width: 1200px;
-    height: 100%;
-    // background-color: pink;
-    .TickerContainer {
-      width: 100%;
-      height: 100%;
-      // background-color: #174855;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: start;
-
-      .TickerItem {
-        width: 100%;
-        height: 350px;
-        background-image: url(./4.png);
-        // background-color: #6C7193;
-        background-position: center;
-        background-repeat: no-repeat;
-        background-size: contain;
-        padding: 40px 150px 0px 180px;
-        box-sizing: border-box;
-        display: flex;
-        margin-bottom: 20px;
-        .infLeft {
-          width: 65%;
-          height: 100%;
-          // background-color: aqua;
-          box-sizing: border-box;
-          padding: 10px 0px 0px 25px;
-          color: #552a17;
-          font-family: sans-serif;
-          h3 {
-            font-size: 30px;
-            color: #a62e02;
-            font-weight: bolder;
-            margin-bottom: 20px;
-          }
-          h4 {
-            font-size: 20px;
-            font-weight: bolder;
-            margin-bottom: 10px;
-          }
-          h5 {
-            font-size: 16px;
-            color: rgb(145, 10, 10);
-          }
-        }
-
-        .infRight {
-          width: 35%;
-          height: 100%;
-          display: flex;
-          justify-content: center;
-          align-items: center;
-          font-size: 25px;
-          font-weight: bolder;
-          color: black;
-        }
+  tbody {
+    tr {
+      td {
+        width: 160px;
+        text-align: center;
+        height: 70px;
       }
+      cursor: pointer;
+    }
+    tr:nth-child(even) {
+      background-color: #f2f2f2;
+    }
+    tr:hover {
+      background-color: #f2f2f2;
     }
   }
+}
+.TableContent {
+  border: 1;
+  border-collapse: collapse;
+  border: 1px solid lightgray;
+}
+.activeButtonFilm {
+  background-color: #f26b38;
+  color: white !important;
+  font-weight: bolder;
+}
+.overlayInfoticket {
+  width: 100%;
+  height: 100%;
+  left: 0px;
+  top: 0px;
+  position: fixed;
+  z-index: 2;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: rgba(79, 79, 79, 0.6);
 }

@@ -84,7 +84,8 @@ function Ticker(props: any) {
     if (
       props.FilmSummaryState.nStandardSeat +
         props.FilmSummaryState.nVIPSeat * 2 ===
-      props.FilmSummaryState.Seat.split(",").length
+        props.FilmSummaryState.Seat.split(",").length &&
+      props.FilmSummaryState.Seat.split(",").includes("") === false
     ) {
       fetch(
         "https://vietcpq.name.vn/U2FsdGVkX1+ibKkbj+HGKjeepxUwFVviPP1AkhuyHto=/Bank/CardRef/" +
@@ -255,7 +256,7 @@ function Ticker(props: any) {
       <div className="mainSize">
         {props.NavigateState.navTmp === true &&
         props.NavigateState.payment === true ? (
-          <div className="TickerContainer">
+          <div className="TickerContainer" id="TickerContainer">
             <h1>CHỌN VÉ/THỨC ĂN</h1>
             <div className="FullTable">
               <table className="tableTop">

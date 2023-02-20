@@ -139,7 +139,8 @@
   font-weight: bolder;
   color: white;
   pointer-events: none !important;
- }
+  cursor: not-allowed;
+}
 .seatNumberVIP {
   background-color: #5a38f2;
   cursor: pointer;

@@ -454,16 +454,18 @@ function FilmInfo(props: any) {
             )}
 
             <div className="dateInfo">
-              <div
-                onClick={() => setIndexDate(0)}
-                className={`dateContainer`}
-                style={{ marginLeft: `${-1 * 249.85 * numTime}px` }}
-              >
-                <div className={`Date  ${IndexDate === 0 ? "active" : ""}`}>
-                  <span>{detaiSchedule[0]?.dates[0].dayOfWeekLabel}</span>
-                  <span>{detaiSchedule[0]?.dates[0].showDate}</span>
+              {detaiSchedule[0]?.dates && (
+                <div
+                  onClick={() => setIndexDate(0)}
+                  className={`dateContainer`}
+                  style={{ marginLeft: `${-1 * 249.85 * numTime}px` }}
+                >
+                  <div className={`Date  ${IndexDate === 0 ? "active" : ""}`}>
+                    <span>{detaiSchedule[0]?.dates[0].dayOfWeekLabel}</span>
+                    <span>{detaiSchedule[0]?.dates[0].showDate}</span>
+                  </div>
                 </div>
-              </div>
+              )}
               {detaiSchedule[0]?.dates?.map((item, index) => {
                 return (
                   index > 0 && (
@@ -490,7 +492,6 @@ function FilmInfo(props: any) {
             {props.CurrentFilmState.isReadyCurFilm === true && (
               <LoaderFilmInfo />
             )}
-
             <div className="scheduleDetail">
               {detaiSchedule
                 ?.filter((n) => n.slug.includes(CinemaObject.slug))

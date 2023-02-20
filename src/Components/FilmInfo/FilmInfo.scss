@@ -217,6 +217,14 @@
     p {
       font-weight: bolder;
     }
+    p::after {
+      display: block;
+      width: 70px;
+      height: 2.5px;
+      margin-top: 8px;
+      content: "";
+      background-color: #f26b38;
+    }
   }
   div:nth-child(2) {
     display: flex;

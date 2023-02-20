@@ -80,7 +80,7 @@ export default function Promotion() {
             <a
               className="promotionButton_1"
               onClick={() => setTmp(1)}
-              href="/HomePage#sectionPromotion"
+              href="#sectionPromotion"
             >
               <i className="fa-solid fa-arrow-up"></i>THU GỌN
             </a>

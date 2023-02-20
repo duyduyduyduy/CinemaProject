@@ -116,7 +116,7 @@ function CinemaInfo(props: any) {
                   </>
                 )}
                 <div className="DateFilmMainSizeInCinema">
-                  {
+                  {detaiSchedule && detaiSchedule[0]?.dates && (
                     <div
                       className="DateContainerinCinema"
                       onClick={() => setIndex(0)}
@@ -127,7 +127,7 @@ function CinemaInfo(props: any) {
                         <p>{detaiSchedule[0]?.dates[0].showDate}</p>
                       </div>
                     </div>
-                  }
+                  )}
                   {detaiSchedule &&
                     detaiSchedule[0]?.dates.map((item, index) => {
                       return (
