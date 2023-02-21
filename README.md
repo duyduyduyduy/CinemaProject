@@ -11,8 +11,7 @@ My project was built by ReactJs and aimed to allow users book cinema ticket. The
 
 ## Features
 
-<img src="./Img/FilmInfo.png" width="200" height="400">
-<img src="./Img/ListOfCinema.png" width="200" height="400">
+<img src="./Img/FilmInfo.png" >
 There are few things you can do with the App:
 
 - Booking cinema ticket throughout 2 flows
