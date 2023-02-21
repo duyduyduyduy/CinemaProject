@@ -2,7 +2,7 @@
 
 ## Introduction
 
-<img src="./Img/FilmInfoImg.png">
+<img src="./Img/FilmInfo.png">
 
 My project was built by ReactJs and aimed to allow users book cinema ticket. There are 2 two flows of booking:
 
