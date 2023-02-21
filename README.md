@@ -27,4 +27,6 @@ There are few things you can do with the App:
 
 ## Usage
 
+The easiest way to show hoe this project works is to watch youtube video that I linked below, but you need to install the app by following the steps in _installation_ section
+
 ### Installation
