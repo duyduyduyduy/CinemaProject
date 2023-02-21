@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from "react";
-import InfoFilm from "../InfoFilm/InfoFilm";
 import "./Seat.scss";
 import { connect } from "react-redux";
 import { useParams } from "react-router-dom";
 function Seat(props: any) {
-  const { CinemaID, FilmID, SessionID } = useParams();
+  const { CinemaID, SessionID } = useParams();
   const [seatStandard, SetSeatStandard] = useState<any>();
   const [seatVIP, SetSeatVIP] = useState<any>();
   const [num1, setNum1] = useState<number>(0);
