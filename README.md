@@ -16,3 +16,11 @@ There are few things you can do with the App:
 - Booking cinema ticket throughout 2 flows
 - Having access to Blog Film
 - Getting booked tickects
+
+## Languages
+
+- ReactJs
+- HTML
+- SCSS
+- Javascript
+- TypeScript
