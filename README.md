@@ -30,3 +30,7 @@ There are few things you can do with the App:
 The easiest way to show hoe this project works is to watch youtube video that I linked below, but you need to install the app by following the steps in _installation_ section
 
 ### Installation
+
+1.  Clone this project
+2.  npm i
+3.  npm start
