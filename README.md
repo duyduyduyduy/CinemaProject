@@ -24,3 +24,7 @@ There are few things you can do with the App:
 - SCSS
 - Javascript
 - TypeScript
+
+## Usage
+
+### Installation
