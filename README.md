@@ -34,3 +34,7 @@ The easiest way to show hoe this project works is to watch youtube video that I 
 1.  Clone this project
 2.  npm i
 3.  npm start
+
+### How to book movie ticket throughout 2 flows:
+
+Youtube Link:
