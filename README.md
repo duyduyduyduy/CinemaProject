@@ -27,7 +27,7 @@ There are few things you can do with the App:
 
 ## Usage
 
-The easiest way to show hoe this project works is to watch youtube video that I linked below, but you need to install the app by following the steps in _installation_ section
+The easiest way to show hoe this project works is to watch youtube video that I linked below, but you need to install the app first by following the steps in _installation_ section
 
 ### Installation
 
@@ -37,4 +37,8 @@ The easiest way to show hoe this project works is to watch youtube video that I 
 
 ### How to book movie ticket throughout 2 flows:
 
-Youtube Link:
+Here is the account in order to book ticket:
+
+- UserName: usercinema@prd04.com
+- Password: 0125
+  Youtube Link:
